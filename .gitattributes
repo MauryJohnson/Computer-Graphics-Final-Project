@@ -1,0 +1,4 @@
+BathRoom filter=lfs diff=lfs merge=lfs -text
+BedRoom filter=lfs diff=lfs merge=lfs -text
+LivingRoom filter=lfs diff=lfs merge=lfs -text
+README.md filter=lfs diff=lfs merge=lfs -text
