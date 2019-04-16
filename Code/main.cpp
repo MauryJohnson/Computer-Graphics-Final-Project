@@ -40,12 +40,16 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 float MyX = SCR_WIDTH / 2.0f;
 float MyY = SCR_HEIGHT / 2.0f;
+float MyLookX = 0.0f;
+float MyLookY = 0.0f;
 float MyZ = 0.0f;
 
 bool firstMouse = true;
 
 // timing
 float deltaTime = 0.0f;
+float DeltaMultiplier = 10.0f;
+
 float lastFrame = 0.0f;
 
 int main()
@@ -102,10 +106,12 @@ int main()
     // load models
     // -----------
     
-    //Model ourModel(FileSystem::getPath("./NanoSuit/nanosuit.obj"));
+    Model ourModel(FileSystem::getPath("./NanoSuit/nanosuit.obj"));
     
-    Model ourModel(FileSystem::getPath("../BedRoom/Black shoe/Black shoe.obj"));
-    
+    //Model ourModel(FileSystem::getPath("../BedRoom/EmptyRoom.obj"));
+   
+    //Model Room
+ 
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
@@ -118,7 +124,9 @@ int main()
         // per-frame time logic
         // --------------------
         float currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
+        
+        deltaTime = (currentFrame - lastFrame) * DeltaMultiplier;
+        
         lastFrame = currentFrame;
 
         // input
@@ -127,7 +135,7 @@ int main()
 
         // render
         // ------
-        glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // don't forget to enable shader before setting uniforms
@@ -141,7 +149,7 @@ int main()
 
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f)); // translate it down so it's at the center of the scene
         //model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         ourModel.Draw(ourShader);
@@ -242,12 +250,73 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       printf("End Press Right\n");
     }
 
+    if(key==GLFW_KEY_W && (action==GLFW_PRESS||Keys[key]))
+    {
+      Keys[key]=true;
+      printf("Pressed LOOK UP\n");
+      //camera.ProcessKeyboard(RIGHT,deltaTime);
+      
+      camera.ProcessMouseMovement(0.0f,1.0f); 
+
+      MyLookX+=1;
+    }
+    else if(key==GLFW_KEY_W){
+      Keys[key]=false;
+      printf("End Press LOOK UP\n");
+    }
+
+    if(key==GLFW_KEY_S && (action==GLFW_PRESS||Keys[key]))
+    {
+      Keys[key]=true;
+      printf("Pressed LOOK DOWN\n");
+      //camera.ProcessKeyboard(RIGHT,deltaTime);
+
+      camera.ProcessMouseMovement(0.0f,-1.0f);
+
+      MyLookX-=1;
+    }
+    else if(key==GLFW_KEY_S){
+      Keys[key]=false;
+      printf("End Press LOOK DOWN\n");
+    }
+
+    if(key==GLFW_KEY_D && (action==GLFW_PRESS||Keys[key]))
+    {
+      Keys[key]=true;
+      printf("Pressed LOOK RIGHT\n");
+      //camera.ProcessKeyboard(RIGHT,deltaTime);
+
+      camera.ProcessMouseMovement(1.0f,0.0f);
+
+      MyLookY+=1;
+    }
+    else if(key==GLFW_KEY_D){
+      Keys[key]=false;
+      printf("End Press LOOK RIGHT\n");
+    }
+
+    if(key==GLFW_KEY_A && (action==GLFW_PRESS||Keys[key]))
+    {
+      Keys[key]=true;
+      printf("Pressed LOOK LEFT\n");
+      //camera.ProcessKeyboard(RIGHT,deltaTime);
+
+      camera.ProcessMouseMovement(-1.0f,0.0f);
+
+      MyLookY-=1;
+    }
+    else if(key==GLFW_KEY_A){
+      Keys[key]=false;
+      printf("End Press LOOK LEFT\n");
+    }
+
+
 }
 
-/*
+
 // glfw: whenever the mouse moves, this callback is called
 // -------------------------------------------------------
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+/*void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
     if (firstMouse)
     {
@@ -270,6 +339,10 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    camera.ProcessMouseScroll(yoffset);
+    //camera.ProcessMouseScroll(yoffset);
+    if(yoffset>0)
+    camera.ProcessKeyboard(UP,deltaTime);
+    else
+    camera.ProcessKeyboard(DOWN,deltaTime);
 }
 
