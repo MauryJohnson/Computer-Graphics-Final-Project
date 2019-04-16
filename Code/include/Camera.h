@@ -14,7 +14,9 @@ enum Camera_Movement {
     FORWARD,
     BACKWARD,
     LEFT,
-    RIGHT
+    RIGHT,
+    UP,
+    DOWN
 };
 
 // Default camera values
@@ -35,6 +37,7 @@ public:
     glm::vec3 Up;
     glm::vec3 Right;
     glm::vec3 WorldUp;
+    
     // Euler Angles
     float Yaw;
     float Pitch;
@@ -80,13 +83,17 @@ public:
             Position -= Right * velocity;
         if (direction == RIGHT)
             Position += Right * velocity;
-    }
+    	if (direction==UP)
+	    Position += Up * velocity;
+	if (direction==DOWN)
+	    Position -= Up * velocity;
+     }
 
     // Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
     void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
     {
-        xoffset *= MouseSensitivity;
-        yoffset *= MouseSensitivity;
+        //xoffset *= MouseSensitivity;
+        //yoffset *= MouseSensitivity;
 
         Yaw   += xoffset;
         Pitch += yoffset;
@@ -128,6 +135,7 @@ private:
         // Also re-calculate the Right and Up vector
         Right = glm::normalize(glm::cross(Front, WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
         Up    = glm::normalize(glm::cross(Right, Front));
-    }
+    
+     }
 };
 #endif
