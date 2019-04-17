@@ -35,11 +35,12 @@ public:
     vector<Mesh> meshes;
     string directory;
     bool gammaCorrection;
-
+    
     /*  Functions   */
     // constructor, expects a filepath to a 3D model.
-    Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
+    Model(string const &path, string const &Root,bool gamma = false) : gammaCorrection(gamma)
     {
+        directory=Root;
         loadModel(path);
     }
 
@@ -213,6 +214,10 @@ unsigned int TextureFromFile(const char *path, const string &directory, bool gam
 {
     string filename = string(path);
     filename = directory + '/' + filename;
+
+    std::replace( filename.begin(), filename.end(), '\\', '/');
+
+    printf("\n FILE:%s",filename.c_str());
 
     unsigned int textureID;
     glGenTextures(1, &textureID);

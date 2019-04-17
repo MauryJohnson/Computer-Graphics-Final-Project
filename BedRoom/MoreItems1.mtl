@@ -54,7 +54,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.008
 Ns 92.156863
@@ -66,7 +66,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
-refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.009
 Ns 92.156863
@@ -91,7 +91,7 @@ illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
 map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
-refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.013
 Ns 92.156863
@@ -116,7 +116,7 @@ illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
 map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
-refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.016
 Ns 92.156863
@@ -128,7 +128,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
-refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.018
 Ns 92.156863

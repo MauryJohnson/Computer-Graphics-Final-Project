@@ -1,5 +1,15 @@
 # Blender MTL File: 'None'
-# Material Count: 24
+# Material Count: 25
+
+newmtl (null).001
+Ns 94.117647
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
 
 newmtl 13648PoloPants_cloth.001
 Ns 9.803922
@@ -54,7 +64,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.006
 Ns 92.156863
@@ -88,7 +98,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
-#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.009
 Ns 92.156863
@@ -113,7 +123,7 @@ illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
 map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
-#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.013
 Ns 92.156863
@@ -138,7 +148,7 @@ illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
 map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
-#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.016
 Ns 92.156863
@@ -150,7 +160,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
-#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.018
 Ns 92.156863

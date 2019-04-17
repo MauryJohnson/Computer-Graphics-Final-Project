@@ -37,12 +37,22 @@ const unsigned int SCR_HEIGHT = 600;
 
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-
+//If turn look any direction, will still always move forward normally
+//float StableLook[]={};
+bool StableMove = true;
+//My Movement Parameters
 float MyX = SCR_WIDTH / 2.0f;
 float MyY = SCR_HEIGHT / 2.0f;
 float MyLookX = 0.0f;
 float MyLookY = 0.0f;
 float MyZ = 0.0f;
+
+
+
+//Store Vertices for each room
+std::vector<float> BedRoomVertices;
+std::vector<float> LivingRoomVertices;
+std::vector<float> BathRoomVertices;
 
 bool firstMouse = true;
 
@@ -82,7 +92,7 @@ int main()
 
 
     // tell GLFW to capture our mouse
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------
@@ -106,10 +116,35 @@ int main()
     // load models
     // -----------
     
-    Model ourModel(FileSystem::getPath("./NanoSuit/nanosuit.obj"));
+    //Model ourModel(FileSystem::getPath("./NanoSuit/nanosuit.obj"));
     
-    //Model ourModel(FileSystem::getPath("../BedRoom/EmptyRoom.obj"));
-   
+    Model ourModel(FileSystem::getPath("../BedRoom/EmptyRoom.obj"),"../BedRoom");
+    Model Bed(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
+     
+    //Model LBD(FileSystem::getPath("../BedRoom/RightBedDresser.obj"),"../BedRoom");
+
+    Model Furniture(FileSystem::getPath("../BedRoom/Furniture.obj"),"../BedRoom");
+
+    Model MoreItems(FileSystem::getPath("../BedRoom/MoreItems.obj"),"../BedRoom");
+    
+    Model BloodyAxe(FileSystem::getPath("../BedRoom/BloodyAxe.obj"),"../BedRoom");
+
+    Model DoorToBathRoom(FileSystem::getPath("../BedRoom/DoorToBathRoom.obj"),"../BedRoom");
+
+    Model DoorToLivingRoom(FileSystem::getPath("../BedRoom/DoorToLivingRoom.obj"),"../BedRoom");
+
+    Model Phone(FileSystem::getPath("../BedRoom/Phone.obj"),"../BedRoom");
+
+    Model RightShoe(FileSystem::getPath("../BedRoom/RightShoe.obj"),"../BedRoom");
+    Model Step(FileSystem::getPath("../BedRoom/Step.obj"),"../BedRoom");
+	 
+    Model TvGun(FileSystem::getPath("../BedRoom/TvGun.obj"),"../BedRoom");
+    
+    //Model Fan(FileSystem::getPath("../BedRoom/fan.obj"),"../BedRoom");
+    //Model Phone2(FileSystem::getPath("../BedRoom/Phone.obj"),"../BedRoom");
+
+    //*/
+
     //Model Room
  
     // draw in wireframe
@@ -149,10 +184,44 @@ int main()
 
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f)); // translate it down so it's at the center of the scene
+        //model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f)); // translate it down so it's at the center of the scene
         //model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
+
+        // STATIC ITEMS
         ourModel.Draw(ourShader);
+
+  	Bed.Draw(ourShader);
+
+        Furniture.Draw(ourShader);
+        //LBD.Draw(ourShader);
+
+  	//RBD.Draw(ourShader);
+
+        MoreItems.Draw(ourShader);
+ 	//END STATIC ITEMS
+
+ 	//EVIDENCE
+	
+	//BEDROOM EVIDENCE
+	DoorToBathRoom.Draw(ourShader);
+ 	DoorToLivingRoom.Draw(ourShader);
+	
+	Phone.Draw(ourShader);
+	
+	RightShoe.Draw(ourShader);
+
+	Step.Draw(ourShader);
+
+        BloodyAxe.Draw(ourShader);
+
+	TvGun.Draw(ourShader);
+
+	//END BEDROOM EVIDENCE
+	
+	//END ALL EVIDENCE
+
+        //ourModel.Draw(ourShader);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -201,59 +270,74 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
         glfwSetWindowShouldClose(window,GL_TRUE);
 
     //camera.ProcessKeyboard(FORWARD, deltaTime);
+    if(key==GLFW_KEY_Q &&(action==GLFW_PRESS || Keys[key]))
+    {	
+	Keys[key]=true;
+    	//printf("\n STOP MOVING!!");
+	return;
+    }
+    else if(key==GLFW_KEY_Q)
+	Keys[key]=false;
+
+    //Check if you set parameter for special movement
+    //This will always reset view look to 0 by backtracking
+    //And then will set view look back to orig again!
+    if(StableMove){
+	camera.ProcessMouseMovement(0.0f,-MyLookX);
+    }
 
     if(key==GLFW_KEY_UP && (action==GLFW_PRESS || Keys[key]))
     {
       Keys[key]=true;
-      printf("Pressed Up\n"); 
+      //printf("Pressed Up\n"); 
       camera.ProcessKeyboard(FORWARD,deltaTime);
       MyZ-=1;
     }
     else if(key==GLFW_KEY_UP){
       Keys[key]=false;
-      printf("End Press Up\n");
+      //printf("End Press Up\n");
     }
 
     if(key==GLFW_KEY_DOWN && (action==GLFW_PRESS||Keys[key]))
     {
       Keys[key]=true;     
-      printf("Pressed Down\n");
+      //printf("Pressed Down\n");
       camera.ProcessKeyboard(BACKWARD,deltaTime);
       MyZ+=1;
     }
     else if(key==GLFW_KEY_DOWN){
       Keys[key]=false;
-      printf("End Press Down\n");
+      //printf("End Press Down\n");
     }
 
     if(key==GLFW_KEY_LEFT && (action==GLFW_PRESS || Keys[key]))
     {
       Keys[key]=true;
-      printf("Pressed Left\n");
+      //printf("Pressed Left\n");
       camera.ProcessKeyboard(LEFT,deltaTime);
       MyX-=1;
     }
     else if(key==GLFW_KEY_LEFT){
       Keys[key]=false;
-      printf("End Press Left\n");
+      //printf("End Press Left\n");
     }
 
     if(key==GLFW_KEY_RIGHT && (action==GLFW_PRESS||Keys[key]))
     {
       Keys[key]=true;
-      printf("Pressed Right\n");
+      //printf("Pressed Right\n");
       camera.ProcessKeyboard(RIGHT,deltaTime);
       MyX+=1;
     }
     else if(key==GLFW_KEY_RIGHT){
       Keys[key]=false;
-      printf("End Press Right\n");
+      //printf("End Press Right\n");
     }
 
     if(key==GLFW_KEY_W && (action==GLFW_PRESS||Keys[key]))
     {
       Keys[key]=true;
-      printf("Pressed LOOK UP\n");
+      //printf("Pressed LOOK UP\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
       
       camera.ProcessMouseMovement(0.0f,1.0f); 
@@ -262,13 +346,13 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     }
     else if(key==GLFW_KEY_W){
       Keys[key]=false;
-      printf("End Press LOOK UP\n");
+      //printf("End Press LOOK UP\n");
     }
 
     if(key==GLFW_KEY_S && (action==GLFW_PRESS||Keys[key]))
     {
       Keys[key]=true;
-      printf("Pressed LOOK DOWN\n");
+      //printf("Pressed LOOK DOWN\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
 
       camera.ProcessMouseMovement(0.0f,-1.0f);
@@ -277,13 +361,13 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     }
     else if(key==GLFW_KEY_S){
       Keys[key]=false;
-      printf("End Press LOOK DOWN\n");
+      //printf("End Press LOOK DOWN\n");
     }
 
     if(key==GLFW_KEY_D && (action==GLFW_PRESS||Keys[key]))
     {
       Keys[key]=true;
-      printf("Pressed LOOK RIGHT\n");
+      //printf("Pressed LOOK RIGHT\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
 
       camera.ProcessMouseMovement(1.0f,0.0f);
@@ -292,13 +376,13 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     }
     else if(key==GLFW_KEY_D){
       Keys[key]=false;
-      printf("End Press LOOK RIGHT\n");
+      //printf("End Press LOOK RIGHT\n");
     }
 
     if(key==GLFW_KEY_A && (action==GLFW_PRESS||Keys[key]))
     {
       Keys[key]=true;
-      printf("Pressed LOOK LEFT\n");
+      //printf("Pressed LOOK LEFT\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
 
       camera.ProcessMouseMovement(-1.0f,0.0f);
@@ -307,9 +391,13 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     }
     else if(key==GLFW_KEY_A){
       Keys[key]=false;
-      printf("End Press LOOK LEFT\n");
+      //printf("End Press LOOK LEFT\n");
     }
 
+
+    if(StableMove){
+        camera.ProcessMouseMovement(0.0f,MyLookX);
+    }
 
 }
 
