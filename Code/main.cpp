@@ -48,11 +48,35 @@ float MyLookY = 0.0f;
 float MyZ = 0.0f;
 
 
-
-//Store Vertices for each room
-std::vector<float> BedRoomVertices;
+//Store Vertices for each room to then check if within a room
+//For rendering efficiency and bounds checking
+//Any point must be >= all lower plane values and <= all upper plane values
+//Store in order of Lower plane (4 vertices = 12 floats)
+//Then Upper plane (remaining 12 float values)
+//In format x1,y1,z1,x2,y2,z2,....,z24
+//std::vector<float> BedRoomVertices;
+bool InBedRoom=true;
+float BedRoomVertices[]={
+//BOTTOM FACE
+6.69,-6.31,-0.1,
+6.69,6.25,-0.1,
+-6.69,-6.31,-0.1,
+-6.69,6.25,-0.1,
+//END BOTTOM FACE
+//TOP FACE
+-6.63,-6.31,7.22,
+6.69,-6.31,7.22,
+6.69,6.25,7.22,
+-6.63,6.25,7.22
+//END TOP FACE
+};
+bool InLivingRoom=false;
 std::vector<float> LivingRoomVertices;
+bool InBathRoom=false;
 std::vector<float> BathRoomVertices;
+
+//All Rooms Stored
+std::vector<float*> AllRooms;
 
 bool firstMouse = true;
 
@@ -62,8 +86,104 @@ float DeltaMultiplier = 10.0f;
 
 float lastFrame = 0.0f;
 
+
+//My Position will use camera's position
+bool WithinBounds(glm::vec3 Position){
+printf("\n Camera Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
+
+//Check if either in bed room, living room, or bath room
+//Check for all rooms
+//IF in NEITHER ROOMS, return false!
+//Otherwise Return True
+/*if(MyPosition.size()!=3){
+printf("\n Invalid Bound Vector");
+return false;
+}
+*/
+
+//float * Position = MyPosition.data();
+
+bool Within = true;
+
+for(int i=0;i<AllRooms.size();i+=1){
+printf("\nRoom:%d",i);
+for(int j=0; j<=23;j+=3){
+printf("\nData:%f,%f,%f",AllRooms[i][j],AllRooms[i][j+1],AllRooms[i][j+2]);
+float* Data = AllRooms[i];
+
+//Checking if either above a plane or below a plane, because ether you are there, or you arent!
+if(
+
+((
+//ggg
+Position[0]>=Data[j] && Position[1]>=Data[j+1] && Position[2]>=Data[j+2] 
+||
+//llg
+Position[0]<=Data[j] && Position[1]<=Data[j+1] && Position[2]>=Data[j+2]
+||
+//glg
+Position[0]>=Data[j] && Position[1]<=Data[j+1] && Position[2]>=Data[j+2]
+||
+//lgg
+Position[0]<=Data[j] && Position[1]>=Data[j+1] && Position[2]>=Data[j+2]
+)
+&&j<=11)
+
+||
+
+((
+//gll
+Position[0]>=Data[j] && Position[1]<=Data[j+1] && Position[2]<=Data[j+2]
+||
+//
+//lgl
+Position[0]<=Data[j] && Position[1]>=Data[j+1] && Position[2]<=Data[j+2]
+||
+//ggl
+Position[0]>=Data[j] && Position[1]>=Data[j+1] && Position[2]<=Data[j+2]
+||
+//
+//lll
+Position[0]<=Data[j] && Position[1]<=Data[j+1] && Position[2]<=Data[j+2]
+)
+&&j>=12
+)
+
+)
+{
+
+
+}
+else{
+Within=false;
+break;
+}
+
+}
+
+if(Within){
+
+printf("\n WITHIN!");
+
+return true;
+
+}
+
+}
+
+return false;
+
+}
+
 int main()
 {
+    
+    AllRooms.push_back(BedRoomVertices);
+
+//    printf("\n Camera Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
+
+    printf("\n WITHIN BOUNDS:%d",WithinBounds(camera.Position));
+
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
