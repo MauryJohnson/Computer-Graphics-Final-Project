@@ -1,5 +1,15 @@
-# Blender MTL File: 'CompleteBedRoom.blend'
-# Material Count: 26
+# Blender MTL File: 'None'
+# Material Count: 27
+
+newmtl (null)
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
 
 newmtl 13648PoloPants_cloth
 Ns 9.803922
@@ -10,8 +20,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\PoloPants_V2_L3.123c602f6084-909a-4c3e-9fed-c0f5ebd1f408\13648PoloPants_cloth_diffuse.jpg
-map_Ka C:\\Users\\jason\\AppData\\Local\\Temp\\PoloPants_V2_L3.123c602f6084-909a-4c3e-9fed-c0f5ebd1f408\\13648PoloPants_cloth_diffuse.jpg
+map_Kd PoloPants_V2_L3.123c602f6084-909a-4c3e-9fed-c0f5ebd1f408\13648PoloPants_cloth_diffuse.jpg
+map_Ka PoloPants_V2_L3.123c602f6084-909a-4c3e-9fed-c0f5ebd1f408\\13648PoloPants_cloth_diffuse.jpg
 
 newmtl Black_surface
 Ns 60.784314
@@ -32,6 +42,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.000000
 illum 7
+map_Kd Tan.png
 
 newmtl Copper_Polished_Procedural
 Ns 23.529412
@@ -42,9 +53,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd black.png
 
 newmtl Material.004_NONE
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -52,10 +64,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-refl C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.017
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -63,9 +75,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd Tan.png
 
 newmtl Material.019
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.016711 0.016711 0.016711
 Ks 0.500000 0.500000 0.500000
@@ -73,10 +86,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Samsung_Smart_TV_55_Zoll\textures\col.png
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 
 newmtl Material.020
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.018410 0.018410 0.018410
 Ks 0.500000 0.500000 0.500000
@@ -84,13 +97,13 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Samsung_Smart_TV_55_Zoll\textures\col.png
-map_Bump C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\nor.png
-map_Ks C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\col.png
-refl C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
+map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.022
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.033089 0.033089 0.033089
 Ks 0.500000 0.500000 0.500000
@@ -98,10 +111,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Samsung_Smart_TV_55_Zoll\textures\col.png
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 
 newmtl Material.023
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.016711 0.016711 0.016711
 Ks 0.000000 0.000000 0.000000
@@ -109,11 +122,11 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Samsung_Smart_TV_55_Zoll\textures\col.png
-refl C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.024
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.218378 0.218378 0.218378
 Ks 0.500000 0.500000 0.500000
@@ -121,11 +134,11 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Samsung_Smart_TV_55_Zoll\textures\col.png
-refl C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.026
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.046743 0.046743 0.046743
 Ks 0.500000 0.500000 0.500000
@@ -133,10 +146,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Samsung_Smart_TV_55_Zoll\textures\col.png
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 
 newmtl Material.027
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -144,12 +157,24 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Samsung_Smart_TV_55_Zoll\textures\col.png
-map_Bump C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\nor.png
-map_Ks C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\col.png
-refl C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
+map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
 newmtl Material.028
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+
+newmtl Material.039
 Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -158,21 +183,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Samsung_Smart_TV_55_Zoll\textures\col.png
-refl C:\\Users\\jason\\AppData\\Local\\Temp\\Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
-
-newmtl Material.039
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
+map_Kd GirlyGreen.png
 
 newmtl Material.040
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -180,6 +194,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd LighterBrownDresser.png
 
 newmtl Material1513820
 Ns 3.921569
@@ -190,8 +205,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Shirt_Dolman Shirt by CG Elves\Shirt_Dolman_v1_39kpolys\01.jpg
-map_Ka C:\\Users\\jason\\AppData\\Local\\Temp\\Shirt_Dolman Shirt by CG Elves\\Shirt_Dolman_v1_39kpolys\\01.jpg
+map_Kd Shirt_Dolman Shirt by CG Elves\Shirt_Dolman_v1_39kpolys\01.jpg
+map_Ka Shirt_Dolman Shirt by CG Elves\\Shirt_Dolman_v1_39kpolys\\01.jpg
 
 newmtl Material1513823
 Ns 3.921569
@@ -202,11 +217,11 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\Shirt_Dolman Shirt by CG Elves\Shirt_Dolman_v1_39kpolys\01.jpg
-map_Ka C:\\Users\\jason\\AppData\\Local\\Temp\\Shirt_Dolman Shirt by CG Elves\\Shirt_Dolman_v1_39kpolys\\01.jpg
+map_Kd Shirt_Dolman Shirt by CG Elves\Shirt_Dolman_v1_39kpolys\01.jpg
+map_Ka Shirt_Dolman Shirt by CG Elves\\Shirt_Dolman_v1_39kpolys\\01.jpg
 
 newmtl Material__166
-Ns 21.568627
+Ns 19.607843
 Ka 0.588000 0.588000 0.588000
 Kd 0.000000 0.000000 0.000000
 Ks 0.900000 0.900000 0.900000
@@ -214,17 +229,19 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\metal2.jpg
-map_Ka C:\\metal2.jpg
+map_Kd lighter gray 2.png
+map_Ka ..\\..\\..\\..\\..\\..\\..\\metal2.jpg
 
 newmtl None
-Ns 0
-Ka 0.119268 0.108996 0.096624
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Ns 0.000000
+Ka 0.108296 0.108296 0.108296
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
-map_Kd C:\wood_2.jpg
+map_Kd ..\..\..\..\..\..\..\wood_2.jpg
 
 newmtl Rubber_Dull_Procedural
 Ns 23.529412
@@ -245,11 +262,11 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\AppData\Local\Temp\WomansBusinessDress_v2_L3.123c5b4bf3ce-012a-44fd-8a74-7a781e4312f5\WomansBusinessDress.jpg
-map_Ka C:\\Users\\jason\\AppData\\Local\\Temp\\WomansBusinessDress_v2_L3.123c5b4bf3ce-012a-44fd-8a74-7a781e4312f5\\WomansBusinessDress.jpg
+map_Kd WomansBusinessDress_v2_L3.123c5b4bf3ce-012a-44fd-8a74-7a781e4312f5\WomansBusinessDress.jpg
+map_Ka WomansBusinessDress_v2_L3.123c5b4bf3ce-012a-44fd-8a74-7a781e4312f5\\WomansBusinessDress.jpg
 
 newmtl default.002
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -259,7 +276,7 @@ d 1.000000
 illum 2
 
 newmtl default2
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -269,7 +286,7 @@ d 1.000000
 illum 2
 
 newmtl default3
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -279,7 +296,7 @@ d 1.000000
 illum 2
 
 newmtl default4
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
