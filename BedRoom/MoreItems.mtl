@@ -1,8 +1,8 @@
 # Blender MTL File: 'None'
-# Material Count: 27
+# Material Count: 25
 
-newmtl (null)
-Ns 96.078431
+newmtl (null).001
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -11,7 +11,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl 13648PoloPants_cloth
+newmtl 13648PoloPants_cloth.001
 Ns 9.803922
 Ka 1.000000 1.000000 1.000000
 Kd 0.006997 0.033359 0.184446
@@ -23,7 +23,7 @@ illum 2
 map_Kd PoloPants_V2_L3.123c602f6084-909a-4c3e-9fed-c0f5ebd1f408\13648PoloPants_cloth_diffuse.jpg
 map_Ka PoloPants_V2_L3.123c602f6084-909a-4c3e-9fed-c0f5ebd1f408\\13648PoloPants_cloth_diffuse.jpg
 
-newmtl Black_surface
+newmtl Black_surface.001
 Ns 60.784314
 Ka 1.000000 1.000000 1.000000
 Kd 0.100000 0.100000 0.100000
@@ -33,7 +33,7 @@ Ni 1.000000
 d 0.000000
 illum 7
 
-newmtl Coarse_leather_brn
+newmtl Coarse_leather_brn.001
 Ns 47.058824
 Ka 1.000000 1.000000 1.000000
 Kd 1.000000 0.692000 0.340000
@@ -44,7 +44,7 @@ d 0.000000
 illum 7
 map_Kd Tan.png
 
-newmtl Copper_Polished_Procedural
+newmtl Copper_Polished_Procedural.001
 Ns 23.529412
 Ka 1.000000 1.000000 1.000000
 Kd 0.550000 0.550000 0.550000
@@ -55,7 +55,7 @@ d 1.000000
 illum 2
 map_Kd black.png
 
-newmtl Material.004_NONE
+newmtl Material.004_NONE.001
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -66,21 +66,44 @@ d 1.000000
 illum 2
 refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
-newmtl Material.017
-Ns 94.117647
+newmtl Material.006
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
+Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Tan.png
+map_Kd LighterBrownDresser.png
 
-newmtl Material.019
+newmtl Material.007
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
-Kd 0.016711 0.016711 0.016711
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd GirlyGreen.png
+
+newmtl Material.008
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.218378 0.218378 0.218378
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+
+newmtl Material.009
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.046743 0.046743 0.046743
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
@@ -88,7 +111,7 @@ d 1.000000
 illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 
-newmtl Material.020
+newmtl Material.011
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.018410 0.018410 0.018410
@@ -102,7 +125,7 @@ map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
 map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
 refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
-newmtl Material.022
+newmtl Material.013
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.033089 0.033089 0.033089
@@ -113,42 +136,7 @@ d 1.000000
 illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 
-newmtl Material.023
-Ns 92.156863
-Ka 1.000000 1.000000 1.000000
-Kd 0.016711 0.016711 0.016711
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
-refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
-
-newmtl Material.024
-Ns 92.156863
-Ka 1.000000 1.000000 1.000000
-Kd 0.218378 0.218378 0.218378
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
-refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
-
-newmtl Material.026
-Ns 92.156863
-Ka 1.000000 1.000000 1.000000
-Kd 0.046743 0.046743 0.046743
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
-
-newmtl Material.027
+newmtl Material.014
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -162,7 +150,7 @@ map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
 map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
 refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
-newmtl Material.028
+newmtl Material.016
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -174,29 +162,18 @@ illum 2
 map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
 refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
 
-newmtl Material.039
-Ns 94.117647
+newmtl Material.018
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
+Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd GirlyGreen.png
+map_Kd Tan.png
 
-newmtl Material.040
-Ns 94.117647
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd LighterBrownDresser.png
-
-newmtl Material1513820
+newmtl Material1513820.001
 Ns 3.921569
 Ka 0.583529 0.583529 0.583529
 Kd 0.748897 0.566238 0.494606
@@ -208,7 +185,7 @@ illum 2
 map_Kd Shirt_Dolman Shirt by CG Elves\Shirt_Dolman_v1_39kpolys\01.jpg
 map_Ka Shirt_Dolman Shirt by CG Elves\\Shirt_Dolman_v1_39kpolys\\01.jpg
 
-newmtl Material1513823
+newmtl Material1513823.001
 Ns 3.921569
 Ka 0.415225 0.415225 0.415225
 Kd 0.390573 0.422822 0.530319
@@ -220,8 +197,8 @@ illum 2
 map_Kd Shirt_Dolman Shirt by CG Elves\Shirt_Dolman_v1_39kpolys\01.jpg
 map_Ka Shirt_Dolman Shirt by CG Elves\\Shirt_Dolman_v1_39kpolys\\01.jpg
 
-newmtl Material__166
-Ns 19.607843
+newmtl Material__166.001
+Ns 17.647059
 Ka 0.588000 0.588000 0.588000
 Kd 0.000000 0.000000 0.000000
 Ks 0.900000 0.900000 0.900000
@@ -232,7 +209,7 @@ illum 2
 map_Kd lighter gray 2.png
 map_Ka ..\\..\\..\\..\\..\\..\\..\\metal2.jpg
 
-newmtl None
+newmtl None.001
 Ns 0.000000
 Ka 0.108296 0.108296 0.108296
 Kd 0.800000 0.800000 0.800000
@@ -243,7 +220,7 @@ d 1.000000
 illum 2
 map_Kd ..\..\..\..\..\..\..\wood_2.jpg
 
-newmtl Rubber_Dull_Procedural
+newmtl Rubber_Dull_Procedural.001
 Ns 23.529412
 Ka 1.000000 1.000000 1.000000
 Kd 1.000000 1.000000 1.000000
@@ -253,7 +230,7 @@ Ni 1.000000
 d 0.000000
 illum 7
 
-newmtl _10157_WomansBusinessDress_v2blinn1SG
+newmtl _10157_WomansBusinessDress_v2blinn1SG.001
 Ns 9.803922
 Ka 0.000000 0.000000 0.000000
 Kd 0.000000 0.000000 0.000000
@@ -265,8 +242,8 @@ illum 2
 map_Kd WomansBusinessDress_v2_L3.123c5b4bf3ce-012a-44fd-8a74-7a781e4312f5\WomansBusinessDress.jpg
 map_Ka WomansBusinessDress_v2_L3.123c5b4bf3ce-012a-44fd-8a74-7a781e4312f5\\WomansBusinessDress.jpg
 
-newmtl default.002
-Ns 94.117647
+newmtl default.000
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -275,8 +252,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl default2
-Ns 94.117647
+newmtl default2.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -285,8 +262,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl default3
-Ns 94.117647
+newmtl default3.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -295,8 +272,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl default4
-Ns 94.117647
+newmtl default4.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
