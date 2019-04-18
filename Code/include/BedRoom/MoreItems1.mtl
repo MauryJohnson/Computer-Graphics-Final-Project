@@ -1,0 +1,204 @@
+# Blender MTL File: 'None'
+# Material Count: 18
+
+newmtl 13648PoloPants_cloth.001
+Ns 9.803922
+Ka 1.000000 1.000000 1.000000
+Kd 0.006997 0.033359 0.184446
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd PoloPants_V2_L3.123c602f6084-909a-4c3e-9fed-c0f5ebd1f408\13648PoloPants_cloth_diffuse.jpg
+map_Ka PoloPants_V2_L3.123c602f6084-909a-4c3e-9fed-c0f5ebd1f408\\13648PoloPants_cloth_diffuse.jpg
+
+newmtl Black_surface.001
+Ns 60.784314
+Ka 1.000000 1.000000 1.000000
+Kd 0.100000 0.100000 0.100000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 7
+
+newmtl Coarse_leather_brn.001
+Ns 47.058824
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.692000 0.340000
+Ks 1.000000 0.927167 0.770000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 7
+map_Kd Tan.png
+
+newmtl Copper_Polished_Procedural.001
+Ns 23.529412
+Ka 1.000000 1.000000 1.000000
+Kd 0.550000 0.550000 0.550000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd black.png
+
+newmtl Material.004_NONE.001
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+
+newmtl Material.008
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.218378 0.218378 0.218378
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+
+newmtl Material.009
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.046743 0.046743 0.046743
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+
+newmtl Material.011
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.018410 0.018410 0.018410
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
+map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+
+newmtl Material.013
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.033089 0.033089 0.033089
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+
+newmtl Material.014
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+map_Bump Samsung_Smart_TV_55_Zoll\\textures\\nor.png
+map_Ks Samsung_Smart_TV_55_Zoll\\textures\\col.png
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+
+newmtl Material.016
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Samsung_Smart_TV_55_Zoll\textures\col.png
+#refl Samsung_Smart_TV_55_Zoll\\textures\\REF 1.jpg
+
+newmtl Material.018
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Tan.png
+
+newmtl Rubber_Dull_Procedural.001
+Ns 23.529412
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 7
+
+newmtl _10157_WomansBusinessDress_v2blinn1SG.001
+Ns 9.803922
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.050000 0.050000 0.050000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd WomansBusinessDress_v2_L3.123c5b4bf3ce-012a-44fd-8a74-7a781e4312f5\WomansBusinessDress.jpg
+map_Ka WomansBusinessDress_v2_L3.123c5b4bf3ce-012a-44fd-8a74-7a781e4312f5\\WomansBusinessDress.jpg
+
+newmtl default.000
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl default2.001
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl default3.001
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl default4.001
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
