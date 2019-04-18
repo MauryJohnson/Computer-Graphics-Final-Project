@@ -13,6 +13,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <math.h>
+
 #include "include/Shader.h"
 #include "include/Camera.h"
 #include "include/Model.h"
@@ -23,6 +25,7 @@
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void key_callback(GLFWwindow* window, int key, int r, int x,int o);
 void processInput(GLFWwindow *window);
@@ -36,7 +39,7 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 0.0f));
 //If turn look any direction, will still always move forward normally
 //float StableLook[]={};
 bool StableMove = true;
@@ -47,6 +50,74 @@ float MyLookX = 0.0f;
 float MyLookY = 0.0f;
 float MyZ = 0.0f;
 
+float DetectionDistance = 1.0f;
+
+//Stores info about each evidence
+class Evidence{
+public:
+	float* Vertices;
+	bool Found = false;
+	const char* Name;
+	Model** M;
+	Evidence(const char* Name,Model** Model,float* EvidenceVertices);
+	~Evidence();
+	void NoMore();
+};
+
+Evidence::Evidence(const char*N,Model** Model,float*V){
+this->Name=N;
+this->Vertices=V;
+this->M=Model;
+}
+
+void Evidence::NoMore(){
+*(this->M)=NULL;
+}
+
+Evidence::~Evidence(){
+
+//Goodbye Evidence!!
+printf("\n GoodBye Evidence:%s @ (%f,%f,%f)",this->Name,Vertices[0],Vertices[1],Vertices[2]);
+
+//*(this->M) = NULL;
+
+}
+
+//Stores info about each room
+
+class Room{
+public:
+	//Room dimensions
+	float * Vertices;
+
+	//ALL evidence positions
+	//float * EvidenceVertices;
+	std::vector<Evidence> Evidences;
+
+	//Determines if the space in room is occupied or not
+	bool Occupied = false;
+
+	//Create room Obj
+	Room(float* Vertices,std::vector<Evidence> Evidences);
+		
+	//Destructor
+	~Room();
+
+
+};
+
+Room::Room(float*Vertices,std::vector<Evidence>EvidenceVertices){
+this->Vertices=Vertices;
+this->Evidences=EvidenceVertices;
+}
+
+Room::~Room(){
+
+printf("\n NO ROOM");
+
+}
+
+std::vector<Room> Rooms;
 
 //Store Vertices for each room to then check if within a room
 //For rendering efficiency and bounds checking
@@ -69,6 +140,17 @@ float BedRoomVertices[]={
 6.69,6.25,7.22,
 -6.63,6.25,7.22
 //END TOP FACE
+};
+float BedRoomEvidenceVertices[]={
+//1
+
+//2
+
+//3
+
+//4
+
+
 };
 bool InLivingRoom=false;
 std::vector<float> LivingRoomVertices;
@@ -105,11 +187,13 @@ return false;
 
 bool Within = true;
 
-for(int i=0;i<AllRooms.size();i+=1){
+for(int i=0;i<Rooms.size();i+=1){
 printf("\nRoom:%d",i);
 for(int j=0; j<=23;j+=3){
-printf("\nData:%f,%f,%f",AllRooms[i][j],AllRooms[i][j+1],AllRooms[i][j+2]);
-float* Data = AllRooms[i];
+
+printf("\nData:%f,%f,%f",Rooms[i].Vertices[j],Rooms[i].Vertices[j+1],Rooms[i].Vertices[j+2]);
+
+float* Data = Rooms[i].Vertices;
 
 //Checking if either above a plane or below a plane, because ether you are there, or you arent!
 if(
@@ -165,6 +249,14 @@ if(Within){
 
 printf("\n WITHIN!");
 
+Rooms[i].Occupied=true;
+
+for(int k=0; k<=Rooms.size()-1;k+=1){
+	if(k!=i){
+		Rooms[k].Occupied=false;
+	}
+}
+
 return true;
 
 }
@@ -175,14 +267,46 @@ return false;
 
 }
 
+//std::vector<Room> Rooms
+
+//Lookup evidence from the corresponding Room
+//If within distance margin of evidence, will then remove that evidence from existence
+//You win if ALL evidence is found
+Evidence * NearEvidence(){
+
+//Iterate all Rooms UNTIL reach room that is occupied
+//Iterate all Roo Evidence Positions (at a centerpoint)
+//Compare distance of camera to distance of this object
+//If distance <=D, then remove evidence, found it!
+for(int i=0; i<Rooms.size();i+=1){
+	if(Rooms[i].Occupied){
+		for(int j=0; j<Rooms[i].Evidences.size();j+=1){
+			Evidence E = Rooms[i].Evidences[j];
+			printf("\n Evidence %s Position:%f,%f,%f,",E.Name,E.Vertices[0],E.Vertices[1],E.Vertices[2]);
+			printf("\nCam Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
+			float Distance = sqrt( 
+			pow(camera.Position[0] - Rooms[i].Evidences[j].Vertices[0],2) + 
+			pow(camera.Position[1] - Rooms[i].Evidences[j].Vertices[1],2) +
+			pow(camera.Position[2] - Rooms[i].Evidences[j].Vertices[2],2)
+			); 
+			printf("Effective Distance:%f",Distance);
+			if(Distance<=DetectionDistance)
+				return &(Rooms[i].Evidences[j]);
+		}
+		printf("\n No Evidence Found (WITHIN A DISTANCE)!");
+		return NULL;
+	}
+}
+
+printf("\n No rooms occupied?!?");
+
+return NULL;;
+}
+
 int main()
 {
-    
-    AllRooms.push_back(BedRoomVertices);
-
-//    printf("\n Camera Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
-
-    printf("\n WITHIN BOUNDS:%d",WithinBounds(camera.Position));
+        
+    //AllRooms.push_back(BedRoomVertices);
 
     // glfw: initialize and configure
     // ------------------------------
@@ -209,7 +333,7 @@ int main()
     //glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetKeyCallback(window,key_callback);
-
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     // tell GLFW to capture our mouse
     //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -233,9 +357,17 @@ int main()
     // -------------------------
     Shader ourShader("shader.vs", "shader.frag");
 
-    // load models
+    // load/store models
     // -----------
+
+    //BedRoom Evidence
+    std::vector<Evidence> BRE; 
     
+    
+//    printf("\n Camera Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
+
+    //printf("\n WITHIN BOUNDS:%d",WithinBounds(camera.Position));
+
     //Model ourModel(FileSystem::getPath("./NanoSuit/nanosuit.obj"));
     
     Model ourModel(FileSystem::getPath("../BedRoom/EmptyRoom.obj"),"../BedRoom");
@@ -255,13 +387,28 @@ int main()
 
     Model Phone(FileSystem::getPath("../BedRoom/Phone.obj"),"../BedRoom");
 
-    Model RightShoe(FileSystem::getPath("../BedRoom/RightShoe.obj"),"../BedRoom");
+    Model * RightShoe = new Model(FileSystem::getPath("../BedRoom/RightShoe.obj"),"../BedRoom");
+    
+    //REMEMBER THAT THE THE Y BECOMES Z AND IT IS NEGATIVED!!!!!!
+    //So x1,y1,z1 -> x1,z1,-y1
+    //Create accurate vertices of all evidence positions here
+    float ShoePosition[]={
+	-0.072f,
+	//3.3826f,
+	0.039f/*-2.5f*/,
+	-3.3826f,
+	//0.039f
+    };
+    BRE.push_back(Evidence("RightShoe",&RightShoe,ShoePosition)); 
+
     Model Step(FileSystem::getPath("../BedRoom/Step.obj"),"../BedRoom");
 	 
     Model TvGun(FileSystem::getPath("../BedRoom/TvGun.obj"),"../BedRoom");
     
     //Model Fan(FileSystem::getPath("../BedRoom/fan.obj"),"../BedRoom");
     //Model Phone2(FileSystem::getPath("../BedRoom/Phone.obj"),"../BedRoom");
+
+    Rooms.push_back(Room(BedRoomVertices,BRE));
 
     //*/
 
@@ -274,6 +421,9 @@ int main()
     
     // -----------
     
+      printf("\n WITHIN BOUNDS:%d",WithinBounds(camera.Position));
+
+
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -304,7 +454,7 @@ int main()
 
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
-        //model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f)); // translate it down so it's at the center of the scene
+        //model = glm::translate(model, glm::vec3(0.0f, 0.0f, -0.466f)); // translate it down so it's at the center of the scene
         //model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
 
@@ -329,7 +479,8 @@ int main()
 	
 	Phone.Draw(ourShader);
 	
-	RightShoe.Draw(ourShader);
+	if(RightShoe!=NULL)
+		(*RightShoe).Draw(ourShader);
 
 	Step.Draw(ourShader);
 
@@ -519,6 +670,8 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
         camera.ProcessMouseMovement(0.0f,MyLookX);
     }
 
+   //printf("\nCam Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
+
 }
 
 
@@ -554,3 +707,20 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
     camera.ProcessKeyboard(DOWN,deltaTime);
 }
 
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+    {    
+	printf("\n CLICKED");	
+
+	Evidence* Evidence = (NearEvidence());
+
+		if(Evidence!=NULL){
+
+			//DESTROY EVIDENCE!!!
+			(*Evidence).NoMore();
+			(*Evidence).~Evidence();
+
+		}
+    }
+}
