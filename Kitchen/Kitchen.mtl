@@ -1,0 +1,635 @@
+# Blender MTL File: 'Kitchen.blend'
+# Material Count: 60
+
+newmtl 20900_Brown_Betty_Teapot
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Water_002_COLOR.jpg
+
+newmtl FMarble
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/photos_2015_09_18_fst_698oway7o7h.jpg
+
+newmtl Marble
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Material_560.png
+
+newmtl Marble.001
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Material_139.png
+
+newmtl Marble.001_Material_560.png
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Material_560.png
+
+newmtl Marble.001_TexturesCom_PlasterBare0121_1_seamless_S.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_PlasterBare0121_1_seamless_S.jpg
+
+newmtl Marble.001_photos_2015_09_18_fst_765b3qqmm4v.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/photos_2015_09_18_fst_765b3qqmm4v.jpg
+
+newmtl Marble_TexturesCom_PlasterBare0121_1_seamless_S.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_PlasterBare0121_1_seamless_S.jpg
+
+newmtl Mat
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl Mat_1
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl Material.001
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_PlasterBare0121_1_seamless_S.jpg
+
+newmtl Material.002
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Material_651.png
+
+newmtl Material.003
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/clean-color-drink-1166646.jpg
+
+newmtl Material.005
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.005_TexturesCom_MetalBare0094_M.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl Material.005_White_Marble_005_DISP.png
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/White_Marble_005_DISP.png
+
+newmtl Material.007
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl Material.008
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/clean-color-drink-1166646.jpg
+
+newmtl Material.008_NONE
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.008_TexturesCom_MetalBare0094_M.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl Material.010
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl Material.010_NONE
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.012
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Watercolor_Paper_001_COLOR.jpg
+
+newmtl Material.014
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.014_TexturesCom_MetalBare0094_M.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl Material.015
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Watercolor_Paper_001_COLOR.jpg
+
+newmtl Material.016
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Metal_-_Iron_Cast
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl Metal_-_Titanium_Black
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/White_Marble_005_DISP.png
+
+newmtl None
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd ../../../../Downloads/White_Marble_005_DISP.png
+
+newmtl None_Abstract_001_COLOR.jpg
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd ../../../../Downloads/Abstract_001_COLOR.jpg
+
+newmtl None_Material_669.png
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd ../../../../Downloads/Material_669.png
+
+newmtl None_NONE
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+
+newmtl None_TexturesCom_MetalBare0094_M.jpg
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl None_TexturesCom_PlasterBare0121_1_seamless_S.jpg
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd TexturesCom_PlasterBare0121_1_seamless_S.jpg
+
+newmtl None_Watercolor_Paper_001_COLOR.jpg
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd ../../../../Downloads/Watercolor_Paper_001_COLOR.jpg
+
+newmtl None_kitchen_blender_front_panel.jpg
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd kitchen_blender_v1_L2.123cdc950f7a-feca-4bf8-b299-f5d78d4e1b90/kitchen_blender_front_panel.jpg
+
+newmtl Plastic-Glossy-blue2
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Grass_002_COLOR.jpg
+
+newmtl Plastic-Glossy-blue2_1
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Abstract_001_COLOR.jpg
+
+newmtl Plastic-Glossy-blue2_2
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MarbleBase0216_1_seamless_S.png
+
+newmtl Plastic-Glossy-blue2_2_Abstract_001_COLOR.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Abstract_001_COLOR.jpg
+
+newmtl Plastic-Glossy-blue2_2_Grass_002_COLOR.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Grass_002_COLOR.jpg
+
+newmtl Plastic-Glossy-blue2_Abstract_001_COLOR.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Abstract_001_COLOR.jpg
+
+newmtl Plastic-Glossy-blue2_Material_139.png
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Material_139.png
+
+newmtl Plastic-Glossy-blue2_Material_560.png
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Material_560.png
+
+newmtl Toaster_Body_Chrome
+Ns 78.431373
+Ka 0.784300 0.784300 0.784300
+Kd 0.784300 0.784300 0.784300
+Ks 0.810000 0.810000 0.810000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Toaster_Body_Chrome_Material_596.png
+Ns 78.431373
+Ka 0.784300 0.784300 0.784300
+Kd 0.784300 0.784300 0.784300
+Ks 0.810000 0.810000 0.810000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Material_596.png
+
+newmtl Toaster_Body_Painted
+Ns 64.705882
+Ka 0.562100 0.562100 0.562100
+Kd 0.431400 0.588200 0.666700
+Ks 0.720000 0.720000 0.720000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Material_596.png
+
+newmtl Toaster_Plastic_Black
+Ns 54.901961
+Ka 0.196100 0.196100 0.196100
+Kd 0.196100 0.196100 0.196100
+Ks 0.078400 0.078400 0.078400
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Material_596.png
+
+newmtl Toaster_Plastic_Black_NONE
+Ns 54.901961
+Ka 0.196100 0.196100 0.196100
+Kd 0.196100 0.196100 0.196100
+Ks 0.078400 0.078400 0.078400
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl kitchen_blender_black
+Ns 50.980392
+Ka 0.027500 0.027500 0.027500
+Kd 0.105900 0.105900 0.105900
+Ks 0.540000 0.540000 0.540000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl kitchen_blender_glass
+Ns 29.411765
+Ka 0.128133 0.128133 0.128133
+Kd 0.047100 0.125500 0.211800
+Ks 0.441000 0.441000 0.441000
+Ke 0.000000 0.000000 0.000000
+Ni 3.000000
+d 0.190000
+illum 2
+map_Kd ../../../../Downloads/clean-color-drink-1166646.jpg
+
+newmtl kitchen_blender_grey
+Ns 50.980392
+Ka 0.525500 0.525500 0.525500
+Kd 0.525500 0.525500 0.525500
+Ks 0.540000 0.540000 0.540000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Abstract_001_COLOR.jpg
+
+newmtl kitchen_blender_marks
+Ns 29.411765
+Ka 0.128133 0.128133 0.128133
+Kd 0.047100 0.125500 0.211800
+Ks 0.468000 0.468000 0.468000
+Ke 0.000000 0.000000 0.000000
+Ni 3.000000
+d 0.230000
+illum 2
+map_Kd ../../../../Downloads/Abstract_001_COLOR.jpg
+
+newmtl kitchen_blender_metal
+Ns 33.333333
+Ka 0.176500 0.176500 0.176500
+Kd 0.588000 0.588000 0.588000
+Ks 0.540000 0.540000 0.540000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl kitchen_blender_white
+Ns 50.980392
+Ka 0.933300 0.933300 0.933300
+Kd 0.933300 0.933300 0.933300
+Ks 0.540000 0.540000 0.540000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/Abstract_001_COLOR.jpg
+
+newmtl white_gloss
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl white_gloss_TexturesCom_MetalBare0094_M.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
+
+newmtl white_gloss_TexturesCom_PlasterBare0121_1_seamless_S.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_PlasterBare0121_1_seamless_S.jpg
+
+newmtl white_gloss_photos_2015_09_18_fst_765b3qqmm4v.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../../../../Downloads/photos_2015_09_18_fst_765b3qqmm4v.jpg
