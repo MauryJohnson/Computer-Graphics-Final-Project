@@ -1,5 +1,5 @@
 # Blender MTL File: 'LivingRoom.blend'
-# Material Count: 142
+# Material Count: 141
 
 newmtl 10406_Funky_Stepping_Stone_v1.001
 Ns 9.803922
@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\OneDrive\Desktop\Graphics\CGF4\Computer-Graphics-Final-Project\BedRoom\BedRoom Evidence\axe\axe-uv.png
+map_Kd ..\BedRoom\BedRoom Evidence\axe\axe-uv.png
 
 newmtl BMD_BrushedSteel_0011.001
 Ns 94.117647
@@ -41,18 +41,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jason\OneDrive\Desktop\Graphics\CGF4\Computer-Graphics-Final-Project\BedRoom\eb_nightstand_01\eb_nightstand_01.jpg
-
-newmtl Material.001_House.png
-Ns 94.117647
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd C:\Users\jason\OneDrive\Desktop\Graphics\CGF4\Computer-Graphics-Final-Project\BedRoom\House.png
+map_Kd ..\BedRoom\eb_nightstand_01\eb_nightstand_01.jpg
 
 newmtl Material.002
 Ns 94.117647
@@ -256,7 +245,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 3
-map_Kd C:\\Users\\jason\\OneDrive\\Desktop\\Graphics\\Final Assignment\\BedRoom\\BedRoom Evidence\\llave pata de cuervo\\imagen_llave_text_conbinadas.png
+map_Kd ..\\..\\..\\Final Assignment\\BedRoom\\BedRoom Evidence\\llave pata de cuervo\\imagen_llave_text_conbinadas.png
 
 newmtl Material0
 Ns 7.843137
