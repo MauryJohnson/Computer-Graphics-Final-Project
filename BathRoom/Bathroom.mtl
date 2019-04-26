@@ -11,7 +11,6 @@ Ni 1.500000
 d 1.000000
 illum 2
 map_Kd Fabric_007_OCC.jpg
-map_Ka ../../../Downloads/10404_Circular_Throw_Rug_v1_L3.123cc482f61c-04a2-46dc-8e2e-2978b08d435f 2/10404_Circular_Throw_Rug_v1_diffuse.jpg
 
 newmtl Cabinet_material
 Ns 96.078431
