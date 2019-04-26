@@ -1,5 +1,5 @@
 # Blender MTL File: 'Kitchen.blend'
-# Material Count: 59
+# Material Count: 56
 
 newmtl 20900_Brown_Betty_Teapot
 Ns 96.078431
@@ -143,17 +143,6 @@ d 1.000000
 illum 2
 map_Kd TexturesCom_MetalBare0094_M.jpg
 
-newmtl Material.005_White_Marble_005_DISP.png
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd ../../../../Downloads/White_Marble_005_DISP.png
-
 newmtl Material.005_White_Marble_005_DISP.png.001
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
@@ -185,7 +174,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd ../../../../Downloads/clean-color-drink-1166646.jpg
+map_Kd clean-color-drink-1166646.jpg
 
 newmtl Material.008_NONE
 Ns 96.078431
@@ -313,14 +302,14 @@ d 1
 illum 2
 map_Kd White_Marble_005_DISP.png
 
-newmtl None_Abstract_001_COLOR.jpg
+newmtl None_Abstract_001_COLOR.jpg.001
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd ../../../../Downloads/Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.jpg
 
 newmtl None_NONE
 Ns 0
@@ -559,6 +548,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
+map_Kd Abstract_001_COLOR.jpg
 
 newmtl kitchen_blender_white
 Ns 50.980392
@@ -581,17 +571,6 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl white_gloss_Material_560.png.001
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Material_560.png
-
 newmtl white_gloss_TexturesCom_MetalBare0094_M.jpg
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
@@ -613,14 +592,3 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd TexturesCom_PlasterBare0121_1_seamless_S.jpg
-
-newmtl white_gloss_photos_2015_09_18_fst_765b3qqmm4v.jpg
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd ../../../../Downloads/photos_2015_09_18_fst_765b3qqmm4v.jpg

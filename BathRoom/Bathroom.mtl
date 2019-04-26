@@ -1,5 +1,5 @@
 # Blender MTL File: 'Bathroom.blend'
-# Material Count: 26
+# Material Count: 24
 
 newmtl 10404_Circular_Throw_Rug_v1
 Ns 9.803922
@@ -88,15 +88,6 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-
-newmtl None_Paste_Diffuse.jpg.001
-Ns 0
-Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
-illum 2
-map_Kd idsk4abcim0w-pastebrush/Paste Diffuse.jpg
 
 newmtl None_Plaster_001_DISP.png.001
 Ns 0
@@ -237,20 +228,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.000000
 illum 6
-map_Kd ../../Downloads/idsk4abcim0w-pastebrush/Paste Diffuse.jpg
-map_Bump ../../../../../../1
-
-newmtl phong4SG
-Ns 17.647059
-Ka 0.000000 0.000000 0.000000
-Kd 0.000000 0.000000 0.000000
-Ks 0.230000 0.230000 0.230000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd idsk4abcim0w-pastebrush/Brush Diffuse.jpg
-map_Bump ../../../../../../1
+map_Kd Abstract_001_COLOR.jpg
 
 newmtl plastic_white
 Ns 96.078431
