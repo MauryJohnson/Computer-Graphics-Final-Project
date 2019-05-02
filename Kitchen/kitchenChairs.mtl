@@ -1,0 +1,20 @@
+# Blender MTL File: 'Kitchen.blend'
+# Material Count: 2
+
+newmtl None
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd White_Marble_005_DISP.png
+
+newmtl None_TexturesCom_MetalBare0094_M.jpg
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd TexturesCom_MetalBare0094_M.jpg
