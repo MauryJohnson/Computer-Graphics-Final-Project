@@ -45,6 +45,14 @@ const unsigned int SCR_HEIGHT = 600;
 // camera
 Camera camera(glm::vec3(0.0f, 0.5f, 0.0f));
 
+glm::vec3 ConvertCam(){
+return glm::vec3(camera.Position[0],camera.Position[2],-camera.Position[1]);
+}
+
+glm::vec3 ConvertP(glm::vec3 P){
+return glm::vec3(P[0],P[2],-P[1]);
+}
+
 float PrevCameraPosition[]={
 0.0f,
 0.0f,
@@ -353,39 +361,64 @@ float* Data = Rooms[i].Vertices;
 //Checking if either above a plane or below a plane, because ether you are there, or you arent!
 if(
 
-((
-//ggg
-Position[0]>=Data[j] && Position[1]>=Data[j+1] && Position[2]>=Data[j+2] 
-||
-//llg
-Position[0]<=Data[j] && Position[1]<=Data[j+1] && Position[2]>=Data[j+2]
-||
-//glg
-Position[0]>=Data[j] && Position[1]<=Data[j+1] && Position[2]>=Data[j+2]
-||
-//lgg
-Position[0]<=Data[j] && Position[1]>=Data[j+1] && Position[2]>=Data[j+2]
+(
+(
+//Check if not too tall or short
+(
+Position[1]>=Data[j+1]
 )
-&&j<=11)
+&&
+//And check if within 2d box
+(
+
+//gl
+Position[0]>=Data[j] && Position[2]<=Data[j+1]
+||
+//gg
+Position[0]>=Data[j] && Position[2]>=Data[j+1]
+||
+//lg
+Position[0]<=Data[j] && Position[2]>=Data[j+1]
+||
+//ll
+Position[0]<=Data[j] && Position[2]<=Data[j+1]
+)
+
+)
+&&j<=11
+)
 
 ||
 
-((
-//gll
-Position[0]>=Data[j] && Position[1]<=Data[j+1] && Position[2]<=Data[j+2]
+(
+(//Check if not too tall or short
+
+(
+Position[1]<=Data[j+1]
+)
+
+&&
+
+//And check if within 2d box
+(
+
+//gl
+Position[0]>=Data[j] && Position[2]<=Data[j+1]
 ||
-//
-//lgl
-Position[0]<=Data[j] && Position[1]>=Data[j+1] && Position[2]<=Data[j+2]
+//gg
+Position[0]>=Data[j] && Position[2]>=Data[j+1]
 ||
-//ggl
-Position[0]>=Data[j] && Position[1]>=Data[j+1] && Position[2]<=Data[j+2]
+//lg
+Position[0]<=Data[j] && Position[2]>=Data[j+1]
 ||
-//
-//lll
-Position[0]<=Data[j] && Position[1]<=Data[j+1] && Position[2]<=Data[j+2]
+//ll
+Position[0]<=Data[j] && Position[2]<=Data[j+1]
+
+)
+
 )
 &&j>=12
+
 )
 
 )
@@ -396,7 +429,7 @@ Within=Within && true;
 }
 else{
 Within=false;
-//break;
+break;
 }
 
 }
@@ -418,7 +451,7 @@ return true;
 }
 
 }
-
+printf("\n NOT WITHIN");
 return false;
 
 }
@@ -449,7 +482,7 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
 
 	printf("\n PREPROCESS Position TEST");
 
-	return WithinBounds(Position);
+	return WithinBounds(ConvertP(Position));
      }
 
 
@@ -711,7 +744,7 @@ int main()
     
     // -----------
     
-    printf("\n WITHIN BOUNDS:%d",WithinBounds(camera.Position));
+    printf("\n WITHIN BOUNDS:%d",WithinBounds(ConvertCam()));
 
     //WithinBounds(camera.Position);
     //return 0;  
