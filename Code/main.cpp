@@ -285,6 +285,7 @@ for(int i=0; i<Rooms.size();i+=1){
 	if(Rooms[i].Occupied){
 		for(int j=0; j<Rooms[i].Evidences.size();j+=1){
 			Evidence E = Rooms[i].Evidences[j];
+			
 			if(E.Vertices!=NULL){
 			printf("\n Evidence %s Position:%f,%f,%f,",E.Name,E.Vertices[0],E.Vertices[1],E.Vertices[2]);
 			printf("\nCam Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
@@ -297,6 +298,7 @@ for(int i=0; i<Rooms.size();i+=1){
 			if(Distance<=DetectionDistance)
 				return &(Rooms[i].Evidences[j]);
 			}
+
 		}
 		printf("\n No Evidence Found (WITHIN A DISTANCE)!");
 		return NULL;
