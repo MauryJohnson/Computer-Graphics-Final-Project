@@ -143,21 +143,47 @@ float BedRoomVertices[]={
 -6.63,6.25,7.22
 //END TOP FACE
 };
-float BedRoomEvidenceVertices[]={
+float BathRoomVertices[]={
+//BOTTOM FACE
 //1
-
+48.40, -3.05, -8.02,
 //2
-
+35.57, -3.05, -8.03,
 //3
-
+35.42, -3.05, 9.32,
 //4
-
-
+48.38, -3.05, 9.35,
+//TOP FACE
+35.52, 4.26, -8.2,
+//2
+48.40, 4.39, -8.02,
+//3
+48.38, 4.39, 9.35,
+//4
+35.41, 4.39, 9.32
 };
-bool InLivingRoom=false;
-std::vector<float> LivingRoomVertices;
-bool InBathRoom=false;
-std::vector<float> BathRoomVertices;
+float KitchenVertices[]={
+//BOTTOM FACE
+//1
+8.00, 0.00, -8.00,
+//2
+8.00, 0.00, 8.00,
+//3
+-8.00, 0.00, 8.00,
+//4
+-8.00, 0.00, -8.00,
+//TOP FACE
+//1
+8.00, 6.18, 8.12,
+//2
+8.00, 6.18, -8.00,
+//3
+-8.00, 6.176,-8.00,
+//4
+-8.00, 6.18, 8.00
+};
+
+
 
 //All Rooms Stored
 std::vector<float*> AllRooms;
@@ -366,9 +392,12 @@ int main()
     // -----------
 
     std::vector<Evidence> BedRoomItems;
+    //BathRoom
     std::vector<Evidence> BathRoomItems;
+    //Living
     std::vector<Evidence> LivingRoomItems;
-
+    //Kitchen
+    std::vector<Evidence> KitchenItems;
     //STATIC ITEMS
 
     //BEDROOM
@@ -383,11 +412,24 @@ int main()
     //END BEDROOM
 
     //BATHROOM
-
+    Model* Bathroom = new Model(FileSystem::getPath("../BathRoom/Bathroom.obj"),"../BathRoom");
+    BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Bathroom,NULL));
+   
     //END BATH ROOM
 
-    //LIVING ROOM
+    //KITCHEN
+    Model* Bed = new Model(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
+    BedRoomItems.push_back(Evidence("STATIC_Bed",&Bed,NULL));
+    Model* Furniture = new Model(FileSystem::getPath("../BedRoom/Furniture.obj"),"../BedRoom");
+    BedRoomItems.push_back(Evidence("STATIC_FURNITURE",&Furniture,NULL));
+    Model* MoreBedRoomItems = new Model(FileSystem::getPath("../BedRoom/MoreItems.obj"),"../BedRoom");
+    BedRoomItems.push_back(Evidence("STATIC_MoreBR",&MoreBedRoomItems,NULL));
+    
 
+    //END KITCHEN
+    
+    
+    //LIVING ROOM
 
     //END LIVING ROOM
 
@@ -465,7 +507,13 @@ int main()
     //END BEDROOM EVIDENCE!!!
 	
     //BATHROOM EVIDENCE
-
+    Model* BloodRug = new Model(FileSystem::getPath("../BathRoom/rug.obj"),"../BathRoom");
+    float BloodRugPosition[]={
+	40.79f,
+	-2.92f,
+	0.83f
+    };
+   BathRoomItems.push_back(Evidence("BRE_Rug",&BloodRug,BloodRugPosition));
 
     //END BATHROOM EVIDENCE!!!
 
@@ -487,7 +535,8 @@ int main()
     //Model Room
   
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
-  
+    Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
+    Rooms.push_back(Room(KitchenVertices,KitchenItems));    
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
