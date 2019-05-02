@@ -8,13 +8,13 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd Sand_003_OCC.jpg
+map_Kd bloodyPrints.jpg
 
-newmtl None_Subway_tiles_001_COLOR.jpg.001
+newmtl None_Material_669.png.001
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd Subway_tiles_001_COLOR.jpg
+map_Kd Material_669.png

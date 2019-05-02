@@ -1,7 +1,18 @@
 # Blender MTL File: 'Bathroom.blend'
 # Material Count: 47
 
-newmtl 10404_Circular_Throw_Rug_v1
+newmtl 10292_Hairbrush
+Ns 9.803922
+Ka 0.588200 0.588200 0.588200
+Kd 0.588200 0.588200 0.588200
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd 10292_Hairbrush_V2_L3.123cbdfe840a-b03b-4032-86db-24f7550af007/10292_Hairbrush_V1_Diffuse.jpg
+
+newmtl 10404_Circular_Throw_Rug_v1.001
 Ns 9.803922
 Ka 0.588000 0.588000 0.588000
 Kd 0.588000 0.588000 0.588000
@@ -34,7 +45,7 @@ illum 2
 map_Kd Grass_002_COLOR.jpg
 
 newmtl Glass_Shower
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -205,23 +216,27 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl None_  1
-Ns 0
+newmtl None.008
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
-illum 2
-map_Kd Material_669.png
-
-newmtl None_Abstract_001_COLOR.jpg.001
-Ns 0
-Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
 map_Kd Abstract_001_COLOR.jpg
+
+newmtl None.009
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Material_669.png
 
 newmtl None_Material_669.png.000
 Ns 0.000000
@@ -289,25 +304,29 @@ illum 2
 map_Kd Subway_tiles_001_COLOR.jpg
 
 newmtl None_background-blue-bubble-311039.jpg.001
-Ns 0
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
 map_Kd background-blue-bubble-311039.jpg
 
 newmtl None_clean-color-drink-1166646.jpg.001
-Ns 0
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
 map_Kd clean-color-drink-1166646.jpg
 
-newmtl Plastic_Handle_material
-Ns 96.078431
+newmtl Plastic_Handle_material.001
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.065600 0.063200 0.016000
 Ks 0.500000 0.500000 0.500000
@@ -337,8 +356,8 @@ d 1.000000
 illum 2
 map_Kd Plaster_001_DISP.png
 
-newmtl Sill_material
-Ns 96.078431
+newmtl Sill_material.001
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -380,17 +399,6 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl chrome
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Material_669.png
-
 newmtl chrome.001
 Ns 94.117647
 Ka 1.000000 1.000000 1.000000
@@ -401,6 +409,17 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd Plaster_001_DISP.png
+
+newmtl chrome.002
+Ns 94.117647
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Material_669.png
 
 newmtl glass
 Ns 94.117647
@@ -443,16 +462,6 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd background-blue-bubble-311039.jpg
-
-newmtl hidden_material
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
 
 newmtl marbel_
 Ns 94.117647
