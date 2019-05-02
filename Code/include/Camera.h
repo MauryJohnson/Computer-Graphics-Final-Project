@@ -71,10 +71,34 @@ public:
         return glm::lookAt(Position, Position + Front, Up);
     }
 
+/*
+    glm::vec3 GetDirection(Camera_Movement direction){
+	if (direction == FORWARD)
+            return Front;
+        if (direction == BACKWARD)
+            return -Front;
+        if (direction == LEFT)
+            return -Right;
+        if (direction == RIGHT)
+            return Right;
+	if (direction == UP)
+	    return Up;
+	if (direction == DOWN)
+	    return -Up;
+
+	return glm::vec3(0.0f,0.0f,0.0f);
+    }
+*/
+
+    float GetMovementSpeed(){
+	return this->MovementSpeed;
+    }
+
     // Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
     void ProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
         float velocity = MovementSpeed * deltaTime;
+
         if (direction == FORWARD)
             Position += Front * velocity;
         if (direction == BACKWARD)
@@ -83,7 +107,8 @@ public:
             Position -= Right * velocity;
         if (direction == RIGHT)
             Position += Right * velocity;
-    	if (direction==UP)
+    	
+	if (direction==UP)
 	    Position += Up * velocity;
 	if (direction==DOWN)
 	    Position -= Up * velocity;

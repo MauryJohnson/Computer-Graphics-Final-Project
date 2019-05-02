@@ -43,7 +43,14 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 0.0f));
+Camera camera(glm::vec3(0.0f, 0.5f, 0.0f));
+
+float PrevCameraPosition[]={
+0.0f,
+0.0f,
+0.0f
+};
+
 //If turn look any direction, will still always move forward normally
 //float StableLook[]={};
 bool StableMove = true;
@@ -70,6 +77,8 @@ float KitchenWaterEnd [] = {
 };
 
 //END DEFINE ALL ANIMATION START AND END POSITIONS
+
+
 
 class Animated{
 public:
@@ -249,16 +258,16 @@ std::vector<Room> Rooms;
 bool InBedRoom=true;
 float BedRoomVertices[]={
 //BOTTOM FACE
-6.69,-6.31,-0.1,
-6.69,6.25,-0.1,
--6.69,-6.31,-0.1,
--6.69,6.25,-0.1,
+-6.63,-0.1,-6.26,
+-6.63,-0.1,6.317,
+6.69,-0.1,6.317,
+6.69,-0.1,-6.26,
 //END BOTTOM FACE
 //TOP FACE
--6.63,-6.31,7.22,
-6.69,-6.31,7.22,
-6.69,6.25,7.22,
--6.63,6.25,7.22
+-6.63,7.22,-6.26,
+-6.63,7.22,6.317,
+6.69,7.22,6.317,
+6.69,7.22,-6.26,
 //END TOP FACE
 };
 float BathRoomVertices[]={
@@ -382,11 +391,12 @@ Position[0]<=Data[j] && Position[1]<=Data[j+1] && Position[2]<=Data[j+2]
 )
 {
 
+Within=Within && true;
 
 }
 else{
 Within=false;
-break;
+//break;
 }
 
 }
@@ -412,6 +422,37 @@ return true;
 return false;
 
 }
+
+bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
+    {
+        float velocity = camera.GetMovementSpeed() * deltaTime;
+
+	glm::vec3 Position = camera.Position;
+
+        if (direction == FORWARD)
+            Position += camera.Front * velocity;
+        else if (direction == BACKWARD)
+            Position -= camera.Front * velocity;
+
+        else if (direction == LEFT)
+            Position -= camera.Right * velocity;
+        else if (direction == RIGHT)
+            Position += camera.Right * velocity;
+
+        else if (direction==UP)
+            Position += camera.Up * velocity;
+        else if (direction==DOWN)
+            Position -= camera.Up * velocity;
+	else{
+		return false;
+	}
+
+	printf("\n PREPROCESS Position TEST");
+
+	return WithinBounds(Position);
+     }
+
+
 
 //std::vector<Room> Rooms
 
@@ -456,7 +497,9 @@ return NULL;;
 
 int main()
 {
-    
+   
+    //WithinBounds(camera.Position);
+    //return 0; 
     Animated KitchenDroplet(KitchenWaterStart,KitchenWaterEnd,10,0);
     //return 0;       
     //AllRooms.push_back(BedRoomVertices);
@@ -629,14 +672,15 @@ int main()
     //END BEDROOM EVIDENCE!!!
 	
     //BATHROOM EVIDENCE
+    /*
     Model* BloodRug = new Model(FileSystem::getPath("../BathRoom/rug.obj"),"../BathRoom");
     float BloodRugPosition[]={
 	40.79f,
 	-2.92f,
 	0.83f
     };
-	
-    BathRoomItems.push_back(Evidence("BRE_Rug",&BloodRug,BloodRugPosition));
+	*/	
+    //BathRoomItems.push_back(Evidence("BRE_Rug",&BloodRug,BloodRugPosition));
 
     //END BATHROOM EVIDENCE!!!
 
@@ -658,7 +702,7 @@ int main()
     //Model Room
   
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
-    Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
+    //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -668,6 +712,9 @@ int main()
     // -----------
     
     printf("\n WITHIN BOUNDS:%d",WithinBounds(camera.Position));
+
+    //WithinBounds(camera.Position);
+    //return 0;  
 
     while (!glfwWindowShouldClose(window))
     {
@@ -827,8 +874,10 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     {
       Keys[key]=true;
       //printf("Pressed Up\n"); 
+      if(PreProcessKeyboard(FORWARD,deltaTime)){
       camera.ProcessKeyboard(FORWARD,deltaTime);
       MyZ-=1;
+      }
     }
     else if(key==GLFW_KEY_UP){
       Keys[key]=false;
@@ -839,8 +888,10 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     {
       Keys[key]=true;     
       //printf("Pressed Down\n");
+      if(PreProcessKeyboard(BACKWARD,deltaTime)){
       camera.ProcessKeyboard(BACKWARD,deltaTime);
       MyZ+=1;
+      }
     }
     else if(key==GLFW_KEY_DOWN){
       Keys[key]=false;
@@ -851,8 +902,10 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     {
       Keys[key]=true;
       //printf("Pressed Left\n");
+      if(PreProcessKeyboard(LEFT,deltaTime)){
       camera.ProcessKeyboard(LEFT,deltaTime);
       MyX-=1;
+      }
     }
     else if(key==GLFW_KEY_LEFT){
       Keys[key]=false;
@@ -863,8 +916,10 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     {
       Keys[key]=true;
       //printf("Pressed Right\n");
+      if(PreProcessKeyboard(RIGHT,deltaTime)){
       camera.ProcessKeyboard(RIGHT,deltaTime);
       MyX+=1;
+      }
     }
     else if(key==GLFW_KEY_RIGHT){
       Keys[key]=false;
@@ -876,9 +931,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       Keys[key]=true;
       //printf("Pressed LOOK UP\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
-      
-      camera.ProcessMouseMovement(0.0f,1.0f); 
-
+      camera.ProcessMouseMovement(0.0f,22.5f); 
       MyLookX+=1;
     }
     else if(key==GLFW_KEY_W){
@@ -892,7 +945,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       //printf("Pressed LOOK DOWN\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
 
-      camera.ProcessMouseMovement(0.0f,-1.0f);
+      camera.ProcessMouseMovement(0.0f,-22.5f);
 
       MyLookX-=1;
     }
@@ -907,7 +960,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       //printf("Pressed LOOK RIGHT\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
 
-      camera.ProcessMouseMovement(1.0f,0.0f);
+      camera.ProcessMouseMovement(22.5f,0.0f);
 
       MyLookY+=1;
     }
@@ -922,7 +975,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       //printf("Pressed LOOK LEFT\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
 
-      camera.ProcessMouseMovement(-1.0f,0.0f);
+      camera.ProcessMouseMovement(-22.5f,0.0f);
 
       MyLookY-=1;
     }
@@ -968,10 +1021,14 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     //camera.ProcessMouseScroll(yoffset);
     if(yoffset>0)
+    if(PreProcessKeyboard(UP,deltaTime))
     camera.ProcessKeyboard(UP,deltaTime);
     else
+    if(PreProcessKeyboard(DOWN,deltaTime))
     camera.ProcessKeyboard(DOWN,deltaTime);
 }
+
+
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
