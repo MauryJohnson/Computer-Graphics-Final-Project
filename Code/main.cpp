@@ -13,11 +13,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <ctime>
+
 #include <math.h>
 
 #include "include/Shader.h"
 #include "include/Camera.h"
 #include "include/Model.h"
+
+#include <cstdlib>
 
 #include "include/FileSystem.h"
 
@@ -51,6 +55,120 @@ float MyLookY = 0.0f;
 float MyZ = 0.0f;
 
 float DetectionDistance = 2.0f;
+
+//DEFINE ALL ANIMATION START AND END POSITIONS
+
+float KitchenWaterStart [] ={
+0.35278,
+2.24067,
+-0.64244,
+};
+float KitchenWaterEnd [] = {
+0.33440,
+1.46828,
+-0.81854,
+};
+
+//END DEFINE ALL ANIMATION START AND END POSITIONS
+
+class Animated{
+public:
+	std::vector<glm::vec3> Positions;
+	float TimeStep;
+	//Make a function which increments time counter
+	//COUNTER will ONLY be incremented if time given to it
+	int TimeCounter = 0;
+	clock_t begin = clock();
+  	//clock_t end = clock();
+  	//float elapsed_secs = float(end - begin) / CLOCKS_PER_SEC;
+	float TotalTime;
+	Animated(float* Start, float* End, int NumSteps, int Type);
+	void Update();
+};
+
+Animated::Animated(float* Start, float* End, int NumSteps, int Type){
+
+NumSteps+=1;
+
+if(NumSteps<=0 || Start == NULL || End == NULL){
+printf("\nBad animate input");
+return;
+}
+
+switch(Type){
+
+//Falling Object
+case 0:{
+
+this->Positions.reserve(NumSteps);
+
+float Distance = sqrt(
+pow(abs(Start[0]-End[0]),2) + 
+pow(abs(Start[1]-End[1]),2) +
+pow(abs(Start[2]-End[2]),2) 
+);
+
+printf("\n Distance: %f",Distance);
+
+this->TotalTime = sqrt(Distance/4.9);
+this->TimeStep = TotalTime / NumSteps;
+
+printf("\n TotalTime Taken for my OBJ to fall:%f",TotalTime);
+
+float XX [] = {
+Start[0],
+Start[1],
+Start[2],
+};
+
+printf("\n First POSE:(%f,%f,%f)",XX[0],XX[1],XX[2]);
+
+//printf("\n END TO:
+
+for(;XX[1]>=End[1];XX[1]-=Distance/NumSteps){
+	printf("\n Next POSE:(%f,%f,%f)",XX[0],XX[1],XX[2]);
+	this->Positions.push_back(glm::vec3(XX[0],XX[1],XX[2]));
+}
+
+break;
+}
+//...
+default:
+break;
+
+}
+
+}
+
+//Will Update the Counter for Position in Vector array
+//When get time() - start time() >= TimStep
+//Then set star time() to get time()
+void Animated::Update(){
+
+clock_t end = clock();
+
+float elapsed_secs = float(end - begin);
+
+if(elapsed_secs >=this->TimeStep){
+
+printf("\n this Animated Object has surpassed timestep:%f",this->TimeStep);
+
+this->begin = end;
+
+if(this->TimeCounter==this->Positions.size()-1){
+this->TimeCounter = 0;
+}
+
+else
+this->TimeCounter+=1;
+
+printf("\n ARray Size:%lu",this->Positions.size());
+
+printf("\n Now using Position in Array:%d",TimeCounter);
+
+}
+
+}
 
 //Stores info about each evidence
 class Evidence{
@@ -338,7 +456,9 @@ return NULL;;
 
 int main()
 {
-        
+    
+    Animated KitchenDroplet(KitchenWaterStart,KitchenWaterEnd,10,0);
+    //return 0;       
     //AllRooms.push_back(BedRoomVertices);
 
     // glfw: initialize and configure
@@ -414,19 +534,19 @@ int main()
     //END BEDROOM
 
     //BATHROOM
-    Model* Bathroom = new Model(FileSystem::getPath("../BathRoom/Bathroom.obj"),"../BathRoom");
-    BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Bathroom,NULL));
+    //Model* Bathroom = new Model(FileSystem::getPath("../BathRoom/Bathroom.obj"),"../BathRoom");
+    //BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Bathroom,NULL));
    
     //END BATH ROOM
 
     //KITCHEN
-    Model* Bed = new Model(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
+    /*Model* Bed = new Model(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_Bed",&Bed,NULL));
     Model* Furniture = new Model(FileSystem::getPath("../BedRoom/Furniture.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_FURNITURE",&Furniture,NULL));
     Model* MoreBedRoomItems = new Model(FileSystem::getPath("../BedRoom/MoreItems.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_MoreBR",&MoreBedRoomItems,NULL));
-    
+    */
 
     //END KITCHEN
     
@@ -515,7 +635,8 @@ int main()
 	-2.92f,
 	0.83f
     };
-   BathRoomItems.push_back(Evidence("BRE_Rug",&BloodRug,BloodRugPosition));
+	
+    BathRoomItems.push_back(Evidence("BRE_Rug",&BloodRug,BloodRugPosition));
 
     //END BATHROOM EVIDENCE!!!
 
@@ -538,7 +659,7 @@ int main()
   
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
     Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
-    Rooms.push_back(Room(KitchenVertices,KitchenItems));    
+    //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
@@ -604,6 +725,9 @@ int main()
 	    
 	    }
 	}
+
+	KitchenDroplet.Update();
+
 	//BEDROOM EVIDENCE
 	
 	//DoorToBathRoom.Draw(ourShader);
