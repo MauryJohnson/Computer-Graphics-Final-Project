@@ -43,7 +43,7 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.5f, 0.0f));
+Camera camera(glm::vec3(0.0f, 0.9f, 0.0f));
 
 glm::vec3 ConvertCam(){
 return glm::vec3(camera.Position[0],camera.Position[2],-camera.Position[1]);
@@ -300,6 +300,7 @@ bool firstMouse = true;
 
 // timing
 float deltaTime = 0.0f;
+float PreDelta = 0.0f;
 float DeltaMultiplier = 10.0f;
 
 float lastFrame = 0.0f;
@@ -307,8 +308,8 @@ float lastFrame = 0.0f;
 
 //My Position will use camera's position
 bool WithinBounds(glm::vec3 Position){
-printf("\n Camera Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
-
+//printf("\n Camera Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
+printf("\n THE Position:%f,%f,%f\n",Position[0],Position[1],Position[2]);
 //Check if either in bed room, living room, or bath room
 //Check for all rooms
 //IF in NEITHER ROOMS, return false!
@@ -329,11 +330,16 @@ for(int j=0; j<=23;j+=3){
 
 printf("\nData:%f,%f,%f",Rooms[i].Vertices[j],Rooms[i].Vertices[j+1],Rooms[i].Vertices[j+2]);
 
+printf("\n VS POSITION:%f,%f,%f,",Position[0],Position[1],Position[2]);
+
 float* Data = Rooms[i].Vertices;
 
-//Checking if either above a plane or below a plane, because ether you are there, or you arent!
-if(
+bool AboveFirstPlane = (
+Position[1]>=Data[j+1]
+)
+;
 
+bool FirstPlane = 
 (
 (
 //Check if not too tall or short
@@ -345,24 +351,25 @@ Position[1]>=Data[j+1]
 (
 
 //gl
-Position[0]>=Data[j] && Position[2]<=Data[j+1]
+(Position[0]>=Data[j] && Position[2]<=Data[j+2] && j==3)
 ||
-//gg
-Position[0]>=Data[j] && Position[2]>=Data[j+1]
+//(gg
+(Position[0]>=Data[j] && Position[2]>=Data[j+2] && j==0)
 ||
 //lg
-Position[0]<=Data[j] && Position[2]>=Data[j+1]
+(Position[0]<=Data[j] && Position[2]>=Data[j+2] && j==9)
 ||
 //ll
-Position[0]<=Data[j] && Position[2]<=Data[j+1]
+(Position[0]<=Data[j] && Position[2]<=Data[j+2] && j==6)
+
 )
 
 )
 &&j<=11
 )
+;
 
-||
-
+bool SecondPlane = 
 (
 (//Check if not too tall or short
 
@@ -376,28 +383,34 @@ Position[1]<=Data[j+1]
 (
 
 //gl
-Position[0]>=Data[j] && Position[2]<=Data[j+1]
+Position[0]>=Data[j] && Position[2]<=Data[j+2] && j==15
 ||
 //gg
-Position[0]>=Data[j] && Position[2]>=Data[j+1]
+Position[0]>=Data[j] && Position[2]>=Data[j+2] && j==12
 ||
 //lg
-Position[0]<=Data[j] && Position[2]>=Data[j+1]
+Position[0]<=Data[j] && Position[2]>=Data[j+2] && j==21
 ||
 //ll
-Position[0]<=Data[j] && Position[2]<=Data[j+1]
+Position[0]<=Data[j] && Position[2]<=Data[j+2] && j==18
 
 )
 
 )
 &&j>=12
 
-)
+);
 
+printf("\n Above First Plane:%d",AboveFirstPlane);
+printf("\n First Plane:%d",FirstPlane);
+
+//Checking if either above a plane or below a plane, because ether you are there, or you arent!
+if(
+FirstPlane || SecondPlane
 )
 {
 
-Within=Within && true;
+//Within=Within && true;
 
 }
 else{
@@ -431,9 +444,14 @@ return false;
 
 bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
-        float velocity = camera.GetMovementSpeed() * deltaTime;
+	//if(PreDelta<=0.0f)
+	//PreDelta = deltaTime/2.0f;
+	PreDelta = 0.2f;
+        float velocity = camera.GetMovementSpeed() * PreDelta;
 
-	glm::vec3 Position = camera.Position;
+        printf("\n VELOCITY!%f",velocity);
+
+	glm::vec3 Position(camera.Position[0],camera.Position[1],camera.Position[2]);
 
         if (direction == FORWARD)
             Position += camera.Front * velocity;
@@ -453,9 +471,14 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
 		return false;
 	}
 
-	printf("\n PREPROCESS Position TEST");
+	printf("\n PREPROCESS Position To:%f,%f,%f TEST",Position[0],Position[1],Position[2]);
 
-	return WithinBounds(ConvertP(Position));
+	//return //WithinBounds(ConvertP(Position));
+	if(	WithinBounds(Position)){
+	camera.Position = Position;
+	return true;
+	}
+	return false;
      }
 
 
@@ -776,7 +799,7 @@ int main()
     
     // -----------
     
-    printf("\n WITHIN BOUNDS:%d",WithinBounds(ConvertCam()));
+    printf("\n WITHIN BOUNDS:%d",WithinBounds(camera.Position));
 
     //WithinBounds(camera.Position);
     //return 0;  
@@ -940,9 +963,11 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       Keys[key]=true;
       //printf("Pressed Up\n"); 
       if(PreProcessKeyboard(FORWARD,deltaTime)){
-      camera.ProcessKeyboard(FORWARD,deltaTime);
+      //camera.ProcessKeyboard(FORWARD,PreDelta);
+      PreDelta = 0.0f;
       MyZ-=1;
       }
+      Keys[key]=false;
     }
     else if(key==GLFW_KEY_UP){
       Keys[key]=false;
@@ -954,9 +979,11 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       Keys[key]=true;     
       //printf("Pressed Down\n");
       if(PreProcessKeyboard(BACKWARD,deltaTime)){
-      camera.ProcessKeyboard(BACKWARD,deltaTime);
+      //camera.ProcessKeyboard(BACKWARD,PreDelta);
+       PreDelta = 0.0f;
       MyZ+=1;
       }
+      Keys[key]=false;
     }
     else if(key==GLFW_KEY_DOWN){
       Keys[key]=false;
@@ -967,24 +994,30 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     {
       Keys[key]=true;
       //printf("Pressed Left\n");
-      if(PreProcessKeyboard(LEFT,deltaTime)){
-      camera.ProcessKeyboard(LEFT,deltaTime);
+      if(PreProcessKeyboard(LEFT,PreDelta)){
+      //camera.ProcessKeyboard(LEFT,deltaTime);
+       PreDelta = 0.0f;
       MyX-=1;
       }
+      Keys[key]=false;
     }
     else if(key==GLFW_KEY_LEFT){
       Keys[key]=false;
       //printf("End Press Left\n");
+    
     }
 
     if(key==GLFW_KEY_RIGHT && (action==GLFW_PRESS||Keys[key]))
     {
       Keys[key]=true;
       //printf("Pressed Right\n");
-      if(PreProcessKeyboard(RIGHT,deltaTime)){
-      camera.ProcessKeyboard(RIGHT,deltaTime);
+      if(PreProcessKeyboard(RIGHT,PreDelta)){
+      //camera.ProcessKeyboard(RIGHT,);
+       PreDelta = 0.0f;
+
       MyX+=1;
       }
+      Keys[key]=false;
     }
     else if(key==GLFW_KEY_RIGHT){
       Keys[key]=false;
