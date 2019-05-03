@@ -263,7 +263,16 @@ std::vector<Room> Rooms;
 //Then Upper plane (remaining 12 float values)
 //In format x1,y1,z1,x2,y2,z2,....,z24
 //std::vector<float> BedRoomVertices;
-bool InBedRoom=true;
+//bool InBedRoom=true;
+
+//From Bathroom to kitchen...
+bool WhichRoom[] = {
+true,
+false,
+false,
+false
+};
+
 float BedRoomVertices[]={
 //BOTTOM FACE
 -6.63,-0.1,-6.26,
@@ -625,6 +634,8 @@ int main()
     //BATHROOM
     /*Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Dresser",&Dresser,NULL));
+    */
+    /* 
     Model* Window = new Model(FileSystem::getPath("../BathRoom/window.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Window",&Window,NULL));
     Model* Tub = new Model(FileSystem::getPath("../BathRoom/bathtub.obj"),"../BathRoom");
@@ -636,6 +647,7 @@ int main()
     Model* Shower = new Model(FileSystem::getPath("../BathRoom/shower.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Shower,NULL));
     */
+
     //END BATH ROOM
 
     //KITCHEN
@@ -756,9 +768,9 @@ int main()
 	1.24f,
 	-1.73f
     };
-    /*
+    
     BathRoomItems.push_back(Evidence("BRE_Chain",&Chain,ChainPosition));
-   
+   /* THIS FAILED TO LOAD
     Model* Needle = new Model(FileSystem::getPath("../BathRoom/needle.obj"),"../BathRoom");
     float NeedlePosition[] = {
 	41.60f,
@@ -766,7 +778,9 @@ int main()
 	-2.07f
     };
     BathRoomItems.push_back(Evidence("BRE_Needle",&Needle,NeedlePosition));
-   
+   */   
+
+
    Model* Key = new Model(FileSystem::getPath("../BathRoom/key.obj"),"../BathRoom");
     float KeyPosition[] = {
 	46.10f,
@@ -791,8 +805,7 @@ int main()
     };
     BathRoomItems.push_back(Evidence("BRE_Cup",&Cup,CupPosition));
     //END BATHROOM EVIDENCE!!!
-    */
-
+    
     //LIVING ROOM EVIDENCE
 
 
