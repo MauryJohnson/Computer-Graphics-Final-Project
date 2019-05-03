@@ -38,6 +38,26 @@ void processInput(GLFWwindow *window);
 //Key
 bool Keys[1024];
 
+//For every movement U,D,L,R,UU,DD
+//CANNOT go again if already couldn't
+//IF try another move, resets all OTHER movements
+bool CantGoAgain[] = {
+false,false,false,false,
+false,false
+};
+
+void UpdateGoAgain(int Position){
+
+if(!CantGoAgain[Position]){
+CantGoAgain[Position] = true;
+for(int i=0; i<=5;i+=1)
+	if(i!=Position){
+		CantGoAgain[Position] = false;
+	}
+}
+
+}
+
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -166,7 +186,7 @@ float elapsed_secs = float(end - begin);
 
 if(elapsed_secs >=this->TimeStep){
 
-printf("\n this Animated Object has surpassed timestep:%f",this->TimeStep);
+//printf("\n this Animated Object has surpassed timestep:%f",this->TimeStep);
 
 this->begin = end;
 
@@ -177,9 +197,9 @@ this->TimeCounter = 0;
 else
 this->TimeCounter+=1;
 
-printf("\n ARray Size:%lu",this->Positions.size());
+//printf("\n ARray Size:%lu",this->Positions.size());
 
-printf("\n Now using Position in Array:%d",TimeCounter);
+//printf("\n Now using Position in Array:%d",TimeCounter);
 
 }
 
@@ -290,10 +310,10 @@ float BedRoomVertices[]={
 };
 float BathRoomVertices[]={
 //BOTTOM FACE
-35.42, -3.05, 9.32
+35.42, -3.05, 9.32,
 48.38, -3.05, 9.35,
-35.57, -3.05, -8.03
-48.40, -3.05, -8.02
+35.57, -3.05, -8.03,
+48.40, -3.05, -8.02,
 //END BOTTOM FACE
 
 //TOP FACE
@@ -365,8 +385,8 @@ printf("\n THE Position:%f,%f,%f\n",Position[0],Position[1],Position[2]);
 
 float DoorMidPoint = 0.0f;
 //Door is 0.21 from midpoint on both sides
-float DoorLeft = -0.21f;
-float DoorRight = 0.21f;
+float DoorLeft = -1.35f;
+float DoorRight = 1.35f;
 
 float TopTFace [] ={
 //In
@@ -430,28 +450,40 @@ DoorMidPoint = (LivingRoomVertices[2] + LivingRoomVertices[5])/2.0f;
 DoorLeft+=DoorMidPoint;
 DoorRight+=DoorMidPoint;
 
+printf("\n Door Midpoint:%f",DoorMidPoint);
+printf("\n Door Left:%f, Door Right:%f",DoorLeft,DoorRight);
+
 //Use Same WithinBounds Function for Current ROOM
 
 bool Within = true;
 
-printf("\nRoom:%d",Current);
+printf("\nTRY Room:%d",Current);
+
+//Current = Next;
+
 for(int j=0; j<=23;j+=3){
 
-printf("\nData:%f,%f,%f",Rooms[Current].Vertices[j],Rooms[Current].Vertices[j+1],Rooms[Current].Vertices[j+2]);
+float* Data = Copy(Rooms[Next].Vertices);
+
+/*
+printf("\nData:%f,%f,%f",Data[j],Data[j+1],Data[j+2]);
 
 printf("\n VS POSITION:%f,%f,%f,",Position[0],Position[1],Position[2]);
+*/
 
-float* Data = Copy(Rooms[Current].Vertices);
+//float* Data = Copy(Rooms[Current].Vertices);
 
 if(XAxis){
 
 if(
-j<=5)
+j<=5 || (j>=12&&j<=17))
 {
+printf("\n j<=5 || (j>=12&&j<=17)");
 Data[j] = DoorLeft;
 }
 
-else if((j>=12 && j<=17)){
+else if((j>=6&&j<=8) || (j>=9&&j<=11) || (j>=18)){
+printf("\n (j>=6&&j<=8) || (j>=9&&j<=11) || (j>=18)");
 Data[j] = DoorRight;
 }
 
@@ -470,6 +502,10 @@ Data[j+2] = DoorRight;
 }
 
 }
+
+printf("\nData:%f,%f,%f",Data[j],Data[j+1],Data[j+2]);
+
+printf("\n VS POSITION:%f,%f,%f,",Position[0],Position[1],Position[2]);
 
 bool AboveFirstPlane = (
 Position[1]>=Data[j+1]
@@ -570,10 +606,13 @@ if(Within){
 
 printf("\n WITHIN!");
 
-Rooms[Current].Occupied=true;
+///////////////////////////// TO CHECK FAST, CHANGE Next to Current
+//It will ALWAYS look to see if within the small bounding box of the door!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Rooms[Next].Occupied=true;
 
 for(int k=0; k<=Rooms.size()-1;k+=1){
-	if(k!=Current){
+	if(k!=Next){
 		Rooms[k].Occupied=false;
 	}
 }
@@ -594,6 +633,11 @@ if(CurrentRoom!=-1 && CurrentRoom!=i){
 return true;
 
 }
+
+printf("\n NOT WITHIN TRANSITION ZONE!!!!");
+
+Rooms[Current].Occupied = true;
+Rooms[Next].Occupied = false;
 
 return false;
 
@@ -795,9 +839,9 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
         else if (direction == RIGHT)
             Position += camera.Right * velocity;
 
-        else if (direction==UP)
+        else if (direction==UP && !CantGoAgain[4])
             Position += camera.Up * velocity;
-        else if (direction==DOWN)
+        else if (direction==DOWN && !CantGoAgain[5])
             Position -= camera.Up * velocity;
 	else{
 		return false;
@@ -806,7 +850,7 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
 	printf("\n PREPROCESS Position To:%f,%f,%f TEST",Position[0],Position[1],Position[2]);
 
 	//return //WithinBounds(ConvertP(Position));
-	if(	WithinBounds(Position)){
+	if(WithinBounds(Position)){
 	
 	if(StableMove){
         printf("\n STABLE 1 \n");
@@ -827,6 +871,9 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
 	return true;
 	
 	}
+
+	PreDelta = 0.0f;
+
 	return false;
      }
 
@@ -848,14 +895,14 @@ for(int i=0; i<Rooms.size();i+=1){
 	//if(Rooms[i].Occupied){
 		for(int j=0; j<Rooms[i].Evidences.size();j+=1){
 			Evidence E = Rooms[i].Evidences[j];					if(E.Vertices!=NULL){
-			printf("\n Evidence %s Position:%f,%f,%f,",E.Name,E.Vertices[0],E.Vertices[1],E.Vertices[2]);
-			printf("\nCam Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
+			//printf("\n Evidence %s Position:%f,%f,%f,",E.Name,E.Vertices[0],E.Vertices[1],E.Vertices[2]);
+			//printf("\nCam Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
 			float Distance = sqrt( 
 			pow(camera.Position[0] - Rooms[i].Evidences[j].Vertices[0],2) + 
 			pow(camera.Position[1] - Rooms[i].Evidences[j].Vertices[1],2) +
 			pow(camera.Position[2] - Rooms[i].Evidences[j].Vertices[2],2)
 			); 
-			printf("Effective Distance:%f VS Detect Distance:%f",Distance,DetectionDistance);
+			//printf("Effective Distance:%f VS Detect Distance:%f",Distance,DetectionDistance);
 			if(Distance<=DetectionDistance){
 				if(strcmp(Rooms[i].Evidences[j].Name,"DOOR")==0){
 	printf("\n Remove a DOOR");
@@ -958,13 +1005,16 @@ int main()
     //END BEDROOM
 
     //BATHROOM
-    Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
+    /*Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Dresser",&Dresser,NULL));
+	*/
+/*
 <<<<<<< HEAD
-    */
+    
      
 =======
 >>>>>>> c6abcd87be8673c5af71129e04aeb22205e71717
+*/
     Model* Window = new Model(FileSystem::getPath("../BathRoom/window.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Window",&Window,NULL));
     /*
@@ -980,21 +1030,25 @@ int main()
 <<<<<<< HEAD
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Shower,NULL));
     */
-=======
-    BathRoomItems.push_back(Evidence("STATIC_Shower",&Shower,NULL));
+//=======
+    //BathRoomItems.push_back(Evidence("STATIC_Shower",&Shower,NULL));
+    /* 
     Model* Handsoap = new Model(FileSystem::getPath("../BathRoom/handsoap.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Handsoap",&Handsoap,NULL));
     Model* ToothpasteandBrush = new Model(FileSystem::getPath("../BathRoom/ToothpasteandBrush.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_ToothpasteandBrush",&ToothpasteandBrush,NULL));
->>>>>>> c6abcd87be8673c5af71129e04aeb22205e71717
+    */
+//>>>>>>> c6abcd87be8673c5af71129e04aeb22205e71717
     //END BATH ROOM
 
     //KITCHEN
+    /*
     Model* Cabinets = new Model(FileSystem::getPath("../Kitchen/cabinets.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Cabinets",&Cabinets,NULL));
     Model* Chairs = new Model(FileSystem::getPath("../Kitchen/kitchenChairs.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Chairs",&Chairs,NULL));
     Model* Dishes = new Model(FileSystem::getPath("../Kitchen/dishes.obj"),"../Kitchen");
+    
     KitchenItems.push_back(Evidence("STATIC_Dishes",&Dishes,NULL));
     Model* Blender = new Model(FileSystem::getPath("../Kitchen/blender.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Blender",&Blender,NULL));
@@ -1016,9 +1070,10 @@ int main()
     KitchenItems.push_back(Evidence("STATIC_Toaster",&Toaster,NULL));
     Model* Trashcan = new Model(FileSystem::getPath("../Kitchen/trashcan.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Trashcan",&Trashcan,NULL));
-    Model* Window = new Model(FileSystem::getPath("../Kitchen/windows.obj"),"../Kitchen");
+    */
+    /*Model* Window = new Model(FileSystem::getPath("../Kitchen/windows.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Window",&Window,NULL));
-    
+    */
     //END KITCHEN
     
     
@@ -1105,11 +1160,6 @@ int main()
     //Rooms.push_back(Room(BedRoomVertices,BedRoomItems));
     //END BEDROOM EVIDENCE!!!
 	
-
-
-
-
-
     //BATHROOM EVIDENCE
     
     Model* BloodRug = new Model(FileSystem::getPath("../BathRoom/rug.obj"),"../BathRoom");
@@ -1182,8 +1232,8 @@ int main()
     
 
 
-
     //KITCHEN EVIDENCE
+    /*
     Model* TeddyBear = new Model(FileSystem::getPath("../Kitchen/bear.obj"),"../Kitchen");
     float TeddyBearPosition[] = {
 	-0.05f,
@@ -1231,10 +1281,8 @@ int main()
 	5.42f
     };
     KitchenItems.push_back(Evidence("BRE_FootPrints",&FootPrints,FootPrintsPosition));
-    
-
+    */
     //END KITCHEN EVIDENCE
-
 
 
 
@@ -1256,14 +1304,14 @@ int main()
     //Model Room
   
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
-<<<<<<< HEAD
+//<<<<<<< HEAD
     Rooms.push_back(Room(LivingRoomVertices,LivingRoomItems));
     //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
-=======
-    Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
-    Rooms.push_back(Room(KitchenVertices,KitchenItems));    
->>>>>>> c6abcd87be8673c5af71129e04aeb22205e71717
+//=======
+    //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
+    //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
+//>>>>>>> c6abcd87be8673c5af71129e04aeb22205e71717
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
@@ -1345,7 +1393,7 @@ int main()
 		break;
 	}
 	else{
-		printf("\n Evidences left:%d",Count);
+		//printf("\n Evidences left:%d",Count);
 	}
 	KitchenDroplet.Update();
 
@@ -1444,15 +1492,19 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
 	camera.ProcessMouseMovement(0.0f,-MyLookX);
     }
     */
-    if(key==GLFW_KEY_UP && (action==GLFW_PRESS || Keys[key]))
+    if(key==GLFW_KEY_UP && (action==GLFW_PRESS || Keys[key]) && !CantGoAgain[0])
     {
       Keys[key]=true;
       //printf("Pressed Up\n"); 
       if(PreProcessKeyboard(FORWARD,deltaTime)){
       //camera.ProcessKeyboard(FORWARD,PreDelta);
       PreDelta = 0.0f;
+      //UpdateGoAgain(0);
       MyZ-=1;
       }
+      else
+	UpdateGoAgain(0);
+
       Keys[key]=false;
     }
     else if(key==GLFW_KEY_UP){
@@ -1460,15 +1512,18 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       //printf("End Press Up\n");
     }
 
-    if(key==GLFW_KEY_DOWN && (action==GLFW_PRESS||Keys[key]))
+    if(key==GLFW_KEY_DOWN && (action==GLFW_PRESS||Keys[key]) && !CantGoAgain[1])
     {
       Keys[key]=true;     
       //printf("Pressed Down\n");
       if(PreProcessKeyboard(BACKWARD,deltaTime)){
       //camera.ProcessKeyboard(BACKWARD,PreDelta);
-       PreDelta = 0.0f;
+      PreDelta = 0.0f;
       MyZ+=1;
       }
+      else
+	UpdateGoAgain(1);
+
       Keys[key]=false;
     }
     else if(key==GLFW_KEY_DOWN){
@@ -1476,7 +1531,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       //printf("End Press Down\n");
     }
 
-    if(key==GLFW_KEY_LEFT && (action==GLFW_PRESS || Keys[key]))
+    if(key==GLFW_KEY_LEFT && (action==GLFW_PRESS || Keys[key]) && !CantGoAgain[2])
     {
       Keys[key]=true;
       //printf("Pressed Left\n");
@@ -1485,6 +1540,9 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
        PreDelta = 0.0f;
       MyX-=1;
       }
+      else
+	UpdateGoAgain(2);
+
       Keys[key]=false;
     }
     else if(key==GLFW_KEY_LEFT){
@@ -1493,7 +1551,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     
     }
 
-    if(key==GLFW_KEY_RIGHT && (action==GLFW_PRESS||Keys[key]))
+    if(key==GLFW_KEY_RIGHT && (action==GLFW_PRESS||Keys[key]) && !CantGoAgain[3])
     {
       Keys[key]=true;
       //printf("Pressed Right\n");
@@ -1503,6 +1561,8 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
 
       MyX+=1;
       }
+	else
+	UpdateGoAgain(3);
       Keys[key]=false;
     }
     else if(key==GLFW_KEY_RIGHT){
@@ -1611,12 +1671,16 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
     //camera.ProcessKeyboard(UP,deltaTime);
     
     }
+	else
+	UpdateGoAgain(4);
     }
     else
     if(PreProcessKeyboard(DOWN,deltaTime)){
     //camera.ProcessKeyboard(DOWN,deltaTime);
     
     }
+	else
+	UpdateGoAgain(5);
 }
 
 
