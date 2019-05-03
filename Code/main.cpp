@@ -473,7 +473,7 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
 	//if(PreDelta<=0.0f)
 	//PreDelta = deltaTime/2.0f;
-	PreDelta = 0.2f;
+	PreDelta = 0.4f;
         float velocity = camera.GetMovementSpeed() * PreDelta;
 
         printf("\n VELOCITY!%f",velocity);
@@ -502,8 +502,25 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
 
 	//return //WithinBounds(ConvertP(Position));
 	if(	WithinBounds(Position)){
-	camera.Position = Position;
+	
+	if(StableMove){
+        printf("\n STABLE 1 \n");
+	camera.ProcessMouseMovement(0.0f,-MyLookX);
+        }
+        
+	//camera.ProcessMouseMovement(0.0f,-MyLookX);
+	//camera.Position = (Position);
+	camera.ProcessKeyboard(direction,PreDelta);
+
+ 	if(StableMove){
+        printf("\n STABLE 2 \n");
+	camera.ProcessMouseMovement(0.0f,MyLookX);
+        }
+	
+	//camera.ProcessMouseMovement(0.0f,-MyLookX);
+	
 	return true;
+	
 	}
 	return false;
      }
@@ -811,11 +828,10 @@ int main()
 	//END STATIC ITEMS
 
  	//EVIDENCE
- 	
+ 	bool NoEvidence = true;
         for(int i=0; i<Rooms.size();i+=1){
 	    //printf("\nIDX:%d",i);
 	    for(int j=0; j<Rooms[i].Evidences.size();j+=1){
-		
 		//printf("\n SOME EVIDENCE");
 		Model** M = NULL;
 		
@@ -823,10 +839,17 @@ int main()
 			M = (Rooms[i].Evidences[j].M);
 		
   	        if(M!=NULL)
-		    if(*M!=NULL)
-		    	(**M).Draw(ourShader);
-	    
+		    if(*M!=NULL){
+			NoEvidence = false;    
+	    		(**M).Draw(ourShader);
+	    	    }
+		
 	    }
+	}
+
+	if(NoEvidence){
+		printf("\n YOU WIN!!!!!!!!!!!!!!!!!\n");
+		break;
 	}
 
 	KitchenDroplet.Update();
@@ -922,10 +945,10 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
     //Check if you set parameter for special movement
     //This will always reset view look to 0 by backtracking
     //And then will set view look back to orig again!
-    if(StableMove){
+    /*if(StableMove){
 	camera.ProcessMouseMovement(0.0f,-MyLookX);
     }
-
+    */
     if(key==GLFW_KEY_UP && (action==GLFW_PRESS || Keys[key]))
     {
       Keys[key]=true;
@@ -998,7 +1021,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       //printf("Pressed LOOK UP\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
       camera.ProcessMouseMovement(0.0f,22.5f); 
-      MyLookX+=1;
+      MyLookX+=22.5f;
     }
     else if(key==GLFW_KEY_W){
       Keys[key]=false;
@@ -1012,8 +1035,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       //camera.ProcessKeyboard(RIGHT,deltaTime);
 
       camera.ProcessMouseMovement(0.0f,-22.5f);
-
-      MyLookX-=1;
+      MyLookX-=22.5f;
     }
     else if(key==GLFW_KEY_S){
       Keys[key]=false;
@@ -1049,14 +1071,17 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       Keys[key]=false;
       //printf("End Press LOOK LEFT\n");
     }
-
-
+    /*
     if(StableMove){
         camera.ProcessMouseMovement(0.0f,MyLookX);
     }
-
+    */
    //printf("\nCam Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
-
+    /*if(StableMove){
+        printf("\n STABLE 2 \n");
+        camera.ProcessMouseMovement(0.0f,MyLookX);
+        }
+	*/
 }
 
 
@@ -1086,12 +1111,17 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     //camera.ProcessMouseScroll(yoffset);
-    if(yoffset>0)
-    if(PreProcessKeyboard(UP,deltaTime))
-    camera.ProcessKeyboard(UP,deltaTime);
+    if(yoffset>0){
+    if(PreProcessKeyboard(UP,deltaTime)){
+    //camera.ProcessKeyboard(UP,deltaTime);
+    
+    }
+    }
     else
-    if(PreProcessKeyboard(DOWN,deltaTime))
-    camera.ProcessKeyboard(DOWN,deltaTime);
+    if(PreProcessKeyboard(DOWN,deltaTime)){
+    //camera.ProcessKeyboard(DOWN,deltaTime);
+    
+    }
 }
 
 
