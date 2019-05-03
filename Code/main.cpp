@@ -86,8 +86,6 @@ float KitchenWaterEnd [] = {
 
 //END DEFINE ALL ANIMATION START AND END POSITIONS
 
-
-
 class Animated{
 public:
 	std::vector<glm::vec3> Positions;
@@ -236,6 +234,9 @@ public:
 
 	//Create room Obj
 	Room(float* Vertices,std::vector<Evidence> Evidences);
+
+	//Open room when Evidence Door is clicked...
+	bool Open = false;
 		
 	//Destructor
 	~Room();
@@ -293,6 +294,23 @@ float BathRoomVertices[]={
 //TOP FACE
 //END TOP FACE
 };
+float LivingRoomVertices[]={
+
+//BOTTOM FACE
+-6.63f,-0.1f,6.34f,
+-6.63f,-0.1f,22.777f,
+6.69f,-0.1f,22.777f,
+6.69f,-0.1f,6.34f,
+//END BOTTOM FACE
+
+//TOP FACE
+-6.63f,7.225f,6.34f,
+-6.63f,7.225f,22.777f,
+6.69f,7.225f,22.777f,
+6.69f,7.225f,6.34f
+//END TOP FACE
+
+};
 float KitchenVertices[]={
 //BOTTOM FACE
 //END BOTTOM FACE
@@ -300,7 +318,15 @@ float KitchenVertices[]={
 //END TOP FACE
 };
 
+float* Copy (float* F){
 
+float* C = (float*)malloc(24*sizeof(float));
+
+for(int i=0; i<=23;i+=1)
+C[i]=F[i];
+
+return C;
+}
 
 //All Rooms Stored
 std::vector<float*> AllRooms;
@@ -314,6 +340,247 @@ float DeltaMultiplier = 10.0f;
 
 float lastFrame = 0.0f;
 
+//Simple Check utilizing here to there case...
+        //Use vertices of door between and furthest vertices in room to
+//wards
+bool WithinTransitionBounds(glm::vec3 Position,int Current,int Next){
+printf("\n THE Position:%f,%f,%f\n",Position[0],Position[1],Position[2]);
+
+float DoorMidPoint = 0.0f;
+//Door is 0.21 from midpoint on both sides
+float DoorLeft = -0.21f;
+float DoorRight = 0.21f;
+
+float TopTFace [] ={
+//In
+0.0f,0.0f,0.0f,
+0.0f,0.0f,0.0f,
+
+//Out
+0.0f,0.0f,0.0f,
+0.0f,0.0f,0.0f
+};
+
+float BottomTFace [] ={
+//In
+0.0f,0.0f,0.0f,
+0.0f,0.0f,0.0f,
+
+//Out
+0.0f,0.0f,0.0f,
+0.0f,0.0f,0.0f
+};
+
+//General Elevation is -0.1f - 7.22f
+
+bool XAxis = false;
+
+//02 20 01 11 13 31
+if(Current==0){
+//6.69,7.22,6.317,
+//6.69,7.22,-6.26,
+if(Next==2){
+DoorMidPoint = (BedRoomVertices[8] + BedRoomVertices[11])/2.0f;
+}
+//-6.63,7.22,6.317,
+//6.69,7.22,6.317,
+else if(Next==1){
+XAxis=true;
+DoorMidPoint = (BedRoomVertices[3] + BedRoomVertices[6])/2.0f;
+}
+}
+else if(Current==1){
+if(Next==0){
+XAxis=true;
+DoorMidPoint = (BedRoomVertices[3] + BedRoomVertices[6])/2.0f;
+}
+else if(Next==3){
+//-6.63f,-0.1f,6.34f,
+//-6.63f,-0.1f,22.777f,
+DoorMidPoint = (LivingRoomVertices[2] + LivingRoomVertices[5])/2.0f;
+}
+}
+else if(Current==2){
+if(Next==0){
+DoorMidPoint = (BedRoomVertices[8] + BedRoomVertices[11])/2.0f;
+}
+}
+else if(Current==3){
+if(Next==1){
+DoorMidPoint = (LivingRoomVertices[2] + LivingRoomVertices[5])/2.0f;
+}
+}
+DoorLeft+=DoorMidPoint;
+DoorRight+=DoorMidPoint;
+
+//Use Same WithinBounds Function for Current ROOM
+
+bool Within = true;
+
+printf("\nRoom:%d",Current);
+for(int j=0; j<=23;j+=3){
+
+printf("\nData:%f,%f,%f",Rooms[Current].Vertices[j],Rooms[Current].Vertices[j+1],Rooms[Current].Vertices[j+2]);
+
+printf("\n VS POSITION:%f,%f,%f,",Position[0],Position[1],Position[2]);
+
+float* Data = Copy(Rooms[Current].Vertices);
+
+if(XAxis){
+
+if(
+j<=5)
+{
+Data[j] = DoorLeft;
+}
+
+else if((j>=12 && j<=17)){
+Data[j] = DoorRight;
+}
+
+}
+else{
+
+if(
+j<=2 || 
+(j>=12 && j<=14)
+){
+Data[j+2] = DoorLeft;
+}
+
+else if((j>=9 && j<=11) || (j>=21 && j<=23)){
+Data[j+2] = DoorRight;
+}
+
+}
+
+bool AboveFirstPlane = (
+Position[1]>=Data[j+1]
+)
+;
+
+bool FirstPlane = 
+(
+(
+//Check if not too tall or short
+(
+Position[1]>=Data[j+1]
+)
+&&
+//And check if within 2d box
+(
+
+//gl
+(Position[0]>=Data[j] && Position[2]<=Data[j+2] && j==3)
+||
+//(gg
+(Position[0]>=Data[j] && Position[2]>=Data[j+2] && j==0)
+||
+//lg
+(Position[0]<=Data[j] && Position[2]>=Data[j+2] && j==9)
+||
+//ll
+(Position[0]<=Data[j] && Position[2]<=Data[j+2] && j==6)
+
+)
+
+)
+&&j<=11
+)
+;
+
+bool BelowSecondPlane = (
+Position[1]<=Data[j+1]
+);
+
+bool SecondPlane = 
+(
+(//Check if not too tall or short
+
+(
+Position[1]<=Data[j+1]
+)
+
+&&
+
+//And check if within 2d box
+(
+
+//gl
+Position[0]>=Data[j] && Position[2]<=Data[j+2] && j==15
+||
+//gg
+Position[0]>=Data[j] && Position[2]>=Data[j+2] && j==12
+||
+//lg
+Position[0]<=Data[j] && Position[2]>=Data[j+2] && j==21
+||
+//ll
+Position[0]<=Data[j] && Position[2]<=Data[j+2] && j==18
+
+)
+
+)
+&&j>=12
+
+);
+
+printf("\n Above First Plane:%d",AboveFirstPlane);
+printf("\n First Plane:%d",FirstPlane);
+
+printf("\n Below Second Plane:%d",BelowSecondPlane);
+printf("\n Second Plane:%d",SecondPlane);
+
+//Checking if either above a plane or below a plane, because ether you are there, or you arent!
+if(
+(FirstPlane || SecondPlane) && (Rooms[Current].Open || Current==0)
+)
+{
+
+//Within=Within && true;
+
+Within = true;
+
+}
+else{
+Within=false;
+break;
+}
+
+}
+
+if(Within){
+
+printf("\n WITHIN!");
+
+Rooms[Current].Occupied=true;
+
+for(int k=0; k<=Rooms.size()-1;k+=1){
+	if(k!=Current){
+		Rooms[k].Occupied=false;
+	}
+}
+
+//Good... Moving From somewhere to Somewhere
+/*
+//Now check if transition from room to room!!
+if(CurrentRoom!=-1 && CurrentRoom!=i){
+	
+	//Know that CurrentRoom is not match, so transitioned
+	printf("\nTransitioned from Room:%d to Room:%d",CurrentRoom,i);
+	//Simple Check utilizing here to there case...
+	//Use vertices of door between and furthest vertices in room towards
+	return WithinTransitionBounds(Position,CurrentRoom,i);	
+}
+
+*/
+return true;
+
+}
+
+return false;
+
+}
 
 //My Position will use camera's position
 bool WithinBounds(glm::vec3 Position){
@@ -329,11 +596,22 @@ return false;
 }
 */
 
+int CurrentRoom = -1;
+
 //float * Position = MyPosition.data();
 
 bool Within = true;
 
 for(int i=0;i<Rooms.size();i+=1){
+if(Rooms[i].Occupied){
+CurrentRoom = i;
+}
+/*
+if(CurrentRoom!=-1 && CurrentRoom!=i){
+
+}
+*/
+
 printf("\nRoom:%d",i);
 for(int j=0; j<=23;j+=3){
 
@@ -378,6 +656,10 @@ Position[1]>=Data[j+1]
 )
 ;
 
+bool BelowSecondPlane = (
+Position[1]<=Data[j+1]
+);
+
 bool SecondPlane = 
 (
 (//Check if not too tall or short
@@ -413,13 +695,18 @@ Position[0]<=Data[j] && Position[2]<=Data[j+2] && j==18
 printf("\n Above First Plane:%d",AboveFirstPlane);
 printf("\n First Plane:%d",FirstPlane);
 
+printf("\n Below Second Plane:%d",BelowSecondPlane);
+printf("\n Second Plane:%d",SecondPlane);
+
 //Checking if either above a plane or below a plane, because ether you are there, or you arent!
 if(
-FirstPlane || SecondPlane
+(FirstPlane || SecondPlane) && (Rooms[i].Open || i==0)
 )
 {
 
 //Within=Within && true;
+
+Within = true;
 
 }
 else{
@@ -441,6 +728,23 @@ for(int k=0; k<=Rooms.size()-1;k+=1){
 	}
 }
 
+//Good... Moving From somewhere to Somewhere
+
+//Now check if transition from room to room!!
+if(CurrentRoom!=-1 && CurrentRoom!=i){
+	
+	//Know that CurrentRoom is not match, so transitioned
+	printf("\nTransitioned from Room:%d to Room:%d",CurrentRoom,i);
+	//Simple Check utilizing here to there case...
+	//Use vertices of door between and furthest vertices in room towards
+	bool WTB = 
+        WithinTransitionBounds(Position,CurrentRoom,i);	
+
+	printf("\n Are We Within Transition Zone?:%d",WTB);
+	return WTB;
+}
+
+
 return true;
 
 }
@@ -455,7 +759,9 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
 	//if(PreDelta<=0.0f)
 	//PreDelta = deltaTime/2.0f;
-	PreDelta = 0.4f;
+	float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        PreDelta = 0.4f + r;
+
         float velocity = camera.GetMovementSpeed() * PreDelta;
 
         printf("\n VELOCITY!%f",velocity);
@@ -522,11 +828,9 @@ Evidence * NearEvidence(){
 //If distance <=D, then remove evidence, found it!
 for(int i=0; i<Rooms.size();i+=1){
 	printf("\n ROOM:%d",i);
-	if(Rooms[i].Occupied){
+	//if(Rooms[i].Occupied){
 		for(int j=0; j<Rooms[i].Evidences.size();j+=1){
-			Evidence E = Rooms[i].Evidences[j];
-			
-			if(E.Vertices!=NULL){
+			Evidence E = Rooms[i].Evidences[j];					if(E.Vertices!=NULL){
 			printf("\n Evidence %s Position:%f,%f,%f,",E.Name,E.Vertices[0],E.Vertices[1],E.Vertices[2]);
 			printf("\nCam Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
 			float Distance = sqrt( 
@@ -534,16 +838,21 @@ for(int i=0; i<Rooms.size();i+=1){
 			pow(camera.Position[1] - Rooms[i].Evidences[j].Vertices[1],2) +
 			pow(camera.Position[2] - Rooms[i].Evidences[j].Vertices[2],2)
 			); 
-			printf("Effective Distance:%f",Distance);
-			if(Distance<=DetectionDistance)
+			printf("Effective Distance:%f VS Detect Distance:%f",Distance,DetectionDistance);
+			if(Distance<=DetectionDistance){
+				if(strcmp(Rooms[i].Evidences[j].Name,"DOOR")==0){
+	printf("\n Remove a DOOR");
+	Rooms[i].Open = true;
+	}
 				return &(Rooms[i].Evidences[j]);
+	}
 			}
 
 		}
-		printf("\n No Evidence Found (WITHIN A DISTANCE)!");
-		return NULL;
-	}
+		//printf("\n No Evidence Found (WITHIN A DISTANCE)!");
+		//return NULL;
 }
+
 
 printf("\n No rooms occupied?!?");
 
@@ -635,19 +944,21 @@ int main()
     /*Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Dresser",&Dresser,NULL));
     */
-    /* 
+     
     Model* Window = new Model(FileSystem::getPath("../BathRoom/window.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Window",&Window,NULL));
+    /*
     Model* Tub = new Model(FileSystem::getPath("../BathRoom/bathtub.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Tub",&Tub,NULL));
+    */
     Model* Bathroom = new Model(FileSystem::getPath("../BathRoom/Bathroom.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Bathroom,NULL));
+    /*
     Model* Toilet = new Model(FileSystem::getPath("../BathRoom/toilet.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Toilet,NULL));
     Model* Shower = new Model(FileSystem::getPath("../BathRoom/shower.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Shower,NULL));
     */
-
     //END BATH ROOM
 
     //KITCHEN
@@ -662,7 +973,8 @@ int main()
     
     
     //LIVING ROOM
-
+	Model* EmptyLivingRoom = new Model(FileSystem::getPath("../LivingRoom/EmptyLivingRoom.obj"),"../LivingRoom");
+	LivingRoomItems.push_back(Evidence("STATIC_FirstPart",&EmptyLivingRoom,NULL));
     //END LIVING ROOM
 
     //END STATIC ITEMS
@@ -687,20 +999,25 @@ int main()
 	1.851f,
 	0.815f
     };
+    /*
     BedRoomItems.push_back(Evidence("DOOR_BathRoom",&DoorToBathRoom,DoorToBathRoomPosition));
+    */
+
     Model* DoorToLivingRoom = new Model(FileSystem::getPath("../BedRoom/DoorToLivingRoom.obj"),"../BedRoom");
     float DoorToLivingRoomPosition[]={
 	0.796f,
 	1.94f,
 	6.368f
     };
-    BedRoomItems.push_back(Evidence("DOOR_LivingRoom",&DoorToLivingRoom,DoorToLivingRoomPosition));
+    LivingRoomItems.push_back(Evidence("DOOR",&DoorToLivingRoom,DoorToLivingRoomPosition));
+    
     Model* Phone = new Model(FileSystem::getPath("../BedRoom/Phone.obj"),"../BedRoom");
     float PhonePosition[]={
 	-0.426f,
 	1.507f,
 	-4.876f
     };
+
     BedRoomItems.push_back(Evidence("BRE_Phone",&Phone,PhonePosition));
     Model * RightShoe = new Model(FileSystem::getPath("../BedRoom/RightShoe.obj"),"../BedRoom");
      /*float RightShoePosition[]={
@@ -823,6 +1140,7 @@ int main()
     //Model Room
   
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
+    Rooms.push_back(Room(LivingRoomVertices,LivingRoomItems));
     //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
     // draw in wireframe
@@ -891,8 +1209,9 @@ int main()
   	        if(M!=NULL)
 		    if(*M!=NULL){
 			//NoEvidence = false;   
-			if(Rooms[i].Evidences[j].Vertices!=NULL)
+			if(Rooms[i].Evidences[j].Vertices!=NULL){
 				Count+=1; 
+			}
 	    		(**M).Draw(ourShader);
 	    	    }
 		//}
@@ -1191,7 +1510,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 	Evidence* Evidence = (NearEvidence());
 
 		if(Evidence!=NULL){
-
+			
 			//DESTROY EVIDENCE!!!
 			(*Evidence).NoMore();
 			(*Evidence).~Evidence();
