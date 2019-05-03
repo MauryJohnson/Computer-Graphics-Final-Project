@@ -11,5 +11,5 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd KnifeD.png
-map_Bump ../../../../../../../obj/KnifeN.png
-map_d ../../../../../../../obj/KnifeD.png
+map_Bump KnifeN.png
+map_d KnifeD.png
