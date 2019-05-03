@@ -664,9 +664,11 @@ int CurrentRoom = -1;
 bool Within = true;
 
 for(int i=0;i<Rooms.size();i+=1){
+
 if(Rooms[i].Occupied){
 CurrentRoom = i;
 }
+
 /*
 if(CurrentRoom!=-1 && CurrentRoom!=i){
 
@@ -781,6 +783,7 @@ if(Within){
 
 printf("\n WITHIN!");
 
+/*
 Rooms[i].Occupied=true;
 
 for(int k=0; k<=Rooms.size()-1;k+=1){
@@ -788,12 +791,23 @@ for(int k=0; k<=Rooms.size()-1;k+=1){
 		Rooms[k].Occupied=false;
 	}
 }
-
+*/
 //Good... Moving From somewhere to Somewhere
 
 //Now check if transition from room to room!!
-if(CurrentRoom!=-1 && CurrentRoom!=i){
-	
+if(CurrentRoom!=i){
+        if(CurrentRoom==-1){
+	for(int i=0; i<Rooms.size();i+=1){
+		if(Rooms[i].Occupied){
+			CurrentRoom = i;
+			break;
+		}
+	}
+	if(CurrentRoom<0){
+		printf("\n FAILED TO FIND CURRENT ROOM!!!!!!!!!!!!");
+		exit(-1);
+	}
+	}	
 	//Know that CurrentRoom is not match, so transitioned
 	printf("\nTransitioned from Room:%d to Room:%d",CurrentRoom,i);
 	//Simple Check utilizing here to there case...
@@ -804,7 +818,17 @@ if(CurrentRoom!=-1 && CurrentRoom!=i){
 	printf("\n Are We Within Transition Zone?:%d",WTB);
 	return WTB;
 }
+else{
 
+Rooms[i].Occupied=true;
+
+for(int k=0; k<=Rooms.size()-1;k+=1){
+        if(k!=i){
+                Rooms[k].Occupied=false;
+        }
+}
+
+}
 
 return true;
 
@@ -1318,6 +1342,8 @@ int main()
     // render loop
     
     // -----------
+
+    Rooms[0].Occupied = true;
     
     printf("\n WITHIN BOUNDS:%d",WithinBounds(camera.Position));
 
