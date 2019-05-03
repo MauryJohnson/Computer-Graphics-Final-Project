@@ -1,8 +1,8 @@
-# Blender MTL File: 'LivingRoom.blend'
+# Blender MTL File: 'Bathroom.blend'
 # Material Count: 4
 
-newmtl Plate
-Ns 94.117647
+newmtl Plate.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -11,8 +11,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl TableWood
-Ns 94.117647
+newmtl TableWood.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -21,8 +21,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Tablecloth
-Ns 94.117647
+newmtl Tablecloth.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -32,8 +32,8 @@ d 1.000000
 illum 2
 map_Kd Fabric1.jpg
 
-newmtl wire_088144225
-Ns 31.372549
+newmtl wire_088144225.001
+Ns 29.411765
 Ka 0.597400 0.597400 0.597400
 Kd 0.345100 0.564700 0.882400
 Ks 0.350000 0.350000 0.350000
