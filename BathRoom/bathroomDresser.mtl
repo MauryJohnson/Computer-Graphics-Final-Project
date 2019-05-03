@@ -1,8 +1,8 @@
-# Blender MTL File: 'Bathroom.blend'
+# Blender MTL File: 'CompleteBedRoom.blend'
 # Material Count: 6
 
-newmtl Cabinet_material
-Ns 96.078431
+newmtl Cabinet_material.001
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -11,8 +11,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Handle_material
-Ns 96.078431
+newmtl Handle_material.001
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.586400 0.623200 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -22,8 +22,8 @@ d 1.000000
 illum 2
 map_Kd Abstract_001_COLOR.jpg
 
-newmtl Material.002
-Ns 96.078431
+newmtl Material.029
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -33,28 +33,34 @@ d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl None
-Ns 0
+newmtl None.008
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
 map_Kd Sand_003_OCC.jpg
 
-newmtl None_Material_669.png.001
-Ns 0
+newmtl None_Material_669.png.004
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl None_NONE
-Ns 0
+newmtl None_NONE.001
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2

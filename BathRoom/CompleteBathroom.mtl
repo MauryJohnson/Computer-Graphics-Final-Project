@@ -1,7 +1,7 @@
-# Blender MTL File: 'Bathroom.blend'
-# Material Count: 47
+# Blender MTL File: 'CompleteBedRoom.blend'
+# Material Count: 45
 
-newmtl 10292_Hairbrush
+newmtl 10292_Hairbrush.001
 Ns 9.803922
 Ka 0.588200 0.588200 0.588200
 Kd 0.588200 0.588200 0.588200
@@ -12,7 +12,7 @@ d 1.000000
 illum 2
 map_Kd 10292_Hairbrush_V1_Diffuse.jpg
 
-newmtl 10404_Circular_Throw_Rug_v1.001
+newmtl 10404_Circular_Throw_Rug_v1.002
 Ns 9.803922
 Ka 0.588000 0.588000 0.588000
 Kd 0.588000 0.588000 0.588000
@@ -23,8 +23,8 @@ d 1.000000
 illum 2
 map_Kd Fabric_007_OCC.jpg
 
-newmtl Cabinet_material.001
-Ns 94.117647
+newmtl Cabinet_material.002
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -33,7 +33,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Cam.001
+newmtl Cam.000
 Ns 92.156863
 Ka 0.281690 0.281690 0.281690
 Kd 0.640000 0.640000 0.640000
@@ -44,8 +44,8 @@ d 1.000000
 illum 2
 map_Kd Grass_002_COLOR.jpg
 
-newmtl Glass_Shower
-Ns 94.117647
+newmtl Glass_Shower.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -54,8 +54,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Handle_material.001
-Ns 94.117647
+newmtl Handle_material.002
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.586400 0.623200 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -65,8 +65,30 @@ d 1.000000
 illum 2
 map_Kd Abstract_001_COLOR.jpg
 
-newmtl Material.000
-Ns 94.117647
+newmtl Material.003_CandlestickRender2.png.002
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.405654 0.234274 0.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd CandlestickRender1.png
+
+newmtl Material.003_CandlestickRender3.png.002
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.405654 0.234274 0.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd CandlestickRender1.png
+
+newmtl Material.032
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -76,7 +98,7 @@ d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl Material.001
+newmtl Material.033
 Ns 92.156863
 Ka 0.000000 0.000000 0.000000
 Kd 0.000000 0.000000 0.000000
@@ -87,39 +109,7 @@ d 1.000000
 illum 2
 map_Kd CandlestickRender1.png
 
-newmtl Material.003
-Ns 92.156863
-Ka 0.000000 0.000000 0.000000
-Kd 0.405654 0.234274 0.000000
-Ks 1.000000 1.000000 1.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-
-newmtl Material.003_CandlestickRender2.png
-Ns 92.156863
-Ka 0.000000 0.000000 0.000000
-Kd 0.405654 0.234274 0.000000
-Ks 1.000000 1.000000 1.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd CandlestickRender1.png
-
-newmtl Material.003_CandlestickRender3.png
-Ns 92.156863
-Ka 0.000000 0.000000 0.000000
-Kd 0.405654 0.234274 0.000000
-Ks 1.000000 1.000000 1.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd CandlestickRender1.png
-
-newmtl Material.004
+newmtl Material.034
 Ns 92.156863
 Ka 0.000000 0.000000 0.000000
 Kd 1.000000 0.899660 0.346123
@@ -130,7 +120,29 @@ d 1.000000
 illum 2
 map_Kd CandlestickRender1.png
 
-newmtl None
+newmtl None.011
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Sand_003_OCC.jpg
+
+newmtl None.012
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Sand_003_OCC.jpg
+
+newmtl None.013
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -141,61 +153,7 @@ d 1.000000
 illum 2
 map_Kd bloodyPrints.jpg
 
-newmtl None.001
-Ns 0.000000
-Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.800000 0.800000 0.800000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Sand_003_OCC.jpg
-
-newmtl None.002
-Ns 0.000000
-Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.800000 0.800000 0.800000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Abstract_001_COLOR.jpg
-
-newmtl None.003
-Ns 0.000000
-Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.800000 0.800000 0.800000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Abstract_001_COLOR.jpg
-
-newmtl None.004
-Ns 0.000000
-Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.800000 0.800000 0.800000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Sand_003_OCC.jpg
-
-newmtl None.005
-Ns 0.000000
-Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.800000 0.800000 0.800000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-
-newmtl None.006
+newmtl None.014
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -206,17 +164,7 @@ d 1.000000
 illum 2
 map_Kd White_Marble_005_DISP.png
 
-newmtl None.007
-Ns 0.000000
-Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.800000 0.800000 0.800000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-
-newmtl None.008
+newmtl None.015
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -227,7 +175,39 @@ d 1.000000
 illum 2
 map_Kd Abstract_001_COLOR.jpg
 
-newmtl None.009
+newmtl None.016
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Abstract_001_COLOR.jpg
+
+newmtl None.017
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl None.018
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Abstract_001_COLOR.jpg
+
+newmtl None.019
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -238,7 +218,7 @@ d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl None_Material_669.png.000
+newmtl None_Material_669.png.005
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -249,7 +229,7 @@ d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl None_Material_669.png.001
+newmtl None_Material_669.png.006
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -260,7 +240,7 @@ d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl None_Material_669.png.002
+newmtl None_Material_669.png.007
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -271,7 +251,7 @@ d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl None_NONE
+newmtl None_NONE.002
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -281,7 +261,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl None_Plaster_001_DISP.png.001
+newmtl None_Plaster_001_DISP.png.000
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -292,7 +272,7 @@ d 1.000000
 illum 2
 map_Kd Plaster_001_DISP.png
 
-newmtl None_Subway_tiles_001_COLOR.jpg.001
+newmtl None_Subway_tiles_001_COLOR.jpg.000
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -303,7 +283,7 @@ d 1.000000
 illum 2
 map_Kd Subway_tiles_001_COLOR.jpg
 
-newmtl None_background-blue-bubble-311039.jpg.001
+newmtl None_background-blue-bubble-311039.jpg.000
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -314,7 +294,7 @@ d 1.000000
 illum 2
 map_Kd background-blue-bubble-311039.jpg
 
-newmtl None_clean-color-drink-1166646.jpg.001
+newmtl None_clean-color-drink-1166646.jpg.000
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -325,8 +305,8 @@ d 1.000000
 illum 2
 map_Kd clean-color-drink-1166646.jpg
 
-newmtl Plastic_Handle_material.001
-Ns 94.117647
+newmtl Plastic_Handle_material.000
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.065600 0.063200 0.016000
 Ks 0.500000 0.500000 0.500000
@@ -336,7 +316,7 @@ d 1.000000
 illum 2
 
 newmtl Plastic_material.001
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.080000 0.080000 0.080000
 Ks 0.500000 0.500000 0.500000
@@ -345,8 +325,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Plastic_material_Plaster_001_DISP.png.001
-Ns 94.117647
+newmtl Plastic_material_Plaster_001_DISP.png.000
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.080000 0.080000 0.080000
 Ks 0.500000 0.500000 0.500000
@@ -356,8 +336,8 @@ d 1.000000
 illum 2
 map_Kd Plaster_001_DISP.png
 
-newmtl Sill_material.001
-Ns 94.117647
+newmtl Sill_material.000
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -367,8 +347,8 @@ d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl _15589_Olympic_Rings_Key_Chain_Fob_v1_NEW_15589_Olympic_Rings_K
-Ns 94.117647
+newmtl _15589_Olympic_Rings_Key_Chain_Fob_v1_NEW_15589_Olympic_Rin.000
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -378,8 +358,8 @@ d 1.000000
 illum 2
 map_Kd Human_skin_001_SPEC.jpg
 
-newmtl _18931_Heart_Key_v1_18931_Heart_Key_v107___Default
-Ns 94.117647
+newmtl _18931_Heart_Key_v1_18931_Heart_Key_v107___Default.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -389,8 +369,8 @@ d 1.000000
 illum 2
 map_Kd Alien_Muscle_001_COLOR.jpg
 
-newmtl anisotropic
-Ns 94.117647
+newmtl anisotropic.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -398,20 +378,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-
-newmtl chrome.001
-Ns 94.117647
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Plaster_001_DISP.png
 
 newmtl chrome.002
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -421,8 +390,19 @@ d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl glass
-Ns 94.117647
+newmtl chrome.003
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Plaster_001_DISP.png
+
+newmtl glass.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -431,29 +411,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl glass_background-blue-bubble-311039.jpg.001
-Ns 94.117647
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd background-blue-bubble-311039.jpg
-
-newmtl glossy
-Ns 94.117647
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-
-newmtl glossy_background-blue-bubble-311039.jpg.001
-Ns 94.117647
+newmtl glass_background-blue-bubble-311039.jpg.000
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -463,8 +422,29 @@ d 1.000000
 illum 2
 map_Kd background-blue-bubble-311039.jpg
 
-newmtl marbel_
-Ns 94.117647
+newmtl glossy.001
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl glossy_background-blue-bubble-311039.jpg.000
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd background-blue-bubble-311039.jpg
+
+newmtl marbel_.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -474,8 +454,8 @@ d 1.000000
 illum 2
 map_Kd Plaster_001_DISP.png
 
-newmtl needle
-Ns 94.117647
+newmtl needle.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -495,8 +475,8 @@ d 0.000000
 illum 2
 map_Kd Abstract_001_COLOR.jpg
 
-newmtl plastic_white
-Ns 94.117647
+newmtl plastic_white.001
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000

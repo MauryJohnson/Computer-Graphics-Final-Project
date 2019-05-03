@@ -1,7 +1,7 @@
-# Blender MTL File: 'Bathroom.blend'
+# Blender MTL File: 'CompleteBedRoom.blend'
 # Material Count: 4
 
-newmtl None.009
+newmtl None.010
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -24,7 +24,7 @@ illum 2
 map_Kd background-blue-bubble-311039.jpg
 
 newmtl Plastic_Handle_material.001
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.065600 0.063200 0.016000
 Ks 0.500000 0.500000 0.500000
@@ -34,7 +34,7 @@ d 1.000000
 illum 2
 
 newmtl Sill_material.001
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000

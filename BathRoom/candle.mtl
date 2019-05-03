@@ -1,7 +1,29 @@
-# Blender MTL File: 'Bathroom.blend'
+# Blender MTL File: 'CompleteBedRoom.blend'
 # Material Count: 4
 
-newmtl Material.001
+newmtl Material.003_CandlestickRender2.png.001
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.405654 0.234274 0.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd CandlestickRender1.png
+
+newmtl Material.003_CandlestickRender3.png.001
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.405654 0.234274 0.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd CandlestickRender1.png
+
+newmtl Material.030
 Ns 92.156863
 Ka 0.000000 0.000000 0.000000
 Kd 0.000000 0.000000 0.000000
@@ -12,29 +34,7 @@ d 1.000000
 illum 2
 map_Kd CandlestickRender1.png
 
-newmtl Material.003_CandlestickRender2.png
-Ns 92.156863
-Ka 0.000000 0.000000 0.000000
-Kd 0.405654 0.234274 0.000000
-Ks 1.000000 1.000000 1.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd CandlestickRender1.png
-
-newmtl Material.003_CandlestickRender3.png
-Ns 92.156863
-Ka 0.000000 0.000000 0.000000
-Kd 0.405654 0.234274 0.000000
-Ks 1.000000 1.000000 1.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd CandlestickRender1.png
-
-newmtl Material.004
+newmtl Material.031
 Ns 92.156863
 Ka 0.000000 0.000000 0.000000
 Kd 1.000000 0.899660 0.346123

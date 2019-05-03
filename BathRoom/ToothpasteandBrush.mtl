@@ -1,22 +1,24 @@
-# Blender MTL File: 'Bathroom.blend'
+# Blender MTL File: 'CompleteBedRoom.blend'
 # Material Count: 2
 
-newmtl None
-Ns 0
+newmtl None.009
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
 map_Kd Abstract_001_COLOR.jpg
 
 newmtl phong3SG
-Ns 50.980392
+Ns 49.019608
 Ka 0.000000 0.000000 0.000000
 Kd 0.000000 0.000000 0.000000
 Ks 0.330000 0.330000 0.330000
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.000000
-illum 6
+illum 2
 map_Kd Abstract_001_COLOR.jpg

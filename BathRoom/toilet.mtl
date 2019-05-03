@@ -1,25 +1,29 @@
-# Blender MTL File: 'Bathroom.blend'
+# Blender MTL File: 'CompleteBedRoom.blend'
 # Material Count: 7
 
-newmtl None
-Ns 0
+newmtl None.006
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
 
 newmtl None_Plaster_001_DISP.png.001
-Ns 0
+Ns 0.000000
 Ka 0.000000 0.000000 0.000000
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
 map_Kd Plaster_001_DISP.png
 
 newmtl Plastic_material
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.080000 0.080000 0.080000
 Ks 0.500000 0.500000 0.500000
@@ -29,7 +33,7 @@ d 1.000000
 illum 2
 
 newmtl Plastic_material_Plaster_001_DISP.png.001
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.080000 0.080000 0.080000
 Ks 0.500000 0.500000 0.500000
@@ -39,8 +43,8 @@ d 1.000000
 illum 2
 map_Kd Plaster_001_DISP.png
 
-newmtl chrome
-Ns 96.078431
+newmtl chrome.001
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -51,7 +55,7 @@ illum 2
 map_Kd Plaster_001_DISP.png
 
 newmtl marbel_
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -62,7 +66,7 @@ illum 2
 map_Kd Plaster_001_DISP.png
 
 newmtl plastic_white
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
