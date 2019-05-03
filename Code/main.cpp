@@ -280,42 +280,15 @@ float BedRoomVertices[]={
 };
 float BathRoomVertices[]={
 //BOTTOM FACE
-//1
-48.40, -3.05, -8.02,
-//2
-35.57, -3.05, -8.03,
-//3
-35.42, -3.05, 9.32,
-//4
-48.38, -3.05, 9.35,
+//END BOTTOM FACE
 //TOP FACE
-35.52, 4.26, -8.2,
-//2
-48.40, 4.39, -8.02,
-//3
-48.38, 4.39, 9.35,
-//4
-35.41, 4.39, 9.32
+//END TOP FACE
 };
 float KitchenVertices[]={
 //BOTTOM FACE
-//1
-8.00, 0.00, -8.00,
-//2
-8.00, 0.00, 8.00,
-//3
--8.00, 0.00, 8.00,
-//4
--8.00, 0.00, -8.00,
+//END BOTTOM FACE
 //TOP FACE
-//1
-8.00, 6.18, 8.12,
-//2
-8.00, 6.18, -8.00,
-//3
--8.00, 6.176,-8.00,
-//4
--8.00, 6.18, 8.00
+//END TOP FACE
 };
 
 
@@ -650,20 +623,27 @@ int main()
     //END BEDROOM
 
     //BATHROOM
-    //Model* Bathroom = new Model(FileSystem::getPath("../BathRoom/Bathroom.obj"),"../BathRoom");
-    //BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Bathroom,NULL));
-   
+    Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
+    BathRoomItems.push_back(Evidence("STATIC_Dresser",&Dresser,NULL));
+    Model* Window = new Model(FileSystem::getPath("../BathRoom/window.obj"),"../BathRoom");
+    BathRoomItems.push_back(Evidence("STATIC_Window",&Window,NULL));
+    Model* Tub = new Model(FileSystem::getPath("../BathRoom/bathtub.obj"),"../BathRoom");
+    BathRoomItems.push_back(Evidence("STATIC_Tub",&Tub,NULL));
+    Model* Bathroom = new Model(FileSystem::getPath("../BathRoom/Bathroom.obj"),"../BathRoom");
+    BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Bathroom,NULL));
+    Model* Toilet = new Model(FileSystem::getPath("../BathRoom/toilet.obj"),"../BathRoom");
+    BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Toilet,NULL));
+    Model* Shower = new Model(FileSystem::getPath("../BathRoom/shower.obj"),"../BathRoom");
+    BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Shower,NULL));
     //END BATH ROOM
 
     //KITCHEN
-    /*Model* Bed = new Model(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
+    Model* Bed = new Model(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_Bed",&Bed,NULL));
     Model* Furniture = new Model(FileSystem::getPath("../BedRoom/Furniture.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_FURNITURE",&Furniture,NULL));
     Model* MoreBedRoomItems = new Model(FileSystem::getPath("../BedRoom/MoreItems.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_MoreBR",&MoreBedRoomItems,NULL));
-    */
-
     //END KITCHEN
     
     
@@ -744,17 +724,69 @@ int main()
     //Rooms.push_back(Room(BedRoomVertices,BedRoomItems));
     //END BEDROOM EVIDENCE!!!
 	
+
+
+
+
+
     //BATHROOM EVIDENCE
-    /*
+    
     Model* BloodRug = new Model(FileSystem::getPath("../BathRoom/rug.obj"),"../BathRoom");
     float BloodRugPosition[]={
-	40.79f,
-	-2.92f,
-	0.83f
+	40.66f,
+	-0.52f,
+	-2.78f
     };
-	*/	
-    //BathRoomItems.push_back(Evidence("BRE_Rug",&BloodRug,BloodRugPosition));
-
+	
+    BathRoomItems.push_back(Evidence("BRE_Rug",&BloodRug,BloodRugPosition));
+    
+    Model* Candle = new Model(FileSystem::getPath("../BathRoom/candle.obj"),"../BathRoom");
+    float CandlePosition[] = {
+	47.50f,
+	7.35f,
+	-2.45f
+    };
+    BathRoomItems.push_back(Evidence("BRE_Candle",&Candle,CandlePosition));
+    
+    Model* Chain = new Model(FileSystem::getPath("../BathRoom/olympicChain.obj"),"../BathRoom");
+    float ChainPosition[] = {
+	46.15f,
+	1.24f,
+	-1.73f
+    };
+    BathRoomItems.push_back(Evidence("BRE_Chain",&Chain,ChainPosition));
+   
+    Model* Needle = new Model(FileSystem::getPath("../BathRoom/needle.obj"),"../BathRoom");
+    float NeedlePosition[] = {
+	41.60f,
+	-7.53f,
+	-2.07f
+    };
+    BathRoomItems.push_back(Evidence("BRE_Needle",&Needle,NeedlePosition));
+   
+   Model* Key = new Model(FileSystem::getPath("../BathRoom/key.obj"),"../BathRoom");
+    float KeyPosition[] = {
+	46.10f,
+	5.10f,
+	-1.40f
+    };
+    BathRoomItems.push_back(Evidence("BRE_Key",&Key,KeyPosition));
+    
+    Model* Hairbrush = new Model(FileSystem::getPath("../BathRoom/hairbrush.obj"),"../BathRoom");
+    float HairbrushPosition[] = {
+	41.89f,
+	7.44f,
+	0.81f
+    };
+    BathRoomItems.push_back(Evidence("BRE_Hairbrush",&Hairbrush,HairbrushPosition));
+    
+    Model* Cup = new Model(FileSystem::getPath("../BathRoom/cup.obj"),"../BathRoom");
+    float CupPosition[] = {
+	46.41f,
+	2.34f,
+	0.62f
+    };
+    BathRoomItems.push_back(Evidence("BRE_Cup",&Cup,CupPosition));
     //END BATHROOM EVIDENCE!!!
 
 
@@ -775,8 +807,8 @@ int main()
     //Model Room
   
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
-    //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
-    //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
+    Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
+    Rooms.push_back(Room(KitchenVertices,KitchenItems));    
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
