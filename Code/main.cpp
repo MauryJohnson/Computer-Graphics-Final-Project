@@ -1104,6 +1104,28 @@ int main()
     //LIVING ROOM
 	Model* EmptyLivingRoom = new Model(FileSystem::getPath("../LivingRoom/EmptyLivingRoom.obj"),"../LivingRoom");
 	LivingRoomItems.push_back(Evidence("STATIC_FirstPart",&EmptyLivingRoom,NULL));
+	
+    	Model* ChessTable = new Model(FileSystem::getPath("../LivingRoom/ChessTable.obj"),"../LivingRoom");
+	LivingRoomItems.push_back(Evidence("STATIC_ChessTable",&ChessTable,NULL));
+
+	Model* CouchAnd =  new Model(FileSystem::getPath("../LivingRoom/CouchAnd.obj"),"../LivingRoom");
+	LivingRoomItems.push_back(Evidence("STATIC_CouchAnd",&CouchAnd,NULL));
+	
+		
+	Model* DiningTable =  new Model(FileSystem::getPath("../LivingRoom/DiningTable.obj"),"../LivingRoom");
+	LivingRoomItems.push_back(Evidence("STATIC_DiningTable",&DiningTable,NULL));
+	
+	
+	/*Model* DiningTable2 =  new Model(FileSystem::getPath("../LivingRoom/DiningTable2.obj"),"../LivingRoom");
+	LivingRoomItems.push_back(Evidence("STATIC_DiningTable2",&DiningTable2,NULL));
+	*/
+	
+	Model* DiningTable3 =  new Model(FileSystem::getPath("../LivingRoom/DiningTable3.obj"),"../LivingRoom");
+	LivingRoomItems.push_back(Evidence("STATIC_DiningTable3",&DiningTable3,NULL));
+	
+	Model* FirePlace =  new Model(FileSystem::getPath("../LivingRoom/FirePlace.obj"),"../LivingRoom");
+	LivingRoomItems.push_back(Evidence("STATIC_FirePlace",&FirePlace,NULL));
+	
     //END LIVING ROOM
 
     //END STATIC ITEMS
@@ -1312,9 +1334,30 @@ int main()
 
 
     //LIVING ROOM EVIDENCE
-
-
-    //END LIVING ROOM EVIDENCE
+	 Model* LivingRoomBones = new Model(FileSystem::getPath("../LivingRoom/LivingRoomBones.obj"),"../LivingRoom");
+    float LivingRoomBonesPosition[]={
+        1.13f,
+        -0.025,
+        22.26f
+    };
+	LivingRoomItems.push_back(Evidence("LRE_Bones",&LivingRoomBones,LivingRoomBonesPosition));
+	Model* LivingRoomFoot = new Model(FileSystem::getPath("../LivingRoom/LivingRoomFoot.obj"),"../LivingRoom");
+    float LivingRoomFootPosition[]={
+        -5.65f,
+        -0.1124f,
+        14.361f
+    };
+        LivingRoomItems.push_back(Evidence("LRE_Bones",&LivingRoomFoot,LivingRoomFootPosition));
+    //UPDATE VERTICES
+    Model* LivingRoomPlate = new Model(FileSystem::getPath("../LivingRoom/LivingRoomPlate.obj"),"../LivingRoom");
+    float LivingRoomPlatePosition[]={
+        -5.65f,
+        -0.1124f,
+        14.361f
+    };
+        LivingRoomItems.push_back(Evidence("LRE_Plate",&LivingRoomPlate,LivingRoomPlatePosition));
+  
+	//END LIVING ROOM EVIDENCE
 
     //END EVIDENCE
 
