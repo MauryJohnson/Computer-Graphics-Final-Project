@@ -623,7 +623,7 @@ int main()
     //END BEDROOM
 
     //BATHROOM
-    Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
+    /*Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Dresser",&Dresser,NULL));
     Model* Window = new Model(FileSystem::getPath("../BathRoom/window.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Window",&Window,NULL));
@@ -635,15 +635,17 @@ int main()
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Toilet,NULL));
     Model* Shower = new Model(FileSystem::getPath("../BathRoom/shower.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Shower,NULL));
+    */
     //END BATH ROOM
 
     //KITCHEN
-    Model* Bed = new Model(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
+    /*Model* Bed = new Model(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_Bed",&Bed,NULL));
     Model* Furniture = new Model(FileSystem::getPath("../BedRoom/Furniture.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_FURNITURE",&Furniture,NULL));
     Model* MoreBedRoomItems = new Model(FileSystem::getPath("../BedRoom/MoreItems.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_MoreBR",&MoreBedRoomItems,NULL));
+    */
     //END KITCHEN
     
     
@@ -754,6 +756,7 @@ int main()
 	1.24f,
 	-1.73f
     };
+    /*
     BathRoomItems.push_back(Evidence("BRE_Chain",&Chain,ChainPosition));
    
     Model* Needle = new Model(FileSystem::getPath("../BathRoom/needle.obj"),"../BathRoom");
@@ -788,7 +791,7 @@ int main()
     };
     BathRoomItems.push_back(Evidence("BRE_Cup",&Cup,CupPosition));
     //END BATHROOM EVIDENCE!!!
-
+    */
 
     //LIVING ROOM EVIDENCE
 
@@ -807,8 +810,8 @@ int main()
     //Model Room
   
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
-    Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
-    Rooms.push_back(Room(KitchenVertices,KitchenItems));    
+    //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
+    //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
@@ -860,10 +863,12 @@ int main()
 	//END STATIC ITEMS
 
  	//EVIDENCE
- 	bool NoEvidence = true;
+ 	//bool NoEvidence = true;
+	int Count = 0;
         for(int i=0; i<Rooms.size();i+=1){
 	    //printf("\nIDX:%d",i);
 	    for(int j=0; j<Rooms[i].Evidences.size();j+=1){
+		//if(Rooms[i].Evidences[j].Vertices!=NULL){
 		//printf("\n SOME EVIDENCE");
 		Model** M = NULL;
 		
@@ -872,18 +877,23 @@ int main()
 		
   	        if(M!=NULL)
 		    if(*M!=NULL){
-			NoEvidence = false;    
+			//NoEvidence = false;   
+			if(Rooms[i].Evidences[j].Vertices!=NULL)
+				Count+=1; 
 	    		(**M).Draw(ourShader);
 	    	    }
-		
+		//}
 	    }
+	   
 	}
 
-	if(NoEvidence){
+	if(Count<=0){
 		printf("\n YOU WIN!!!!!!!!!!!!!!!!!\n");
 		break;
 	}
-
+	else{
+		printf("\n Evidences left:%d",Count);
+	}
 	KitchenDroplet.Update();
 
 	//BEDROOM EVIDENCE
