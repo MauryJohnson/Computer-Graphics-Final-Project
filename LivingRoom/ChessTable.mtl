@@ -54,6 +54,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd BW.png
 
 newmtl Material.028
 Ns 94.117647
@@ -64,6 +65,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd BW.png
 
 newmtl Material.029
 Ns 94.117647
@@ -85,6 +87,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd BW.png
 
 newmtl Material.031
 Ns 94.117647
@@ -95,6 +98,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd BW.png
 
 newmtl Material.032
 Ns 94.117647
@@ -105,6 +109,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd BW.png
 
 newmtl Material.033
 Ns 94.117647
@@ -159,6 +164,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd BW.png
 
 newmtl Material.038
 Ns 94.117647
@@ -169,6 +175,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd BW.png
 
 newmtl Material.039
 Ns 92.156863
@@ -179,3 +186,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.180000
 illum 2
+map_Kd BW.png
