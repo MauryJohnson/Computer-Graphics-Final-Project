@@ -1,8 +1,8 @@
-# Blender MTL File: 'LivingRoom.blend'
+# Blender MTL File: 'None'
 # Material Count: 2
 
 newmtl fp_s
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -13,7 +13,7 @@ illum 2
 map_Kd bloodyPrints.png
 
 newmtl fp_t
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
