@@ -27,6 +27,8 @@
 
 #include <iostream>
 
+float YouWinTimeStart = 0.0f;
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
@@ -138,7 +140,7 @@ public:
   	//float elapsed_secs = float(end - begin) / CLOCKS_PER_SEC;
 	float TotalTime;
 	Animated(float* Start, float* End, int NumSteps, int Type);
-	void Update();
+	bool Update();
 };
 
 Animated::Animated(float* Start, float* End, int NumSteps, int Type){
@@ -198,7 +200,7 @@ break;
 //Will Update the Counter for Position in Vector array
 //When get time() - start time() >= TimStep
 //Then set star time() to get time()
-void Animated::Update(){
+bool Animated::Update(){
 
 clock_t end = clock();
 
@@ -212,6 +214,10 @@ this->begin = end;
 
 if(this->TimeCounter==this->Positions.size()-1){
 this->TimeCounter = 0;
+
+//Reached END of animated object...
+
+return true;
 }
 
 else
@@ -223,6 +229,7 @@ this->TimeCounter+=1;
 
 }
 
+return false;
 }
 
 //Stores info about each evidence
@@ -882,7 +889,12 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
         printf("\n VELOCITY!%f",velocity);
 
 	glm::vec3 Position(camera.Position[0],camera.Position[1],camera.Position[2]);
-
+/*
+	if(StableMove){
+        printf("\n STABLE 1 \n");
+        camera.ProcessMouseMovement(0.0f,-MyLookX);
+        }
+*/
         if (direction == FORWARD)
             Position += camera.Front * velocity;
         else if (direction == BACKWARD)
@@ -893,9 +905,9 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
         else if (direction == RIGHT)
             Position += camera.Right * velocity;
 
-        else if (direction==UP && !CantGoAgain[4] && MyLookX==0)
+        else if (direction==UP && !CantGoAgain[4] && (MyLookX==0 /*|| MyLookX==45 || MyLookX==-45*/))
             Position += camera.Up * velocity;
-        else if (direction==DOWN && !CantGoAgain[5] && MyLookX==0)
+        else if (direction==DOWN && !CantGoAgain[5] && (MyLookX==0 /*|| MyLookX==45 || MyLookX==-45*/))
             Position -= camera.Up * velocity;
 	else{
 		return false;
@@ -914,7 +926,7 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
 	//camera.ProcessMouseMovement(0.0f,-MyLookX);
 	//camera.Position = (Position);
 	camera.ProcessKeyboard(direction,PreDelta);
-
+	
  	if(StableMove){
         printf("\n STABLE 2 \n");
 	camera.ProcessMouseMovement(0.0f,MyLookX);
@@ -927,7 +939,12 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
 	}
 
 	PreDelta = 0.0f;
-
+/*
+	if(StableMove){
+        printf("\n STABLE 2 \n");
+        camera.ProcessMouseMovement(0.0f,MyLookX);
+        }
+*/
 	return false;
      }
 
@@ -1012,6 +1029,71 @@ return true;
 
 }
 
+class End{
+public:
+	glm::vec3 Here;
+	glm::mat4 Projection;
+	glm::mat4 View;
+	glm::mat4 Model;
+	End(glm::vec3 H, glm::mat4 P, glm::mat4 V, glm::mat4 M);
+
+};
+
+End::End(glm::vec3 H, glm::mat4 P, glm::mat4 V, glm::mat4 M){
+this->Here = H;
+this->Projection = P;
+this->View = V;
+this->Model = M;
+}
+
+//Function returns std:: vector of FOUR positions
+std::vector<End> EndWords(float DistFrom){
+
+std::vector<End> Ends;
+
+float ROT = 0.0f;
+
+	for(int i=0; i<=4;i+=1){
+	glm::vec3 Here;
+
+	switch(i){	
+	case 0:
+		Here = glm::vec3(camera.Position[0], camera.Position[1], camera.Position[2]-DistFrom);
+	break;
+	case 1:
+		Here = glm::vec3(camera.Position[0]+DistFrom, camera.Position[1], camera.Position[2]);
+	break;
+	case 2:
+		Here = glm::vec3(camera.Position[0], camera.Position[1], camera.Position[2]+DistFrom);
+	break;
+	case 3:
+		Here = glm::vec3(camera.Position[0]-DistFrom, camera.Position[1], camera.Position[2]);
+	break;
+	}
+        glm::mat4 projection2 = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
+        glm::mat4 view2 = camera.GetViewMatrix();
+
+        //endShader.setMat4("projection", projection2);
+        //endShader.setMat4("view", view2);
+
+        // render the loaded model
+        glm::mat4 model2 = glm::mat4(1.0f);
+        model2 = glm::translate(model2, Here); // translate it down so it's at the center of the scene          
+        model2 = glm::rotate(model2,glm::radians(90.0f+(ROT==90 || ROT==270? ROT-180:ROT)),glm::vec3(0.0f,1.0f,0.0f));
+        //endShader.setMat4("model", model3);
+
+	Ends.push_back(End(Here,projection2,view2,model2));
+
+	ROT+=90.0f;
+
+	printf("\n ROT:%f",ROT);
+
+	}
+
+return Ends;
+
+}
 
 int main()
 {
@@ -1070,7 +1152,8 @@ int main()
     // build and compile shaders
     // -------------------------
     Shader ourShader("shader.vs", "shader.frag");
-
+    Shader endShader("shader.vs", "shader.frag");
+    
     // load/store models
     // -----------
 
@@ -1296,13 +1379,13 @@ int main()
 	-5.768f
     };
     
-    BathRoomItems.push_back(Evidence("BRE_Chain",&Chain,ChainPosition));
+    BathRoomItems.push_back(Evidence("BRE_Chain",&Chain,NULL));
    
     Model* Needle = new Model(FileSystem::getPath("../BathRoom/needle.obj"),"../BathRoom");
     float NeedlePosition[] = {
-	41.60f,
-	-7.53f,
-	-2.07f
+	13.719f,
+	0.743f,
+	4.78f
     };
     BathRoomItems.push_back(Evidence("BRE_Needle",&Needle,NeedlePosition));
       
@@ -1317,9 +1400,9 @@ int main()
     
     Model* Hairbrush = new Model(FileSystem::getPath("../BathRoom/hairbrush.obj"),"../BathRoom");
     float HairbrushPosition[] = {
-	18.933f,
-	0.206f,
-	-5.768f
+	13.406f,
+	3.416,
+	-5.69f
     };
     BathRoomItems.push_back(Evidence("BRE_Hairbrush",&Hairbrush,HairbrushPosition));
     
@@ -1449,10 +1532,10 @@ int main()
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
 
 //<<<<<<< HEAD
-    Rooms.push_back(Room(LivingRoomVertices,LivingRoomItems));
+    /*Rooms.push_back(Room(LivingRoomVertices,LivingRoomItems));
     Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     Rooms.push_back(Room(KitchenVertices,KitchenItems));    
-
+	*/
 //=======
     //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
@@ -1473,6 +1556,19 @@ int main()
     //WithinBounds(camera.Position);
     //return 0;  
 
+    Model* YouWin = new Model(FileSystem::getPath("../BedRoom/YOUWIN.obj"),"../BedRoom");
+    float YouWinStart[]=
+{
+0.0f,0.0f,0.0f
+};
+    float YouWinEnd[]={
+	0.0f,-1000000000.0f,0.0f
+    };    
+  
+    Animated * YOUWIN = NULL;    
+
+    //Animated YOUWIN(YouWinStart,YouWinEnd,10,0);
+    
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -1543,12 +1639,64 @@ int main()
 	   
 	}
 
-	if(Count<=0){
-		printf("\n YOU WIN!!!!!!!!!!!!!!!!!\n");
-		break;
+	if(Count<=10){
+		printf("\n !!!!!!!!!!!!!!!!!!!YOU WIN!!!!!!!!!!!!!!!!!\n");
+		endShader.use();
+		// view/projection transformations
+	/*
+   	glm::vec3 Here(camera.Position[0], camera.Position[1], camera.Position[2]-2.0f);
+
+        glm::mat4 projection2 = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
+        glm::mat4 view2 = camera.GetViewMatrix();
+
+        endShader.setMat4("projection", projection2);
+        endShader.setMat4("view", view2);
+
+        // render the loaded model
+        glm::mat4 model2 = glm::mat4(1.0f);
+        model2 = glm::translate(model2, Here); // translate it down so it's at the center of the scene	   	
+	model2 = glm::rotate(model2,glm::radians(90.0f),glm::vec3(0.0f,1.0f,0.0f));	
+	*/
+	/*
+	//MyLookY
+	glm::mat4 model3 = glm::translate(model2,camera.Position);
+	model3 = glm::rotate(model3,glm::radians(MyLookY*(3.14159f/180.0f) ),glm::vec3(0.0f,1.0f,0.0f));
+	model3 = glm::translate(model2,-camera.Position);
+	*/
+        /*//MyLookX
+	model2 = glm::translate(model2,Here);
+	model2 = glm::rotate(model2,glm::radians(MyLookX),glm::vec3(1.0f,0.0f,0.0f));
+	model2 = glm::translate(model2,-Here);
+	*/
+	//model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));       // it's a bit too big for our scene, so scale it down
+        //endShader.setMat4("model", model2);
+	
+		if(YOUWIN==NULL){
+			YOUWIN=new Animated(YouWinStart,YouWinEnd,10000,0);
+		}	
+		else{
+			if(YOUWIN->Update()){
+				printf("YOUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
+				break;
+			}
+		}
+
+		std::vector<End> Ends = EndWords(3.0f);
+		
+		for(int i=0; i<Ends.size();i+=1){	
+		endShader.setMat4("projection", Ends[i].Projection);
+	        endShader.setMat4("view", Ends[i].View);
+		endShader.setMat4("model", Ends[i].Model);
+		YouWin->Draw(endShader);
+		}
+		
+		//YOUWIN->draw();
+		
+		//break;
 	}
 	else{
-		//printf("\n Evidences left:%d",Count);
+		printf("\n Evidences left:%d",Count);
 	}
 	KitchenDroplet.Update();
 
@@ -1763,7 +1911,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
 
       camera.ProcessMouseMovement(22.0f + r,0.0f);
 
-      MyLookY+=1;
+      MyLookY+=22.0f+r;
     }
     else if(key==GLFW_KEY_D){
       Keys[key]=false;
@@ -1780,7 +1928,7 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
 
       camera.ProcessMouseMovement(-23.0f+r,0.0f);
 
-      MyLookY-=1;
+      MyLookY+=(-23.0f+r);
     }
     else if(key==GLFW_KEY_A){
       Keys[key]=false;
