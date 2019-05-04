@@ -109,7 +109,7 @@ float MyLookX = 0.0f;
 float MyLookY = 0.0f;
 float MyZ = 0.0f;
 
-float DetectionDistance = 2.0f;
+float DetectionDistance = 5.0f;
 
 //DEFINE ALL ANIMATION START AND END POSITIONS
 
@@ -247,6 +247,7 @@ this->M=Model;
 void Evidence::NoMore(){
 *(this->M)=NULL;
 printf("\n GoodBye Evidence:%s @ (%f,%f,%f)",this->Name,Vertices==NULL? 0.0f:Vertices[0],Vertices==NULL? 0.0f:Vertices[1],Vertices==NULL? 0.0f:Vertices[2]);
+(this->Vertices)=NULL;
 }
 
 Evidence::~Evidence(){
@@ -365,16 +366,16 @@ float LivingRoomVertices[]={
 };
 float KitchenVertices[]={
 //BOTTOM FACE
--8.00,0.00,-8.00,
--8.00, 0.00, 8.00,
-8.00, 0.00, 8.00,
-8.00, 0.00, -8.00,
+-22.927f,-0.362f,6.625f,
+-22.722f, -0.373f, 22.71f,
+-6.3f, -0.09f, 22.763f,
+-6.3f, -0.084f, 6.34f,
 //END BOTTOM FACE
 //TOP FACE
--8.00, 6.18, -8.00,
--8.00, 6.18, 8.00,
-8.00, 6.18, 8.00,
-8.00, 6.18, -8.00
+-22.927f,7.35f,6.625f,
+-22.722f, 7.35f, 22.71f,
+-6.3f, 7.35f, 22.763f,
+-6.3f, 7.35f, 6.34f,
 //END TOP FACE
 };
 
@@ -457,7 +458,10 @@ DoorMidPoint = (BedRoomVertices[3] + BedRoomVertices[6])/2.0f;
 else if(Next==3){
 //-6.63f,-0.1f,6.34f,
 //-6.63f,-0.1f,22.777f,
-DoorMidPoint = (LivingRoomVertices[2] + LivingRoomVertices[5])/2.0f;
+//DoorMidPoint = (LivingRoomVertices[2] + LivingRoomVertices[5])/2.0f;
+
+DoorMidPoint = 12.07f;
+
 }
 }
 else if(Current==2){
@@ -467,7 +471,8 @@ DoorMidPoint = (BedRoomVertices[8] + BedRoomVertices[11])/2.0f;
 }
 else if(Current==3){
 if(Next==1){
-DoorMidPoint = (LivingRoomVertices[2] + LivingRoomVertices[5])/2.0f;
+//DoorMidPoint = (LivingRoomVertices[2] + LivingRoomVertices[5])/2.0f;
+DoorMidPoint = 12.07f;
 }
 }
 DoorLeft+=DoorMidPoint;
@@ -943,15 +948,15 @@ for(int i=0; i<Rooms.size();i+=1){
 	printf("\n ROOM:%d",i);
 	//if(Rooms[i].Occupied){
 		for(int j=0; j<Rooms[i].Evidences.size();j+=1){
-			Evidence E = Rooms[i].Evidences[j];					if(E.Vertices!=NULL){
-			//printf("\n Evidence %s Position:%f,%f,%f,",E.Name,E.Vertices[0],E.Vertices[1],E.Vertices[2]);
-			//printf("\nCam Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
+			Evidence E = Rooms[i].Evidences[j];					if(E.Vertices!=NULL && *(E.M)!=NULL){
+			printf("\n Evidence %s Position:%f,%f,%f,",E.Name,E.Vertices[0],E.Vertices[1],E.Vertices[2]);
+			printf("\nCam Position:%f,%f,%f",camera.Position[0],camera.Position[1],camera.Position[2]);
 			float Distance = sqrt( 
 			pow(camera.Position[0] - Rooms[i].Evidences[j].Vertices[0],2) + 
 			pow(camera.Position[1] - Rooms[i].Evidences[j].Vertices[1],2) +
 			pow(camera.Position[2] - Rooms[i].Evidences[j].Vertices[2],2)
 			); 
-			//printf("Effective Distance:%f VS Detect Distance:%f",Distance,DetectionDistance);
+			printf("Effective Distance:%f VS Detect Distance:%f",Distance,DetectionDistance);
 			if(Distance<=DetectionDistance){
 				if(strcmp(Rooms[i].Evidences[j].Name,"DOOR")==0){
 	printf("\n Remove a DOOR");
@@ -971,6 +976,42 @@ printf("\n No rooms occupied?!?");
 
 return NULL;;
 }
+
+bool RenderSave(int IDX,int I){
+//Find Room that is available
+
+//if inside bathroom, don't render kitchen!
+
+//if inside kitchen, don't render bathroom and bedroom!
+
+switch(IDX){
+
+//BedRoom
+case 0:
+
+break;
+//LivingRoom
+case 1:
+
+break;
+//Bathroom
+case 2:
+return I!=3;
+break;
+//Kitchen
+case 3:
+return I!= 2 && I!=0;
+break;	
+
+default:
+break;
+
+}
+
+return true;
+
+}
+
 
 int main()
 {
@@ -1054,9 +1095,8 @@ int main()
     //END BEDROOM
 
     //BATHROOM
-    /*Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
+    Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Dresser",&Dresser,NULL));
-	*/
 /*
 <<<<<<< HEAD
     
@@ -1072,32 +1112,32 @@ int main()
     
     Model* Bathroom = new Model(FileSystem::getPath("../BathRoom/Bathroom.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Bathroom,NULL));
-    /*
+    
     Model* Toilet = new Model(FileSystem::getPath("../BathRoom/toilet.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Toilet",&Toilet,NULL));
     Model* Shower = new Model(FileSystem::getPath("../BathRoom/shower.obj"),"../BathRoom");
-<<<<<<< HEAD
+//<<<<<<< HEAD
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Shower,NULL));
-    */
+    
 //=======
     //BathRoomItems.push_back(Evidence("STATIC_Shower",&Shower,NULL));
-    /* 
+    
     Model* Handsoap = new Model(FileSystem::getPath("../BathRoom/handsoap.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Handsoap",&Handsoap,NULL));
     Model* ToothpasteandBrush = new Model(FileSystem::getPath("../BathRoom/ToothpasteandBrush.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_ToothpasteandBrush",&ToothpasteandBrush,NULL));
-    */
+    
 //>>>>>>> c6abcd87be8673c5af71129e04aeb22205e71717
     //END BATH ROOM
 
     //KITCHEN
-    /*
+    
     Model* Cabinets = new Model(FileSystem::getPath("../Kitchen/cabinets.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Cabinets",&Cabinets,NULL));
     Model* Chairs = new Model(FileSystem::getPath("../Kitchen/kitchenChairs.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Chairs",&Chairs,NULL));
-    Model* Dishes = new Model(FileSystem::getPath("../Kitchen/dishes.obj"),"../Kitchen");
     
+    Model* Dishes = new Model(FileSystem::getPath("../Kitchen/dishes.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Dishes",&Dishes,NULL));
     Model* Blender = new Model(FileSystem::getPath("../Kitchen/blender.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Blender",&Blender,NULL));
@@ -1119,7 +1159,7 @@ int main()
     KitchenItems.push_back(Evidence("STATIC_Toaster",&Toaster,NULL));
     Model* Trashcan = new Model(FileSystem::getPath("../Kitchen/trashcan.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Trashcan",&Trashcan,NULL));
-    */
+    
     /*Model* Window = new Model(FileSystem::getPath("../Kitchen/windows.obj"),"../Kitchen");
     KitchenItems.push_back(Evidence("STATIC_Window",&Window,NULL));
     */
@@ -1302,15 +1342,15 @@ int main()
 
 
     //KITCHEN EVIDENCE
-    /*
+    
     Model* TeddyBear = new Model(FileSystem::getPath("../Kitchen/bear.obj"),"../Kitchen");
     float TeddyBearPosition[] = {
-	-0.05f,
-	-0.18f,
-	5.42f
+	-13.87f,
+	-5.952f,
+	14.06f
     };
     KitchenItems.push_back(Evidence("BRE_TeddyBear",&TeddyBear,TeddyBearPosition));
-    
+    /*
     Model* Ball = new Model(FileSystem::getPath("../Kitchen/ball.obj"),"../Kitchen");
     float BallPosition[] = {
 	7.38f,
@@ -1318,45 +1358,51 @@ int main()
 	1.34f
     };
     KitchenItems.push_back(Evidence("BRE_Ball",&Ball,BallPosition));
-    
+    */
     Model* Rope = new Model(FileSystem::getPath("../Kitchen/rope.obj"),"../Kitchen");
     float RopePosition[] = {
-	-7.67f,
-	-1.28f,
-	2.09f
+	-13.12f,
+	2.085f,
+	22.29f
     };
     KitchenItems.push_back(Evidence("BRE_Rope",&Rope,RopePosition));
     
     Model* Bottle = new Model(FileSystem::getPath("../Kitchen/cleaner.obj"),"../Kitchen");
     float BottlePosition[] = {
-	-5.99f,
-	-5.026f,
-	0.74f
+	-19.356f,
+	0.489f,
+	20.499f
     };
     KitchenItems.push_back(Evidence("BRE_Bottle",&Bottle,BottlePosition));
     
     Model* Knife = new Model(FileSystem::getPath("../Kitchen/knife.obj"),"../Kitchen");
     float KnifePosition[] = {
-	-0.09f,
-	0.45f,
-	1.50f
+	-14.84f,
+	1.507f,
+	14.7f
     };
     KitchenItems.push_back(Evidence("BRE_Knife",&Knife,KnifePosition));
     
     Model* FootPrints = new Model(FileSystem::getPath("../Kitchen/footprints.obj"),"../Kitchen");
     float FootPrintsPosition[] = {
-	-0.05f,
-	-0.18f,
-	5.42f
+	-18.33f,
+	-0.017f,
+	12.593f
     };
     KitchenItems.push_back(Evidence("BRE_FootPrints",&FootPrints,FootPrintsPosition));
-    */
+    
     //END KITCHEN EVIDENCE
 
 
-
-
     //LIVING ROOM EVIDENCE
+    Model* DoorToKitchen = new Model(FileSystem::getPath("../LivingRoom/DoorToKitchen.obj"),"../LivingRoom");
+    float DoorToKitchenPosition[] = {
+        -7.212f,
+        1.992f,
+        12.07f
+    };
+    KitchenItems.push_back(Evidence("DOOR",&DoorToKitchen,DoorToKitchenPosition));	
+
 	 Model* LivingRoomBones = new Model(FileSystem::getPath("../LivingRoom/LivingRoomBones.obj"),"../LivingRoom");
     float LivingRoomBonesPosition[]={
         1.13f,
@@ -1370,7 +1416,7 @@ int main()
         -0.1124f,
         14.361f
     };
-        LivingRoomItems.push_back(Evidence("LRE_Bones",&LivingRoomFoot,LivingRoomFootPosition));
+        LivingRoomItems.push_back(Evidence("LRE_Foot",&LivingRoomFoot,LivingRoomFootPosition));
     //UPDATE VERTICES
     Model* LivingRoomPlate = new Model(FileSystem::getPath("../LivingRoom/LivingRoomPlate.obj"),"../LivingRoom");
     float LivingRoomPlatePosition[]={
@@ -1401,10 +1447,12 @@ int main()
     //Model Room
   
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
+
 //<<<<<<< HEAD
     Rooms.push_back(Room(LivingRoomVertices,LivingRoomItems));
     Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
-    //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
+    Rooms.push_back(Room(KitchenVertices,KitchenItems));    
+
 //=======
     //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
@@ -1466,7 +1514,11 @@ int main()
  	//EVIDENCE
  	//bool NoEvidence = true;
 	int Count = 0;
-        for(int i=0; i<Rooms.size();i+=1){
+        int WithinIDX = -1;
+	for(int i=0; i<Rooms.size();i+=1){
+	    if(Rooms[i].Occupied){
+		WithinIDX = i;
+	    }
 	    //printf("\nIDX:%d",i);
 	    for(int j=0; j<Rooms[i].Evidences.size();j+=1){
 		//if(Rooms[i].Evidences[j].Vertices!=NULL){
@@ -1482,7 +1534,9 @@ int main()
 			if(Rooms[i].Evidences[j].Vertices!=NULL){
 				Count+=1; 
 			}
-	    		(**M).Draw(ourShader);
+	    		//Don't render certain parts...
+			if(RenderSave(WithinIDX,i))
+				(**M).Draw(ourShader);
 	    	    }
 		//}
 	    }
@@ -1542,6 +1596,7 @@ int main()
     glfwTerminate();
     return 0;
 }
+
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
