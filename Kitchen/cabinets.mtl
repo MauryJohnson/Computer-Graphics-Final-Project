@@ -1,8 +1,8 @@
-# Blender MTL File: 'LivingRoom.blend'
+# Blender MTL File: 'None'
 # Material Count: 8
 
-newmtl Marble.001_TexturesCom_PlasterBare0121_1_seamless_S.png.001
-Ns 92.156863
+newmtl Marble.001_TexturesCom_PlasterBare0121_1_seamless_S.jpg.001
+Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -10,7 +10,6 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd TexturesCom_PlasterBare0121_1_seamless_S.png
 
 newmtl Marble.003
 Ns 92.156863
@@ -23,7 +22,7 @@ d 1.000000
 illum 2
 map_Kd Material_560.png
 
-newmtl Material.022
+newmtl Material.025
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -33,18 +32,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Material.023
-Ns 92.156863
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd TexturesCom_PlasterBare0121_1_seamless_S.png
-
-newmtl Material.024
+newmtl Material.035
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -55,7 +43,18 @@ d 1.000000
 illum 2
 map_Kd White_Marble_005_DISP.png
 
-newmtl None.005
+newmtl Material.036
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TexturesCom_PlasterBare0121_1_seamless_S.png
+
+newmtl None.009
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -76,8 +75,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl white_gloss_TexturesCom_PlasterBare0121_1_seamless_S.png.001
-Ns 92.156863
+newmtl white_gloss_TexturesCom_PlasterBare0121_1_seamless_S.jpg.001
+Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -85,4 +84,3 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd TexturesCom_PlasterBare0121_1_seamless_S.png
