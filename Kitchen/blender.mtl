@@ -1,7 +1,7 @@
-# Blender MTL File: 'Kitchen.blend'
+# Blender MTL File: 'LivingRoom.blend'
 # Material Count: 8
 
-newmtl None
+newmtl None.001
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -12,7 +12,7 @@ d 1.000000
 illum 2
 map_Kd White_Marble_005_DISP.png
 
-newmtl None_Abstract_001_COLOR.jpg.000
+newmtl None_Abstract_001_COLOR.png.000
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -21,7 +21,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl kitchen_blender_black
 Ns 49.019608
@@ -42,7 +42,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 3.000000
 d 0.190000
 illum 2
-map_Kd clean-color-drink-1166646.jpg
+map_Kd clean-color-drink-1166646.png
 
 newmtl kitchen_blender_grey
 Ns 49.019608
@@ -53,7 +53,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl kitchen_blender_marks
 Ns 29.411765
@@ -64,10 +64,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 3.000000
 d 0.230000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl kitchen_blender_metal
-Ns 31.372549
+Ns 29.411765
 Ka 0.176500 0.176500 0.176500
 Kd 0.588000 0.588000 0.588000
 Ks 0.540000 0.540000 0.540000
@@ -75,7 +75,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl kitchen_blender_white
 Ns 49.019608
@@ -86,4 +86,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png

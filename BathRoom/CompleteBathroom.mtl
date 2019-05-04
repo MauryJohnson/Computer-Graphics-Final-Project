@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd 10292_Hairbrush_V1_Diffuse.jpg
+map_Kd 10292_Hairbrush_V1_Diffuse.png
 
 newmtl 10404_Circular_Throw_Rug_v1.002
 Ns 9.803922
@@ -21,7 +21,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd Fabric_007_OCC.jpg
+map_Kd Fabric_007_OCC.png
 
 newmtl Cabinet_material.002
 Ns 92.156863
@@ -42,7 +42,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Grass_002_COLOR.jpg
+map_Kd Grass_002_COLOR.png
 
 newmtl Glass_Shower.001
 Ns 92.156863
@@ -63,7 +63,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl Material.003_CandlestickRender2.png.002
 Ns 92.156863
@@ -129,7 +129,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Sand_003_OCC.jpg
+map_Kd Sand_003_OCC.png
 
 newmtl None.012
 Ns 0.000000
@@ -140,7 +140,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Sand_003_OCC.jpg
+map_Kd Sand_003_OCC.png
 
 newmtl None.013
 Ns 0.000000
@@ -151,7 +151,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd bloodyPrints.jpg
+map_Kd bloodyPrints.png
 
 newmtl None.014
 Ns 0.000000
@@ -173,7 +173,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl None.016
 Ns 0.000000
@@ -184,7 +184,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl None.017
 Ns 0.000000
@@ -205,7 +205,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl None.019
 Ns 0.000000
@@ -272,7 +272,7 @@ d 1.000000
 illum 2
 map_Kd Plaster_001_DISP.png
 
-newmtl None_Subway_tiles_001_COLOR.jpg.000
+newmtl None_Subway_tiles_001_COLOR.png.000
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -281,9 +281,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Subway_tiles_001_COLOR.jpg
+map_Kd Subway_tiles_001_COLOR.png
 
-newmtl None_background-blue-bubble-311039.jpg.000
+newmtl None_background-blue-bubble-311039.png.000
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -292,9 +292,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd background-blue-bubble-311039.jpg
+map_Kd background-blue-bubble-311039.png
 
-newmtl None_clean-color-drink-1166646.jpg.000
+newmtl None_clean-color-drink-1166646.png.000
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -303,7 +303,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd clean-color-drink-1166646.jpg
+map_Kd clean-color-drink-1166646.png
 
 newmtl Plastic_Handle_material.000
 Ns 92.156863
@@ -356,7 +356,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Human_skin_001_SPEC.jpg
+map_Kd Human_skin_001_SPEC.png
 
 newmtl _18931_Heart_Key_v1_18931_Heart_Key_v107___Default.001
 Ns 92.156863
@@ -367,7 +367,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Alien_Muscle_001_COLOR.jpg
+map_Kd Alien_Muscle_001_COLOR.png
 
 newmtl anisotropic.001
 Ns 92.156863
@@ -411,7 +411,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl glass_background-blue-bubble-311039.jpg.000
+newmtl glass_background-blue-bubble-311039.png.000
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -420,7 +420,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd background-blue-bubble-311039.jpg
+map_Kd background-blue-bubble-311039.png
 
 newmtl glossy.001
 Ns 92.156863
@@ -432,7 +432,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl glossy_background-blue-bubble-311039.jpg.000
+newmtl glossy_background-blue-bubble-311039.png.000
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -441,7 +441,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd background-blue-bubble-311039.jpg
+map_Kd background-blue-bubble-311039.png
 
 newmtl marbel_.001
 Ns 92.156863
@@ -473,7 +473,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl plastic_white.001
 Ns 92.156863

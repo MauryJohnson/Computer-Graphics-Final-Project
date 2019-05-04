@@ -20,9 +20,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
-newmtl None_clean-color-drink-1166646.jpg.001
+newmtl None_clean-color-drink-1166646.png.001
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -31,7 +31,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd clean-color-drink-1166646.jpg
+map_Kd clean-color-drink-1166646.png
 
 newmtl chrome
 Ns 94.117647

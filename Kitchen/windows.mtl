@@ -1,7 +1,7 @@
-# Blender MTL File: 'Kitchen.blend'
+# Blender MTL File: 'LivingRoom.blend'
 # Material Count: 2
 
-newmtl Material.002
+newmtl Material.067
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -10,9 +10,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Material_651.png
 
-newmtl Material.003
+newmtl Material.068
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -21,4 +20,3 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd clean-color-drink-1166646.jpg

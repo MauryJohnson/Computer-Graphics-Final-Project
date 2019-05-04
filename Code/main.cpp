@@ -48,12 +48,32 @@ false,false
 
 void UpdateGoAgain(int Position){
 
+//CHECK if all options are false...
+//BAD!
+
+
 if(!CantGoAgain[Position]){
 CantGoAgain[Position] = true;
 for(int i=0; i<=5;i+=1)
 	if(i!=Position){
 		CantGoAgain[Position] = false;
 	}
+}
+else{
+int Any = -1;
+
+for(int i=0; i<=5;i+=1)
+        if(!CantGoAgain[i]){
+                Any=i;
+		break;
+        }
+
+if(Any==-1){
+for(int i=0; i<=5;i+=1)
+       	CantGoAgain[i]=false;
+
+}
+
 }
 
 }
@@ -219,6 +239,7 @@ public:
 
 Evidence::Evidence(const char*N,Model** Model,float*V){
 this->Name=N;
+printf("\n Made MY Evidence:%s",N);
 this->Vertices=V;
 this->M=Model;
 }
@@ -308,21 +329,23 @@ float BedRoomVertices[]={
 6.69,7.22,-6.26,
 //END TOP FACE
 };
+
 float BathRoomVertices[]={
 //BOTTOM FACE
-35.42, -3.05, 9.32,
-48.38, -3.05, 9.35,
-35.57, -3.05, -8.03,
-48.40, -3.05, -8.02,
+6.69, -0.1013, -6.2588,
+6.69, -0.1005, 6.317,
+19.624, -0.205, 6.362,
+19.648, -0.056, -6.429,
 //END BOTTOM FACE
 
 //TOP FACE
-35.41, 4.39, 9.32,
-48.38,4.39, 9.35,
-35.52, 4.25, -8.20,
-48.40, 4.39, -8.02
+6.69, 7.21, -6.2588,
+6.69, 7.21, 6.317,
+19.624, 7.21, 6.362,
+19.648, 7.21, -6.429,
 //END TOP FACE
 };
+
 float LivingRoomVertices[]={
 
 //BOTTOM FACE
@@ -491,13 +514,13 @@ Data[j] = DoorRight;
 else{
 
 if(
-j<=2 || 
-(j>=12 && j<=14)
+j<=2 || (j>=9&&j<=11) || 
+(j>=12 && j<=14) || (j>=21&&j<=23)
 ){
 Data[j+2] = DoorLeft;
 }
 
-else if((j>=9 && j<=11) || (j>=21 && j<=23)){
+else if((j>=3&&j<=8) ||(j>=15&&j<=20)){
 Data[j+2] = DoorRight;
 }
 
@@ -610,6 +633,8 @@ printf("\n WITHIN!");
 //It will ALWAYS look to see if within the small bounding box of the door!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Rooms[Next].Occupied=true;
+
+Rooms[Next].Open=true;
 
 for(int k=0; k<=Rooms.size()-1;k+=1){
 	if(k!=Next){
@@ -863,9 +888,9 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
         else if (direction == RIGHT)
             Position += camera.Right * velocity;
 
-        else if (direction==UP && !CantGoAgain[4])
+        else if (direction==UP && !CantGoAgain[4] && MyLookX==0)
             Position += camera.Up * velocity;
-        else if (direction==DOWN && !CantGoAgain[5])
+        else if (direction==DOWN && !CantGoAgain[5] && MyLookX==0)
             Position -= camera.Up * velocity;
 	else{
 		return false;
@@ -1041,10 +1066,10 @@ int main()
 */
     Model* Window = new Model(FileSystem::getPath("../BathRoom/window.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Window",&Window,NULL));
-    /*
+    
     Model* Tub = new Model(FileSystem::getPath("../BathRoom/bathtub.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Tub",&Tub,NULL));
-    */
+    
     Model* Bathroom = new Model(FileSystem::getPath("../BathRoom/Bathroom.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Bathroom",&Bathroom,NULL));
     /*
@@ -1150,10 +1175,9 @@ int main()
 	1.851f,
 	0.815f
     };
-    /*
-    BedRoomItems.push_back(Evidence("DOOR_BathRoom",&DoorToBathRoom,DoorToBathRoomPosition));
-    */
-
+    
+    BathRoomItems.push_back(Evidence("DOOR",&DoorToBathRoom,DoorToBathRoomPosition));
+    
     Model* DoorToLivingRoom = new Model(FileSystem::getPath("../BedRoom/DoorToLivingRoom.obj"),"../BedRoom");
     float DoorToLivingRoomPosition[]={
 	0.796f,
@@ -1210,26 +1234,26 @@ int main()
     
     Model* BloodRug = new Model(FileSystem::getPath("../BathRoom/rug.obj"),"../BathRoom");
     float BloodRugPosition[]={
-	40.66f,
-	-0.52f,
-	-2.78f
+	13.19f,
+	0.1f,
+	0.11f
     };
 	
     BathRoomItems.push_back(Evidence("BRE_Rug",&BloodRug,BloodRugPosition));
     
     Model* Candle = new Model(FileSystem::getPath("../BathRoom/candle.obj"),"../BathRoom");
     float CandlePosition[] = {
-	47.50f,
-	7.35f,
-	-2.45f
+	18.933f,
+	0.207,
+	-5.768f
     };
     BathRoomItems.push_back(Evidence("BRE_Candle",&Candle,CandlePosition));
     
     Model* Chain = new Model(FileSystem::getPath("../BathRoom/olympicChain.obj"),"../BathRoom");
     float ChainPosition[] = {
-	46.15f,
-	1.24f,
-	-1.73f
+	18.933f,
+	0.206,
+	-5.768f
     };
     
     BathRoomItems.push_back(Evidence("BRE_Chain",&Chain,ChainPosition));
@@ -1243,35 +1267,34 @@ int main()
     BathRoomItems.push_back(Evidence("BRE_Needle",&Needle,NeedlePosition));
       
 
-
    Model* Key = new Model(FileSystem::getPath("../BathRoom/key.obj"),"../BathRoom");
     float KeyPosition[] = {
-	46.10f,
-	5.10f,
-	-1.40f
+	18.933f,
+	0.206,
+	-5.768f
     };
     BathRoomItems.push_back(Evidence("BRE_Key",&Key,KeyPosition));
     
     Model* Hairbrush = new Model(FileSystem::getPath("../BathRoom/hairbrush.obj"),"../BathRoom");
     float HairbrushPosition[] = {
-	41.89f,
-	7.44f,
-	0.81f
+	18.933f,
+	0.206f,
+	-5.768f
     };
     BathRoomItems.push_back(Evidence("BRE_Hairbrush",&Hairbrush,HairbrushPosition));
     
     Model* Cup = new Model(FileSystem::getPath("../BathRoom/cup.obj"),"../BathRoom");
     float CupPosition[] = {
-	46.41f,
-	2.34f,
-	0.62f
+	17.77f,
+	3.165f,
+	-2.664f
     };
     BathRoomItems.push_back(Evidence("BRE_Cup",&Cup,CupPosition));
     Model* Mirror = new Model(FileSystem::getPath("../BathRoom/bathroomMirror.obj"),"../BathRoom");
     float MirrorPosition[] = {
-	48.19f,
-	-1.02f,
-	2.57f
+	19.346f,
+	4.870f,
+	0.2945f
     };
     BathRoomItems.push_back(Evidence("BRE_Mirror",&Mirror,MirrorPosition));
     //END BATHROOM EVIDENCE!!!
@@ -1351,12 +1374,19 @@ int main()
     //UPDATE VERTICES
     Model* LivingRoomPlate = new Model(FileSystem::getPath("../LivingRoom/LivingRoomPlate.obj"),"../LivingRoom");
     float LivingRoomPlatePosition[]={
-        -5.65f,
-        -0.1124f,
-        14.361f
+        -1.15f,
+        -0.06f,
+        15.8f
     };
         LivingRoomItems.push_back(Evidence("LRE_Plate",&LivingRoomPlate,LivingRoomPlatePosition));
-  
+    Model* LivingRoomWrench = new Model(FileSystem::getPath("../LivingRoom/LivingRoomWrench.obj"),"../LivingRoom");
+    float LivingRoomWrenchPosition[]={
+        -3.03f,
+        -0.066f,
+        20.65f
+    };
+        LivingRoomItems.push_back(Evidence("LRE_Wrench",&LivingRoomWrench,LivingRoomWrenchPosition));
+ 
 	//END LIVING ROOM EVIDENCE
 
     //END EVIDENCE
@@ -1373,7 +1403,7 @@ int main()
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
 //<<<<<<< HEAD
     Rooms.push_back(Room(LivingRoomVertices,LivingRoomItems));
-    //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
+    Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
 //=======
     //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
@@ -1387,6 +1417,8 @@ int main()
     // -----------
 
     Rooms[0].Occupied = true;
+    //Because check if room is opened lol
+    //Rooms[1].Open = true;
     
     printf("\n WITHIN BOUNDS:%d",WithinBounds(camera.Position));
 
@@ -1672,7 +1704,9 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       //printf("Pressed LOOK RIGHT\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
 
-      camera.ProcessMouseMovement(22.5f,0.0f);
+       float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+      camera.ProcessMouseMovement(22.0f + r,0.0f);
 
       MyLookY+=1;
     }
@@ -1687,7 +1721,9 @@ void key_callback(GLFWwindow* window,int key,int scancode,int action,int mode)
       //printf("Pressed LOOK LEFT\n");
       //camera.ProcessKeyboard(RIGHT,deltaTime);
 
-      camera.ProcessMouseMovement(-22.5f,0.0f);
+       float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+      camera.ProcessMouseMovement(-23.0f+r,0.0f);
 
       MyLookY-=1;
     }

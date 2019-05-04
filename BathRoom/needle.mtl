@@ -21,7 +21,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl glass_background-blue-bubble-311039.jpg.001
+newmtl glass_background-blue-bubble-311039.png.001
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -30,7 +30,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd background-blue-bubble-311039.jpg
+map_Kd background-blue-bubble-311039.png
 
 newmtl glossy
 Ns 92.156863
@@ -42,7 +42,7 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl glossy_background-blue-bubble-311039.jpg.001
+newmtl glossy_background-blue-bubble-311039.png.001
 Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -51,7 +51,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd background-blue-bubble-311039.jpg
+map_Kd background-blue-bubble-311039.png
 
 newmtl needle
 Ns 92.156863
