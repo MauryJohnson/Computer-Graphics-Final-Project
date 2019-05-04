@@ -1,7 +1,7 @@
-# Blender MTL File: 'CompleteBedRoom.blend'
+# Blender MTL File: 'None'
 # Material Count: 2
 
-newmtl None.003
+newmtl None.024
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -12,7 +12,7 @@ d 1.000000
 illum 2
 map_Kd White_Marble_005_DISP.png
 
-newmtl None_Material_669.png.002
+newmtl None_Material_669.png.001
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
