@@ -12,7 +12,7 @@ d 1.000000
 illum 2
 map_Kd Material_669.png
 
-newmtl None_background-blue-bubble-311039.jpg.001
+newmtl None_background-blue-bubble-311039.png.001
 Ns 0.000000
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -21,7 +21,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd background-blue-bubble-311039.jpg
+map_Kd background-blue-bubble-311039.png
 
 newmtl Plastic_Handle_material.001
 Ns 92.156863

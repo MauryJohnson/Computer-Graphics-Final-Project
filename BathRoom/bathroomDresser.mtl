@@ -20,7 +20,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl Material.029
 Ns 94.117647
@@ -42,7 +42,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Sand_003_OCC.jpg
+map_Kd Sand_003_OCC.png
 
 newmtl None_Material_669.png.004
 Ns 0.000000

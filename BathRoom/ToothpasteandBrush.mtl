@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
 
 newmtl phong3SG
 Ns 49.019608
@@ -21,4 +21,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.000000
 illum 2
-map_Kd Abstract_001_COLOR.jpg
+map_Kd Abstract_001_COLOR.png
