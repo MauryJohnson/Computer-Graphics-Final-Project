@@ -1,4 +1,4 @@
-# Blender MTL File: 'LivingRoom.blend'
+# Blender MTL File: 'None'
 # Material Count: 2
 
 newmtl 02_-_Default.002
@@ -13,7 +13,7 @@ illum 2
 map_Kd light grey.png
 
 newmtl 20285_Circular_door_knob_w_button_lock_v3.002
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.033619 0.033619 0.033619
 Ks 0.500000 0.500000 0.500000
