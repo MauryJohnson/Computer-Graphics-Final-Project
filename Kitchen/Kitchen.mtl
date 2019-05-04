@@ -1,8 +1,8 @@
-# Blender MTL File: 'LivingRoom.blend'
-# Material Count: 4
+# Blender MTL File: 'None'
+# Material Count: 2
 
 newmtl FMarble
-Ns 94.117647
+Ns 92.156863
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -12,8 +12,8 @@ d 1.000000
 illum 2
 map_Kd photos_2015_09_18_fst_698oway7o7h.png
 
-newmtl FMarble_Watercolor_Paper_001_COLOR.png
-Ns 94.117647
+newmtl FMarble_Watercolor_Paper_001_COLOR.jpg
+Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -21,26 +21,3 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Watercolor_Paper_001_COLOR.png
-
-newmtl Material.000
-Ns 94.117647
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Watercolor_Paper_001_COLOR.png
-
-newmtl Material.021
-Ns 94.117647
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd Watercolor_Paper_001_COLOR.png
