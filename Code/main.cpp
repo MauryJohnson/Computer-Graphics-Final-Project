@@ -334,7 +334,7 @@ public:
 	bool Open = false;
 		
 	//Destructor
-	~Room();
+//	~Room();
 
 
 };
@@ -343,13 +343,13 @@ Room::Room(float*Vertices,std::vector<Evidence>EvidenceVertices){
 this->Vertices=Vertices;
 this->Evidences=EvidenceVertices;
 }
-
+/*
 Room::~Room(){
 
 printf("\n NO ROOM");
 
 }
-
+*/
 std::vector<Room> Rooms;
 
 //Store Vertices for each room to then check if within a room
@@ -877,6 +877,8 @@ if(Within){
 
 printf("\n WITHIN!");
 
+printf("\n Current ROom:%d,I:%d",CurrentRoom,i);
+
 /*
 Rooms[i].Occupied=true;
 
@@ -1175,7 +1177,7 @@ if(Rooms[i].Evidences[j].Vertices!=NULL && ValidItem(Rooms[i].Evidences[j].Name)
 
 float* Vertices = Rooms[i].Evidences[j].Vertices;
 
-glm::vec3 Here(Vertices[0],Vertices[1],Vertices[2]);
+glm::vec3 Here = glm::vec3(Vertices[0],Vertices[1],Vertices[2]);
 
 glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
@@ -1195,7 +1197,7 @@ Evidences.push_back(&Rooms[i].Evidences[j].HPVM);
 }
 }
 
-printf("\n AL evidences:%d",Evidences.size());
+//printf("\n AL evidences:%d",Evidences.size());
 
 return Evidences;
 
@@ -1321,6 +1323,178 @@ End CreateEnd(glm::vec3 Here){
 	return End(Here,projection2,view2,model2);
 }
 
+int randRange(int min, int max){
+//return min+(rand()%static_cast<int>(max-min+1));
+srand(time(0));
+return rand() % (4);
+}
+
+
+int Dist(int Start, int End,int HowFar){
+
+if(Start==End)
+return 0;
+
+int Order[]={
+2,
+0,
+1,
+3
+};
+
+int IdxStart = -1;
+int IdxEnd = -1;
+for(int i=0;i<=3;i+=1){
+if(Start==Order[i])
+IdxStart = i;
+else if(End==Order[i])
+IdxEnd = i;
+}
+
+if(abs(IdxStart-IdxEnd)<=HowFar)
+printf("Distance from %dto %d:%d",Start,End,abs(IdxStart-IdxEnd));
+
+return abs(IdxStart-IdxEnd);
+
+}
+
+//Gather all adjacent rooms to room given...
+//Room 0 is BedRoom
+//1 is LivingRoom
+//2 is BathRoom
+//3 is Kitchen
+std::vector<int> AllAdjacents(int RoomNum,int HowFar){
+int Order[]={
+2,
+0,
+1,
+3
+};
+
+std::vector<int> AllOthersFar;
+
+int Far = 0;
+
+printf("\n All Rooms Adjacent to:%d\n",RoomNum);
+
+// and i>=
+
+for(int i=0; i<4 && Far<HowFar;i+=1){
+
+int D = Dist(RoomNum,Order[i],HowFar);
+
+if(Order[i]!=RoomNum && D<=HowFar){
+        printf("\n%d",Order[i]);
+        AllOthersFar.push_back(Order[i]);
+        Far+=1;
+}
+
+}
+
+return AllOthersFar;
+
+}
+
+
+//Choose adjacent rooms
+std::vector<int> GetRooms(int NumRooms){
+std::vector<int> Rooms;
+
+int StartRoom = randRange(0,5);
+
+printf("\n Start Room:%d",StartRoom);
+
+Rooms.push_back(StartRoom);
+
+std::vector<int> MoreRooms;
+
+switch(NumRooms){
+
+case 1:
+Rooms.push_back(StartRoom);
+break;
+
+case 2:
+MoreRooms = AllAdjacents(StartRoom,1);
+break;
+
+case 3:
+MoreRooms = AllAdjacents(StartRoom,2);
+break;
+
+case 4:
+MoreRooms = AllAdjacents(StartRoom,3);
+break;
+
+default:
+return Rooms;
+}
+
+for(int i=0; i<MoreRooms.size();i+=1){
+Rooms.push_back(MoreRooms[i]);
+}
+
+return Rooms;
+
+}
+
+/*
+//Gather all adjacent rooms to room given...
+//Room 0 is BedRoom
+//1 is LivingRoom
+//2 is BathRoom
+//3 is Kitchen
+std::vector<int> AllAdjacents(int RoomNum,int HowFar){
+int Order[]={
+2,
+0,
+1,
+3
+}
+
+std::vector<int> AllOthersFar;
+
+int Far = 0;
+
+printf("\n All Rooms Adjacent to:%d\n",RoomNum);
+
+for(int i=0; i<4 && Far<HowFar;i+=1){
+if(Order[i]!=RoomNum){
+	printf("\n%d",Order[i]);
+	AllOthersFar.push_back(Order[i]);
+	Far+=1;
+}
+}
+
+return AllOthersFar;
+
+}
+*/
+
+char* sub(char* A,int Start){
+char* next = A+Start;
+return next;
+}
+
+
+bool Container[]={
+false,
+false,
+false,
+false
+};
+
+void ContainsInt(std::vector<int>R,int I){
+
+for(int i=0 ;i<R.size();i+=1){
+Container[R[i]]=true;
+//if(R[i]==I)
+//return true;
+}
+
+//return false;
+}
+
 /*
 bool ValidItem(const char* Item){
 
@@ -1328,72 +1502,78 @@ return strcmp(Item,"DOOR")!=0;
 
 }
 */
-int main(int argc, char** argv)
+int main(/*int argc, char** argv*/)
 {
+    int argc = 0;
+    char** argv = NULL;
     printf("\n Number of Arguments:%d",argc);     
+    
+    int Args[]={
+	//Level Index
+	-1,
+	//Seed Index
+	-1
+    };
+
     //If user enters a valid integer...
-    int Seed = argc;
+  
+    if(argc==2){
+	if(isPartOf(argv[1],"Level=")){
+		printf("\n%c",*(*(argv+1)+6));
+		//sprintf(*(*(argv+1)+6),"%d",Args[0]);
+		Args[0] = atoi(sub(argv[1],6));
+	}
+	else if(isPartOf(argv[1],"Seed=")){
+	 	//sprintf(((*argv+1)+5),"%d",Args[1]);
+		Args[1] = atoi(sub(argv[1],5));
+	}	
+    }
+    else if(argc==3){
+	for(int i=1;i<=2;i+=1){
+		/*char A[]=
+		{
+		*((*argv+1)+5)
+		};
+		*/
+		if(isPartOf(argv[i],"Seed=")){
+			 //sprintf((*(argv+1)+5),"%d",Args[1]);
+			Args[1] = atoi(sub(argv[i],5));
+		}	
+		else if(isPartOf(argv[i],"Level=")){
+			 //sprintf((*(argv+1)+6),"%d",Args[0]);
+			Args[0] = atoi(sub(argv[i],6));
+		}
+	}
+    }
+
+    printf("\n%d,%d\n",Args[0],Args[1]);
+
+    std::vector<int>RoomOrder;
     /*if(argc>1)
     sprintf(argv[1],"%d",Seed);
     */
-    if(Seed>=0)
+	
+    if(Args[1]>=0){
     printf("\n YOU Confirm Randomized Game");
-
+    }
+    if(Args[0]>=1){
+    RoomOrder = GetRooms(Args[0]);
+    printf("\n YOU Chose A Game with (Adjacent) Rooms");
+    }
+    else{
+    //This is the room you start in
+    RoomOrder.push_back(0);
+    //These are all other rooms
+    RoomOrder.push_back(0);
+    RoomOrder.push_back(1);
+    RoomOrder.push_back(2);
+    RoomOrder.push_back(3);
+    }
+   
+    //return 0;
+ 
     Animated KitchenDroplet(KitchenWaterStart,KitchenWaterEnd,10,0);
-    // glfw: initialize and configure
-    // ------------------------------
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
-#endif
-
-    // glfw window creation
-    // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Find All Hidden Items!", NULL, NULL);
-    if (window == NULL)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    //glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetScrollCallback(window, scroll_callback);
-    glfwSetKeyCallback(window,key_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
-
-    // tell GLFW to capture our mouse
-    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
-
-    //glfwMakeContextCurrent(window);
-
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
     
-    // configure global opengl state
-    // -----------------------------
-    glEnable(GL_DEPTH_TEST);
-
-    // build and compile shaders
-    // -------------------------
-    Shader ourShader("shader.vs", "shader.frag");
-    Shader endShader("shader.vs", "shader.frag");
-    Shader fanShader("shader.vs", "shader.frag");
-    Shader kwdShader("shader.vs", "shader.frag"); 
-    // load/store models
-    // -----------
-
     std::vector<Evidence> BedRoomItems;
     //BathRoom
     std::vector<Evidence> BathRoomItems;
@@ -1403,17 +1583,27 @@ int main(int argc, char** argv)
     std::vector<Evidence> KitchenItems;
     //STATIC ITEMS
 
+    //ContainsInt(RoomOrder,0);
+    
+    Model*EmptyBedRoom=NULL;
+    Model* Bed;
+    Model* Furniture;
+    Model* MoreBedRoomItems;
+    
+    if(Container[0]){
     //BEDROOM
-    Model* EmptyBedRoom = new Model(FileSystem::getPath("../BedRoom/EmptyRoom.obj"),"../BedRoom");
+    EmptyBedRoom = new Model(FileSystem::getPath("../BedRoom/EmptyRoom.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_EmptyRoom",&EmptyBedRoom,NULL)); 
-    Model* Bed = new Model(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
+    Bed = new Model(FileSystem::getPath("../BedRoom/Bed.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_Bed",&Bed,NULL));
-    Model* Furniture = new Model(FileSystem::getPath("../BedRoom/Furniture.obj"),"../BedRoom");
+    Furniture = new Model(FileSystem::getPath("../BedRoom/Furniture.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_FURNITURE",&Furniture,NULL));
-    Model* MoreBedRoomItems = new Model(FileSystem::getPath("../BedRoom/MoreItems.obj"),"../BedRoom");
+    MoreBedRoomItems = new Model(FileSystem::getPath("../BedRoom/MoreItems.obj"),"../BedRoom");
     BedRoomItems.push_back(Evidence("STATIC_MoreBR",&MoreBedRoomItems,NULL));
     //END BEDROOM
-
+    }
+    
+    if(Container[2]){
     //BATHROOM
     Model* Dresser = new Model(FileSystem::getPath("../BathRoom/bathroomDresser.obj"),"../BathRoom");
     BathRoomItems.push_back(Evidence("STATIC_Dresser",&Dresser,NULL));
@@ -1449,7 +1639,9 @@ int main(int argc, char** argv)
     
 //>>>>>>> c6abcd87be8673c5af71129e04aeb22205e71717
     //END BATH ROOM
-
+    }
+    
+    if(Container[3]){
     //KITCHEN
     
     Model* Cabinets = new Model(FileSystem::getPath("../Kitchen/cabinets.obj"),"../Kitchen");
@@ -1484,8 +1676,10 @@ int main(int argc, char** argv)
     KitchenItems.push_back(Evidence("STATIC_Window",&Window,NULL));
     */
     //END KITCHEN
-    
-    
+    }
+
+
+    if(Container[1]){    
     //LIVING ROOM
 	Model* EmptyLivingRoom = new Model(FileSystem::getPath("../LivingRoom/EmptyLivingRoom.obj"),"../LivingRoom");
 	LivingRoomItems.push_back(Evidence("STATIC_FirstPart",&EmptyLivingRoom,NULL));
@@ -1514,16 +1708,20 @@ int main(int argc, char** argv)
         LivingRoomItems.push_back(Evidence("STATIC_FirePlaceFire",&FirePlaceFire,NULL));
 	
     //END LIVING ROOM
+    }
 
     //END STATIC ITEMS
 
     //EVIDENCE
+
 
     //BedRoom Evidence
     //std::vector<Evidence> BRE;     
         
     //BedRoom Evidence!!!!!!!!!!!!!!!!!!11
 
+
+    if(Container[0]){
     Model* BloodyAxe = new Model(FileSystem::getPath("../BedRoom/BloodyAxe.obj"),"../BedRoom");
     float BloodyAxePosition[] = {
 	-5.81f,
@@ -1531,23 +1729,29 @@ int main(int argc, char** argv)
 	-6.05f
     };
     BedRoomItems.push_back(Evidence("BRE_BloodyAxe",&BloodyAxe,BloodyAxePosition));
+    }    
+
+    /*
+    //SOME DOORS
     Model* DoorToBathRoom = new Model(FileSystem::getPath("../BedRoom/DoorToBathRoom.obj"),"../BedRoom");
     float DoorToBathRoomPosition[]={
 	6.6867f,
 	1.851f,
 	0.815f
-    };
-    
-    BathRoomItems.push_back(Evidence("BathRoomDOOR_FINAL",&DoorToBathRoom,DoorToBathRoomPosition));
-    
+    }; 
+    *///BathRoomItems.push_back(Evidence("BathRoomDOOR_FINAL",&DoorToBathRoom,DoorToBathRoomPosition/*ContainsInt(RoomOrder,2) ? DoorToBathRoomPosition:NULL*/));
+    /*  
     Model* DoorToLivingRoom = new Model(FileSystem::getPath("../BedRoom/DoorToLivingRoom.obj"),"../BedRoom");
     float DoorToLivingRoomPosition[]={
 	0.796f,
 	1.94f,
 	6.368f
     };
-    LivingRoomItems.push_back(Evidence("LivingRoomDOOR_FINAL",&DoorToLivingRoom,DoorToLivingRoomPosition));
+    *///LivingRoomItems.push_back(Evidence("LivingRoomDOOR_FINAL",&DoorToLivingRoom,DoorToLivingRoomPosition/*ContainsInt(RoomOrder,1) ? DoorToLivingRoomPosition:NULL*/));
+    //END SOME DOORS
     
+    if(Container[0]){
+
     Model* Phone = new Model(FileSystem::getPath("../BedRoom/Phone.obj"),"../BedRoom");
     float PhonePosition[]={
 	-0.426f,
@@ -1591,7 +1795,9 @@ int main(int argc, char** argv)
     BedRoomItems.push_back(Evidence("BRE_TvGun",&TvGun,TvGunPosition));
     //Rooms.push_back(Room(BedRoomVertices,BedRoomItems));
     //END BEDROOM EVIDENCE!!!
-	
+    }
+
+    if(Container[2]){
     //BATHROOM EVIDENCE
     
     Model* BloodRug = new Model(FileSystem::getPath("../BathRoom/rug.obj"),"../BathRoom");
@@ -1660,9 +1866,10 @@ int main(int argc, char** argv)
     };
     BathRoomItems.push_back(Evidence("FINAL",&Mirror,MirrorPosition));
     //END BATHROOM EVIDENCE!!!
-    
+    }
 
 
+    if(Container[3]){
     //KITCHEN EVIDENCE
     
     Model* TeddyBear = new Model(FileSystem::getPath("../Kitchen/bear.obj"),"../Kitchen");
@@ -1716,17 +1923,20 @@ int main(int argc, char** argv)
     KitchenItems.push_back(Evidence("FINAL",&FootPrints,FootPrintsPosition));
     
     //END KITCHEN EVIDENCE
-
+    }
 
     //LIVING ROOM EVIDENCE
-    Model* DoorToKitchen = new Model(FileSystem::getPath("../LivingRoom/DoorToKitchen.obj"),"../LivingRoom");
+    //SOME DOOR
+    /*Model* DoorToKitchen = new Model(FileSystem::getPath("../LivingRoom/DoorToKitchen.obj"),"../LivingRoom");
     float DoorToKitchenPosition[] = {
         -7.212f,
         1.992f,
         12.07f
     };
-    KitchenItems.push_back(Evidence("KitchenDOOR_FINAL",&DoorToKitchen,DoorToKitchenPosition));	
-
+    */
+//KitchenItems.push_back(Evidence("KitchenDOOR_FINAL",&DoorToKitchen,//DoorToKitchenPosition/*ContainsInt(RoomOrder,3) ? DoorToKitchenPosition:NULL*/));	
+    //END SOME DOOR
+   if(Container[1]){
 	 Model* LivingRoomBones = new Model(FileSystem::getPath("../LivingRoom/LivingRoomBones.obj"),"../LivingRoom");
     float LivingRoomBonesPosition[]={
         1.13f,
@@ -1758,12 +1968,13 @@ int main(int argc, char** argv)
         LivingRoomItems.push_back(Evidence("LRE_Wrench",&LivingRoomWrench,LivingRoomWrenchPosition));
  
 	//END LIVING ROOM EVIDENCE
-
+    }
     //END EVIDENCE
 
     //MOVABLE ITEMS
-    Model* Fan = new Model(FileSystem::getPath("../BedRoom/fan.obj"),"../BedRoom");
+    /*Model* Fan = new Model(FileSystem::getPath("../BedRoom/fan.obj"),"../BedRoom");
     Model* KitchenWaterDroplet = new Model(FileSystem::getPath("../Kitchen/KitchenWaterDroplet.obj"),"../Kitchen");
+    */
     //BedRoomItems.push_back(Evidence("FAN",&Fan,NULL)); 
     //Model* Phone2 = new Model(FileSystem::getPath("../BedRoom/Phone.obj"),"../BedRoom");
     //BedRomItems.push_back(Evidence("
@@ -1817,11 +2028,70 @@ int main(int argc, char** argv)
   
     std::vector<End**> AllEvidences = GetE(Rooms);
     
-    if(Seed>=0) 
-    AllEvidences = ShuffleEvidences(AllEvidences);
+    //if(Args[1]>=0) 
+    //AllEvidences = ShuffleEvidences(AllEvidences);
  
-    bool Already[23];
+    //bool Already[23];
 
+    printf("\n MADE IT");
+
+
+    // glfw: initialize and configure
+    // ------------------------------
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
+#endif
+
+    // glfw window creation
+    // --------------------
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Find All Hidden Items!", NULL, NULL);
+    if (window == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    //glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+    glfwSetKeyCallback(window,key_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
+
+    // tell GLFW to capture our mouse
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    // glad: load all OpenGL function pointers
+    // ---------------------------------------
+
+    //glfwMakeContextCurrent(window);
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return -1;
+    }
+    
+    // configure global opengl state
+    // -----------------------------
+    glEnable(GL_DEPTH_TEST);
+
+    // build and compile shaders
+    // -------------------------
+    Shader ourShader("shader.vs", "shader.frag");
+    Shader endShader("shader.vs", "shader.frag");
+    Shader fanShader("shader.vs", "shader.frag");
+    Shader kwdShader("shader.vs", "shader.frag"); 
+    // load/store models
+    // -----------
+
+
+    //return 0;
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -1900,7 +2170,11 @@ int main(int argc, char** argv)
 				}
 				else
 				ourShader.setMat4("model",model);
-				(**M).Draw(ourShader);
+				
+				if(M!=NULL)
+				if(*M!=NULL)
+				//if(**M!=NULL)
+				(*M)->Draw(ourShader);
 	    		
 		}
 		//}
@@ -1987,7 +2261,7 @@ int main(int argc, char** argv)
         FAN.Model = glm::rotate(FAN.Model,glm::radians(deltaTime*50.0f),glm::vec3(0.0f,1.0f,0.0f));
 	FAN.Model= glm::translate(FAN.Model,-glm::vec3(-1.037,6.08,-1.022));
 	fanShader.setMat4("model", FAN.Model);	
-	Fan->Draw(fanShader);
+	//Fan->Draw(fanShader);
 	//END FAN
 
 	//DROPLET
@@ -2027,7 +2301,7 @@ int main(int argc, char** argv)
 	
 	kwdShader.setMat4("model",KWD.Model);
   	
-	KitchenWaterDroplet->Draw(kwdShader);
+	//KitchenWaterDroplet->Draw(kwdShader);
 	
 	//Positions[TimeCounter] is next  positions in 3d!!!
 	//END DROPLET
