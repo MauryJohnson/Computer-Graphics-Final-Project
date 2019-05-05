@@ -50,6 +50,26 @@ false,false,false,false,
 false,false
 };
 
+bool isPartOf(const char* w1, const char* w2)
+{
+    int i=0;
+    int j=0;
+
+    for(i;i < strlen(w1); i++)
+    {
+        if(w1[i] == w2[j])
+        {
+            j++;
+        }
+    }
+
+    if(strlen(w2) == j)
+        return true;
+    else
+        return false;
+}
+
+
 void UpdateGoAgain(int Position){
 
 //CHECK if all options are false...
@@ -1040,7 +1060,7 @@ for(int i=0; i<Rooms.size();i+=1){
 		}
 
 		if(Min!=10000.0f && I!=-1 && J!=-1){
-			 if(strcmp(Rooms[I].Evidences[J].Name,"DOOR")==0){
+			 if(isPartOf(Rooms[I].Evidences[J].Name,"DOOR")==0){
         printf("\n Remove a DOOR");
         Rooms[I].Open = true;
         	}
@@ -1108,10 +1128,29 @@ this->View = V;
 this->Model = M;
 }
 */
+/*
+bool isPartOf(const char* w1, const char* w2)
+{
+    int i=0;
+    int j=0;
 
+    for(i;i < strlen(w1); i++)
+    {
+        if(w1[i] == w2[j])
+        {
+            j++;
+        }
+    }
+
+    if(strlen(w2) == j)
+        return true;
+    else
+        return false;
+}
+*/
 bool ValidItem(const char* Item){
 
-return strcmp(Item,"DOOR")!=0;
+return !isPartOf(Item,"FINAL");
 
 }
 
@@ -1281,15 +1320,18 @@ return strcmp(Item,"DOOR")!=0;
 
 }
 */
-int main()
+int main(int argc, char** argv)
 {
-   
-    //WithinBounds(camera.Position);
-    //return 0; 
-    Animated KitchenDroplet(KitchenWaterStart,KitchenWaterEnd,10,0);
-    //return 0;       
-    //AllRooms.push_back(BedRoomVertices);
+    printf("\n Number of Arguments:%d",argc);     
+    //If user enters a valid integer...
+    int Seed = argc;
+    /*if(argc>1)
+    sprintf(argv[1],"%d",Seed);
+    */
+    if(Seed>=0)
+    printf("\n YOU Confirm Randomized Game");
 
+    Animated KitchenDroplet(KitchenWaterStart,KitchenWaterEnd,10,0);
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
@@ -1303,7 +1345,7 @@ int main()
 
     // glfw window creation
     // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Find All Hidden Items!", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -1488,7 +1530,7 @@ int main()
 	0.815f
     };
     
-    BathRoomItems.push_back(Evidence("DOOR",&DoorToBathRoom,DoorToBathRoomPosition));
+    BathRoomItems.push_back(Evidence("BathRoomDOOR_FINAL",&DoorToBathRoom,DoorToBathRoomPosition));
     
     Model* DoorToLivingRoom = new Model(FileSystem::getPath("../BedRoom/DoorToLivingRoom.obj"),"../BedRoom");
     float DoorToLivingRoomPosition[]={
@@ -1496,7 +1538,7 @@ int main()
 	1.94f,
 	6.368f
     };
-    LivingRoomItems.push_back(Evidence("DOOR",&DoorToLivingRoom,DoorToLivingRoomPosition));
+    LivingRoomItems.push_back(Evidence("LivingRoomDOOR_FINAL",&DoorToLivingRoom,DoorToLivingRoomPosition));
     
     Model* Phone = new Model(FileSystem::getPath("../BedRoom/Phone.obj"),"../BedRoom");
     float PhonePosition[]={
@@ -1523,7 +1565,7 @@ int main()
 	-3.3826f,
 	//0.039f
     };
-    BedRoomItems.push_back(Evidence("BRE_RightShoe",&RightShoe,ShoePosition)); 
+    BedRoomItems.push_back(Evidence("FINAL",&RightShoe,ShoePosition)); 
 
     Model* Step = new Model(FileSystem::getPath("../BedRoom/Step.obj"),"../BedRoom");
     float StepPosition[]={
@@ -1531,7 +1573,7 @@ int main()
 	-0.136f,
 	-4.16f
     };
-    BedRoomItems.push_back(Evidence("BRE_Step",&Step,StepPosition));	 
+    BedRoomItems.push_back(Evidence("FINAL",&Step,StepPosition));	 
     Model* TvGun = new Model(FileSystem::getPath("../BedRoom/TvGun.obj"),"../BedRoom");
     float TvGunPosition[] = {
 	6.145f,
@@ -1551,7 +1593,7 @@ int main()
 	0.11f
     };
 	
-    BathRoomItems.push_back(Evidence("BRE_Rug",&BloodRug,BloodRugPosition));
+    BathRoomItems.push_back(Evidence("FINAL",&BloodRug,BloodRugPosition));
     
     Model* Candle = new Model(FileSystem::getPath("../BathRoom/candle.obj"),"../BathRoom");
     float CandlePosition[] = {
@@ -1608,7 +1650,7 @@ int main()
 	4.870f,
 	0.2945f
     };
-    BathRoomItems.push_back(Evidence("BRE_Mirror",&Mirror,MirrorPosition));
+    BathRoomItems.push_back(Evidence("FINAL",&Mirror,MirrorPosition));
     //END BATHROOM EVIDENCE!!!
     
 
@@ -1663,7 +1705,7 @@ int main()
 	-0.017f,
 	12.593f
     };
-    KitchenItems.push_back(Evidence("BRE_FootPrints",&FootPrints,FootPrintsPosition));
+    KitchenItems.push_back(Evidence("FINAL",&FootPrints,FootPrintsPosition));
     
     //END KITCHEN EVIDENCE
 
@@ -1675,7 +1717,7 @@ int main()
         1.992f,
         12.07f
     };
-    KitchenItems.push_back(Evidence("DOOR",&DoorToKitchen,DoorToKitchenPosition));	
+    KitchenItems.push_back(Evidence("KitchenDOOR_FINAL",&DoorToKitchen,DoorToKitchenPosition));	
 
 	 Model* LivingRoomBones = new Model(FileSystem::getPath("../LivingRoom/LivingRoomBones.obj"),"../LivingRoom");
     float LivingRoomBonesPosition[]={
@@ -1767,7 +1809,8 @@ int main()
     //Animated YOUWIN(YouWinStart,YouWinEnd,10,0);
   
     std::vector<End**> AllEvidences = GetE(Rooms);
-     
+    
+    if(Seed>=0) 
     AllEvidences = ShuffleEvidences(AllEvidences);
  
     bool Already[23];
