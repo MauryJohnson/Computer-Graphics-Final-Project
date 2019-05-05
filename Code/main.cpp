@@ -24,7 +24,9 @@
 #include <cstdlib>
 
 #include "include/FileSystem.h"
-
+#include <random>
+#include <chrono>
+#include <algorithm>
 #include <iostream>
 
 float YouWinTimeStart = 0.0f;
@@ -233,6 +235,24 @@ this->TimeCounter+=1;
 return false;
 }
 
+class End{
+public:
+        glm::vec3 Here;
+        glm::mat4 Projection;
+        glm::mat4 View;
+        glm::mat4 Model;
+        End(glm::vec3 H, glm::mat4 P, glm::mat4 V, glm::mat4 M);
+
+};
+
+End::End(glm::vec3 H, glm::mat4 P, glm::mat4 V, glm::mat4 M){
+this->Here = H;
+this->Projection = P;
+this->View = V;
+this->Model = M;
+}
+
+
 //Stores info about each evidence
 class Evidence{
 public:
@@ -241,6 +261,7 @@ public:
 	// to +NextVertices
 	float* NextVertices = NULL;
 	float* Vertices;
+	End* HPVM;
 	bool Found = false;
 	const char* Name;
 	Model** M;
@@ -1069,7 +1090,7 @@ break;
 return true;
 
 }
-
+/*
 class End{
 public:
 	glm::vec3 Here;
@@ -1086,7 +1107,7 @@ this->Projection = P;
 this->View = V;
 this->Model = M;
 }
-
+*/
 
 bool ValidItem(const char* Item){
 
@@ -1096,9 +1117,9 @@ return strcmp(Item,"DOOR")!=0;
 
 
 //Set up every single evidence model, proj, view, here
-std::vector<End> GetE(std::vector<Room> Rooms){
+std::vector<End**> GetE(std::vector<Room> Rooms){
 
-std::vector<End> Evidences;
+std::vector<End**> Evidences;
 
 for(int i=0; i<Rooms.size();i+=1){
 for(int j=0; j<Rooms[i].Evidences.size();j+=1){
@@ -1118,7 +1139,10 @@ glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WI
 
         //model = glm::translate(model, Here); // translate it down so it's at the center of the scene  
 
-Evidences.push_back(End(Here,projection,view,model));
+//Evidences.push_back(End(Here,projection,view,model));
+
+Rooms[i].Evidences[j].HPVM = new End(Here,projection,view,model);
+Evidences.push_back(&Rooms[i].Evidences[j].HPVM);
 
 }
 }
@@ -1134,10 +1158,51 @@ return Evidences;
 //Then all you gotta do is for each evidence to render
 //Check if their vertices match the HERE of Evidences
 //if not, translate back to 0,0,0 then translate to evidences[k]
-std::vector<End> ShuffleEvidences(std::vector<End> Evidences){
+std::vector<End**> ShuffleEvidences(std::vector<End**> Evidences){
 
-auto rng = std::default_random_engine {};
+unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+auto rng = std::default_random_engine {seed};
+
 std::shuffle(std::begin(Evidences), std::end(Evidences), rng);
+
+int Count = 0;
+
+for(int i=0; i<Rooms.size();i+=1){
+for(int j=0; j<Rooms[i].Evidences.size();j+=1){
+
+if(Rooms[i].Evidences[j].Vertices!=NULL && ValidItem(Rooms[i].Evidences[j].Name)){
+
+float* Vertices = Rooms[i].Evidences[j].Vertices;
+
+Rooms[i].Evidences[j].HPVM = *(Evidences[Count]);
+
+//Negative to origin
+Rooms[i].Evidences[j].HPVM->Model = glm::translate(
+Rooms[i].Evidences[j].HPVM->Model,-glm::vec3(Vertices[0],Vertices[1],Vertices[2]));
+
+//Translate to HPVM->Here
+Rooms[i].Evidences[j].HPVM->Model=glm::translate(
+Rooms[i].Evidences[j].HPVM->Model,Rooms[i].Evidences[j].HPVM->Here);
+
+//Re Set Vertices
+Rooms[i].Evidences[j].Vertices[0] = Rooms[i].Evidences[j].HPVM->Here[0];
+
+Rooms[i].Evidences[j].Vertices[1] = Rooms[i].Evidences[j].HPVM->Here[1];
+
+Rooms[i].Evidences[j].Vertices[2] = Rooms[i].Evidences[j].HPVM->Here[2];
+
+Count+=1;
+
+if(Count>=Evidences.size()){
+return Evidences;
+}
+
+}
+
+}
+}
+
 
 return Evidences;
 
@@ -1701,9 +1766,9 @@ int main()
     float TotalRot = 0.0f;
     //Animated YOUWIN(YouWinStart,YouWinEnd,10,0);
   
-    std::vector<End> AllEvidences = GetE(Rooms);
+    std::vector<End**> AllEvidences = GetE(Rooms);
      
-    //AllEvidences = ShuffleEvidences(AllEvidences);
+    AllEvidences = ShuffleEvidences(AllEvidences);
  
     bool Already[23];
 
@@ -1773,7 +1838,17 @@ int main()
 			if(Rooms[i].Evidences[j].Vertices!=NULL){
 					Count+=1;
 			}	
-	    		
+	    			End * EE = Rooms[i].Evidences[j].HPVM;
+				float* Vertices = Rooms[i].Evidences[j].Vertices;
+					
+				if(EE!=NULL){
+				//Negative to origin
+				//EE->Model = glm::translate(EE->Model,-glm::vec3(Vertices[0],0.0f,Vertices[2]));
+				//Translate to HPVM->Here
+				//EE->Model=glm::translate(EE->Model,EE->Here);
+				ourShader.setMat4("model",EE->Model);
+				}
+				else
 				ourShader.setMat4("model",model);
 				(**M).Draw(ourShader);
 	    		
