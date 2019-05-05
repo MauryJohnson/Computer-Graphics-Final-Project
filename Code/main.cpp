@@ -116,14 +116,14 @@ float DetectionDistance = 5.0f;
 //DEFINE ALL ANIMATION START AND END POSITIONS
 
 float KitchenWaterStart [] ={
-0.35278,
+-15.00,
 2.24067,
--0.64244,
+14.259,
 };
 float KitchenWaterEnd [] = {
-0.33440,
+-15.00,
 1.46828,
--0.81854,
+14.259,
 };
 
 //END DEFINE ALL ANIMATION START AND END POSITIONS
@@ -170,7 +170,7 @@ printf("\n Distance: %f",Distance);
 this->TotalTime = sqrt(Distance/4.9);
 this->TimeStep = TotalTime / NumSteps;
 
-printf("\n TotalTime Taken for my OBJ to fall:%f",TotalTime);
+//printf("\n TotalTime Taken for my OBJ to fall:%f",TotalTime);
 
 float XX [] = {
 Start[0],
@@ -178,12 +178,12 @@ Start[1],
 Start[2],
 };
 
-printf("\n First POSE:(%f,%f,%f)",XX[0],XX[1],XX[2]);
+//printf("\n First POSE:(%f,%f,%f)",XX[0],XX[1],XX[2]);
 
 //printf("\n END TO:
 
 for(;XX[1]>=End[1];XX[1]-=Distance/NumSteps){
-	printf("\n Next POSE:(%f,%f,%f)",XX[0],XX[1],XX[2]);
+//	printf("\n Next POSE:(%f,%f,%f)",XX[0],XX[1],XX[2]);
 	this->Positions.push_back(glm::vec3(XX[0],XX[1],XX[2]));
 }
 
@@ -225,7 +225,8 @@ this->TimeCounter+=1;
 
 //printf("\n ARray Size:%lu",this->Positions.size());
 
-//printf("\n Now using Position in Array:%d",TimeCounter);
+//printf("\n Now using Position in Array:%d ->(%f,%f,%f)",TimeCounter,this->Positions[TimeCounter][0],this->Positions[TimeCounter][1],this->Positions[TimeCounter][2]);
+
 
 }
 
@@ -235,6 +236,10 @@ return false;
 //Stores info about each evidence
 class Evidence{
 public:
+	//If randomizing all positions, set this parameter
+	// because will translate to -Vertices and then translate 
+	// to +NextVertices
+	float* NextVertices = NULL;
 	float* Vertices;
 	bool Found = false;
 	const char* Name;
@@ -395,6 +400,17 @@ C[i]=F[i];
 
 return C;
 }
+
+float* Copy2(float* F){
+float* C = (float*)malloc(3*sizeof(float));
+
+for(int i=0; i<=2;i+=1)
+C[i]=F[i];
+
+return C;
+}
+
+
 
 //All Rooms Stored
 std::vector<float*> AllRooms;
@@ -916,9 +932,10 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
 	printf("\n PREPROCESS Position To:%f,%f,%f TEST",Position[0],Position[1],Position[2]);
 
 	//return //WithinBounds(ConvertP(Position));
+	
 	if(WithinBounds(Position)){
 	
-	if(StableMove){
+	if(StableMove && direction!=UP && direction!= DOWN){
         printf("\n STABLE 1 \n");
 	camera.ProcessMouseMovement(0.0f,-MyLookX);
         }
@@ -927,7 +944,7 @@ bool PreProcessKeyboard(Camera_Movement direction, float deltaTime)
 	//camera.Position = (Position);
 	camera.ProcessKeyboard(direction,PreDelta);
 	
- 	if(StableMove){
+ 	if(StableMove && direction!=UP && direction!=DOWN){
         printf("\n STABLE 2 \n");
 	camera.ProcessMouseMovement(0.0f,MyLookX);
         }
@@ -961,8 +978,18 @@ Evidence * NearEvidence(){
 //Iterate all Roo Evidence Positions (at a centerpoint)
 //Compare distance of camera to distance of this object
 //If distance <=D, then remove evidence, found it!
+
+//char* Name = "";
+float Min = 10000.0f;
+int I = -1;
+int J = -1;
+
 for(int i=0; i<Rooms.size();i+=1){
 	printf("\n ROOM:%d",i);
+	
+	//char* Name = "";
+	//float Min = 10000.0f;
+
 	//if(Rooms[i].Occupied){
 		for(int j=0; j<Rooms[i].Evidences.size();j+=1){
 			Evidence E = Rooms[i].Evidences[j];					if(E.Vertices!=NULL && *(E.M)!=NULL){
@@ -974,15 +1001,29 @@ for(int i=0; i<Rooms.size();i+=1){
 			pow(camera.Position[2] - Rooms[i].Evidences[j].Vertices[2],2)
 			); 
 			printf("Effective Distance:%f VS Detect Distance:%f",Distance,DetectionDistance);
-			if(Distance<=DetectionDistance){
-				if(strcmp(Rooms[i].Evidences[j].Name,"DOOR")==0){
+			if(Distance<=DetectionDistance && Distance<=Min){
+	/*			if(strcmp(Rooms[i].Evidences[j].Name,"DOOR")==0){
 	printf("\n Remove a DOOR");
 	Rooms[i].Open = true;
 	}
-				return &(Rooms[i].Evidences[j]);
+	*/	
+		Min = Distance;	
+		//Name = Rooms[i].Evidences[j].Name;
+		I = i;
+		J = j;
+		//return &(Rooms[i].Evidences[j]);
+	
 	}
 			}
 
+		}
+
+		if(Min!=10000.0f && I!=-1 && J!=-1){
+			 if(strcmp(Rooms[I].Evidences[J].Name,"DOOR")==0){
+        printf("\n Remove a DOOR");
+        Rooms[I].Open = true;
+        	}
+		return &(Rooms[I].Evidences[J]);
 		}
 		//printf("\n No Evidence Found (WITHIN A DISTANCE)!");
 		//return NULL;
@@ -1046,6 +1087,62 @@ this->View = V;
 this->Model = M;
 }
 
+
+bool ValidItem(const char* Item){
+
+return strcmp(Item,"DOOR")!=0;
+
+}
+
+
+//Set up every single evidence model, proj, view, here
+std::vector<End> GetE(std::vector<Room> Rooms){
+
+std::vector<End> Evidences;
+
+for(int i=0; i<Rooms.size();i+=1){
+for(int j=0; j<Rooms[i].Evidences.size();j+=1){
+
+if(Rooms[i].Evidences[j].Vertices!=NULL && ValidItem(Rooms[i].Evidences[j].Name)){
+
+float* Vertices = Rooms[i].Evidences[j].Vertices;
+
+glm::vec3 Here(Vertices[0],Vertices[1],Vertices[2]);
+
+glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
+        glm::mat4 view = camera.GetViewMatrix();
+
+        // render the loaded model
+        glm::mat4 model = glm::mat4(1.0f);
+
+        //model = glm::translate(model, Here); // translate it down so it's at the center of the scene  
+
+Evidences.push_back(End(Here,projection,view,model));
+
+}
+}
+}
+
+printf("\n AL evidences:%d",Evidences.size());
+
+return Evidences;
+
+}
+
+//le by their HERE vertices
+//Then all you gotta do is for each evidence to render
+//Check if their vertices match the HERE of Evidences
+//if not, translate back to 0,0,0 then translate to evidences[k]
+std::vector<End> ShuffleEvidences(std::vector<End> Evidences){
+
+auto rng = std::default_random_engine {};
+std::shuffle(std::begin(Evidences), std::end(Evidences), rng);
+
+return Evidences;
+
+}
+
 //Function returns std:: vector of FOUR positions
 std::vector<End> EndWords(float DistFrom){
 
@@ -1087,7 +1184,7 @@ float ROT = 0.0f;
 
 	ROT+=90.0f;
 
-	printf("\n ROT:%f",ROT);
+	//printf("\n ROT:%f",ROT);
 
 	}
 
@@ -1095,6 +1192,30 @@ return Ends;
 
 }
 
+End CreateEnd(glm::vec3 Here){
+
+	glm::mat4 projection2 = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
+        glm::mat4 view2 = camera.GetViewMatrix();
+
+        //endShader.setMat4("projection", projection2);
+        //endShader.setMat4("view", view2);
+
+        // render the loaded model
+        glm::mat4 model2 = glm::mat4(1.0f);
+
+	//model2 = glm::translate(model2, Here)
+	
+	return End(Here,projection2,view2,model2);
+}
+
+/*
+bool ValidItem(const char* Item){
+
+return strcmp(Item,"DOOR")!=0;
+
+}
+*/
 int main()
 {
    
@@ -1153,7 +1274,8 @@ int main()
     // -------------------------
     Shader ourShader("shader.vs", "shader.frag");
     Shader endShader("shader.vs", "shader.frag");
-    
+    Shader fanShader("shader.vs", "shader.frag");
+    Shader kwdShader("shader.vs", "shader.frag"); 
     // load/store models
     // -----------
 
@@ -1273,6 +1395,8 @@ int main()
 	
 	Model* FirePlace =  new Model(FileSystem::getPath("../LivingRoom/FirePlace.obj"),"../LivingRoom");
 	LivingRoomItems.push_back(Evidence("STATIC_FirePlace",&FirePlace,NULL));
+  	 Model* FirePlaceFire =  new Model(FileSystem::getPath("../LivingRoom/FirePlaceFire.obj"),"../LivingRoom");
+        LivingRoomItems.push_back(Evidence("STATIC_FirePlaceFire",&FirePlaceFire,NULL));
 	
     //END LIVING ROOM
 
@@ -1428,9 +1552,9 @@ int main()
     
     Model* TeddyBear = new Model(FileSystem::getPath("../Kitchen/bear.obj"),"../Kitchen");
     float TeddyBearPosition[] = {
-	-13.87f,
-	-5.952f,
-	14.06f
+	-14.128,
+	6.105,
+	14.06
     };
     KitchenItems.push_back(Evidence("BRE_TeddyBear",&TeddyBear,TeddyBearPosition));
     /*
@@ -1458,14 +1582,16 @@ int main()
     };
     KitchenItems.push_back(Evidence("BRE_Bottle",&Bottle,BottlePosition));
     
-    Model* Knife = new Model(FileSystem::getPath("../Kitchen/knife.obj"),"../Kitchen");
+    /*Model* Knife = new Model(FileSystem::getPath("../Kitchen/knife.obj"),"../Kitchen");
     float KnifePosition[] = {
 	-14.84f,
-	1.507f,
+	1.5079,
 	14.7f
     };
-    KitchenItems.push_back(Evidence("BRE_Knife",&Knife,KnifePosition));
-    
+    */
+
+    /*KitchenItems.push_back(Evidence("BRE_Knife",&Knife,KnifePosition));
+    */
     Model* FootPrints = new Model(FileSystem::getPath("../Kitchen/footprints.obj"),"../Kitchen");
     float FootPrintsPosition[] = {
 	-18.33f,
@@ -1521,7 +1647,8 @@ int main()
     //END EVIDENCE
 
     //MOVABLE ITEMS
-    //Model* Fan = new Model(FileSystem::getPath("../BedRoom/fan.obj"),"../BedRoom");
+    Model* Fan = new Model(FileSystem::getPath("../BedRoom/fan.obj"),"../BedRoom");
+    Model* KitchenWaterDroplet = new Model(FileSystem::getPath("../Kitchen/KitchenWaterDroplet.obj"),"../Kitchen");
     //BedRoomItems.push_back(Evidence("FAN",&Fan,NULL)); 
     //Model* Phone2 = new Model(FileSystem::getPath("../BedRoom/Phone.obj"),"../BedRoom");
     //BedRomItems.push_back(Evidence("
@@ -1535,7 +1662,7 @@ int main()
     /*Rooms.push_back(Room(LivingRoomVertices,LivingRoomItems));
     Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     Rooms.push_back(Room(KitchenVertices,KitchenItems));    
-	*/
+    */
 //=======
     //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
@@ -1567,8 +1694,19 @@ int main()
   
     Animated * YOUWIN = NULL;    
 
+    //Animated * FAN = NULL;
+
+    End FAN = CreateEnd(glm::vec3(0.0f,0.0f,0.0f));
+    End KWD = CreateEnd(glm::vec3(0.0f,0.0f,0.0f));
+    float TotalRot = 0.0f;
     //Animated YOUWIN(YouWinStart,YouWinEnd,10,0);
-    
+  
+    std::vector<End> AllEvidences = GetE(Rooms);
+     
+    //AllEvidences = ShuffleEvidences(AllEvidences);
+ 
+    bool Already[23];
+
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -1611,35 +1749,44 @@ int main()
  	//bool NoEvidence = true;
 	int Count = 0;
         int WithinIDX = -1;
+	int ECount = 0;
 	for(int i=0; i<Rooms.size();i+=1){
 	    if(Rooms[i].Occupied){
 		WithinIDX = i;
 	    }
 	    //printf("\nIDX:%d",i);
 	    for(int j=0; j<Rooms[i].Evidences.size();j+=1){
-		//if(Rooms[i].Evidences[j].Vertices!=NULL){
+		/*if(Rooms[i].Evidences[j].Vertices!=NULL){
+			ECount+=1;
+		}
+		*/
 		//printf("\n SOME EVIDENCE");
 		Model** M = NULL;
 		
 		if(Rooms[i].Evidences[j].M!=NULL)
 			M = (Rooms[i].Evidences[j].M);
-		
+	
+		bool SHUFF = false;	
   	        if(M!=NULL)
 		    if(*M!=NULL){
 			//NoEvidence = false;   
 			if(Rooms[i].Evidences[j].Vertices!=NULL){
-				Count+=1; 
-			}
-	    		//Don't render certain parts...
-			if(RenderSave(WithinIDX,i))
+					Count+=1;
+			}	
+	    		
+				ourShader.setMat4("model",model);
 				(**M).Draw(ourShader);
-	    	    }
+	    		
+		}
 		//}
-	    }
-	   
+	    	/*if(Rooms[i].Evidences[j].Vertices!=NULL){
+                        ECount+=1;
+                }
+		*/
+		}	   
 	}
 
-	if(Count<=10){
+	if(Count<=0){
 		printf("\n !!!!!!!!!!!!!!!!!!!YOU WIN!!!!!!!!!!!!!!!!!\n");
 		endShader.use();
 		// view/projection transformations
@@ -1698,39 +1845,74 @@ int main()
 	else{
 		printf("\n Evidences left:%d",Count);
 	}
+
+	//Shader.use();
+	//ANIMATIONS
+
+	//Update Positions...
 	KitchenDroplet.Update();
+	//End Update Positions
+	
+	//Shader Draw
+	//FAN
+	fanShader.use();
+	fanShader.setMat4("projection", projection);
+        fanShader.setMat4("view", view);
+	FAN.Model= glm::translate(FAN.Model,glm::vec3(-1.037,6.08,-1.022));
+        FAN.Model = glm::rotate(FAN.Model,glm::radians(deltaTime*50.0f),glm::vec3(0.0f,1.0f,0.0f));
+	FAN.Model= glm::translate(FAN.Model,-glm::vec3(-1.037,6.08,-1.022));
+	fanShader.setMat4("model", FAN.Model);	
+	Fan->Draw(fanShader);
+	//END FAN
+
+	//DROPLET
+	kwdShader.use();
+	
+	kwdShader.setMat4("projection", projection);
+        kwdShader.setMat4("view", view);	
+	
+	//TEMPLATE
+	deltaTime = deltaTime / 1000;
+	
+	//printf("\n Delta * 50.0f: %f",deltaTime*50.0f);	
+	
+	if(deltaTime*50.0f<=1.0 && TotalRot<=1.0){
+	KWD.Model= glm::translate(KWD.Model,glm::vec3(1219.0f,-47.0f,-25.22f));
+        KWD.Model = glm::rotate(KWD.Model,glm::radians(deltaTime*50.0f),glm::vec3(1.0f,0.0f,1.0f));
+        KWD.Model= glm::translate(KWD.Model,-glm::vec3(1219.0f,-47.0f,-25.22f));
+	TotalRot+=(deltaTime*50.0f);
+	}
+	else{
+		KWD.Model= glm::translate(KWD.Model,glm::vec3(1219.0f,-47.0f,-25.22f));
+        KWD.Model = glm::rotate(KWD.Model,glm::radians(-TotalRot),glm::vec3(1.0f,0.0f,1.0f));
+        KWD.Model= glm::translate(KWD.Model,-glm::vec3(1219.0f,-47.0f,-25.22f));	
+	TotalRot = 0.0f;
+	}
+	
+	/*KWD.Model = glm::translate(KWD.Model,
+	glm::vec3(
+	KitchenDroplet.Positions[KitchenDroplet.TimeCounter][0]
+	,
+	KitchenDroplet.Positions[KitchenDroplet.TimeCounter][2]
+	,
+	-KitchenDroplet.Positions[KitchenDroplet.TimeCounter][1]
+	));
+	*/
+	//WD.Model = glm::scale(KWD.Model, glm::vec3(2.0f, 2.0f, 2.0f));       // it's a bit too big for our scene, so scale it down
+	
+	kwdShader.setMat4("model",KWD.Model);
+  	
+	KitchenWaterDroplet->Draw(kwdShader);
+	
+	//Positions[TimeCounter] is next  positions in 3d!!!
+	//END DROPLET
+	//End Shader Draw
+
+	//END ANIMATIONS
 
 	//BEDROOM EVIDENCE
 	
-	//DoorToBathRoom.Draw(ourShader);
- 	
-	//DoorToLivingRoom.Draw(ourShader);
-
-	/*
-	Phone.Draw(ourShader);
-	
-	if(RightShoe!=NULL)
-		(*RightShoe).Draw(ourShader);
-
-	Step.Draw(ourShader);
-
-        BloodyAxe.Draw(ourShader);
-
-	TvGun.Draw(ourShader);
-	*/
-
-	//END BEDROOM EVIDENCE
-	
-	//END ALL EVIDENCE
-
-	//MOVABLE ITEMS
-
-
-
-	//END MOVABLE ITEMS
-
-        //ourModel.Draw(ourShader);
-
+	//
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
 
