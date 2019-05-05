@@ -929,7 +929,15 @@ return true;
 }
 
 }
+
 printf("\n NOT WITHIN");
+
+//If not within any room. Error
+if(!WithinBounds(camera.Position)){
+	printf("\n CRITICAL ERROR! Ended up outside of BOUNDS!!\nRestart game. Make sure that if you experience low frame rate, take you time and move slowly!!");
+exit(-1);
+}
+
 return false;
 
 }
@@ -1060,7 +1068,7 @@ for(int i=0; i<Rooms.size();i+=1){
 		}
 
 		if(Min!=10000.0f && I!=-1 && J!=-1){
-			 if(isPartOf(Rooms[I].Evidences[J].Name,"DOOR")==0){
+			 if(isPartOf(Rooms[I].Evidences[J].Name,"DOOR")){
         printf("\n Remove a DOOR");
         Rooms[I].Open = true;
         	}
@@ -1766,10 +1774,9 @@ int main(int argc, char** argv)
     Rooms.push_back(Room(BedRoomVertices,BedRoomItems));  
 
 //<<<<<<< HEAD
-    /*Rooms.push_back(Room(LivingRoomVertices,LivingRoomItems));
+    Rooms.push_back(Room(LivingRoomVertices,LivingRoomItems));
     Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     Rooms.push_back(Room(KitchenVertices,KitchenItems));    
-    */
 //=======
     //Rooms.push_back(Room(BathRoomVertices,BathRoomItems));
     //Rooms.push_back(Room(KitchenVertices,KitchenItems));    
